@@ -1,12 +1,12 @@
 # Projektmanagement Game
 
 
-## Deploy
+## Build
 ```
-docker run -d -it --rm \
-    --publish 8181:80 \
-    --volume <path-to-repo>:/usr/share/nginx/html \
-    nginx
+docker build Projektmanagement-Game/ -t pm-game
 ```
 
-Replace `<path-to-repo>` with the absolute path of your repository.
+## Deploy
+```
+docker run -d -p 80:5000 pm-game
+```
