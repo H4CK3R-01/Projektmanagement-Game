@@ -1,7 +1,7 @@
 const app = new PIXI.Application({
     autoResize: true,
     resolution: devicePixelRatio,
-    backgroundColor: 0xffff00
+    backgroundColor: 0x0073db
 });
 document.getElementById('game').appendChild(app.view);
 
