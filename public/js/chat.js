@@ -24,7 +24,7 @@ window.addEventListener('load', function () {
     });
 
     // Login
-    socket.emit('add user', username);
+    socket.emit('add user', {'username': username, 'room_name': room_name});
 });
 
 function sendMessage() {
