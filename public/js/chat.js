@@ -8,7 +8,7 @@ window.addEventListener('load', function () {
 
     socket.on('login', function (data) {
         connected = true;
-        log("Welcome " + username + "!");
+        addLogMessage("Welcome " + username + "!");
     });
 
     socket.on('new message', function (data) {
@@ -16,11 +16,11 @@ window.addEventListener('load', function () {
     });
 
     socket.on('user joined', function (data) {
-        log(data + ' joined');
+        addLogMessage(data + ' joined');
     });
 
     socket.on('user left', function (data) {
-        log(data + ' left');
+        addLogMessage(data + ' left');
     });
 
     // Login
@@ -28,23 +28,23 @@ window.addEventListener('load', function () {
 });
 
 function sendMessage() {
-    let message = document.getElementById('message').value;
+    let message = document.getElementById('message_input').value;
 
     if (message && connected) {
-        document.getElementById('message').value = '';
+        document.getElementById('message_input').value = '';
 
-        addChatMessage({ username: username, message: message });
+        addChatMessage({username: username, message: message});
 
         socket.emit('new message', message);
     }
 }
 
-function log(message) {
+function addLogMessage(message) {
     let li = document.createElement('div');
-    li.classList.add('log');
+    li.classList.add('log_message');
     li.innerText = message;
 
-    document.getElementById("messages").appendChild(li);
+    document.getElementById("messages_received").appendChild(li);
 }
 
 function addChatMessage(data) {
@@ -57,8 +57,8 @@ function addChatMessage(data) {
     messageBody.innerText = data.message;
 
     let messageDiv = document.createElement('div');
-    messageDiv.classList.add('message');
-    if(data.username === username) {
+    messageDiv.classList.add('chat_message');
+    if (data.username === username) {
         messageDiv.classList.add('me');
     } else {
         messageDiv.classList.add('others');
@@ -66,5 +66,5 @@ function addChatMessage(data) {
     messageDiv.appendChild(user);
     messageDiv.appendChild(messageBody);
 
-    document.getElementById('messages').append(messageDiv);
+    document.getElementById('messages_received').append(messageDiv);
 }
