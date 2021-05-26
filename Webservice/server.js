@@ -4,9 +4,9 @@ let server = require('http').createServer(app);
 let {Server} = require("socket.io");
 let io = new Server(server);
 
-let port = parseInt(process.env.PORT) || 5000;
+let port = 5000;
 server.listen(port, function () {
-    generate_log_message("", "", 'RUNNING', "PORT " + port);
+    generate_log_message("MAIN", "Server", 'RUNNING', "PORT " + port);
 });
 
 
@@ -22,9 +22,8 @@ io.on('connection', socket => {
 
         addedUser = true;
 
-        socket.join(socket.room);
-
         socket.emit('login');
+        socket.join(socket.room);
 
         socket.broadcast.to(socket.room).emit('user joined', socket.username);
 
@@ -71,8 +70,8 @@ function generate_log_message(room, user, type, message) {
     user = pad(10, user, ' ').substr(0, 10);
     type = pad(10, type, ' ').substr(0, 10);
 
-    // Reset color: \x1b[0m
-    console.info("%s[%s] [%s] [%s]\x1b[0m %s", color, room, user, type, message);
+    let reset_color = '\x1b[0m';
+    console.info("%s[%s] [%s] [%s]\x1b[0m %s", color, room, user, type, reset_color, message);
 }
 
 function pad(width, string, padding) {

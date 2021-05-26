@@ -1,12 +1,12 @@
 let socket;
 let username = prompt("Please enter your name");
-//let room_name = prompt("Please enter room name", "1234");
+let room_name = prompt("Please enter room name");
 let connected = false;
 
 window.addEventListener('load', function () {
     socket = io();
 
-    socket.on('login', function (data) {
+    socket.on('login', function () {
         connected = true;
         addLogMessage("Welcome " + username + "!");
     });
