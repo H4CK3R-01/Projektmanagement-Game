@@ -75,6 +75,6 @@ function generate_log_message(room, user, type, message) {
 }
 
 function pad(width, string, padding) {
-    if (string === undefined) return pad(width, " ", " ");
+    if (string === undefined || string === null) return pad(width, " ", " ");
     return (width <= string.length) ? string : pad(width, string + padding, padding)
 }
