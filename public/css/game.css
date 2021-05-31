@@ -1,4 +1,8 @@
 #game {
     height: 100%;
+    width: 100%;
     grid-column-start: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
