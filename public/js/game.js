@@ -1,3 +1,5 @@
+let answer = null;
+
 function Sprite(x, y) {
     this.sprite = PIXI.Sprite.from('/img/sprite.jpg');
     this.coord_x = x;
@@ -94,7 +96,7 @@ app.stage.addChild(cards_2);
 
 let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 7, 3, function () {
     console.log("3");
-    generate_card("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.");
+    generate_card("Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?", "a1", "a2", "a3", "a4", 1, 1);
 });
 app.stage.addChild(cards_3);
 
@@ -123,7 +125,21 @@ function generate_circle(graphics, x, y) {
     return graphics;
 }
 
-function generate_card(s) {
+function generate_card(s, a1, a2, a3, a4, right_a, d) {
+    const style = new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 20,
+        wordWrap: true,
+        wordWrapWidth: game_board_size * 0.5 - 20,
+    });
+
+    const header_style = new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 25,
+        wordWrap: true,
+        wordWrapWidth: game_board_size * 0.5 - 20,
+    });
+
     const card = new PIXI.Graphics();
     let start_x = game_board_size * 0.25 + 2.5;
     let start_y = game_board_size / 2 - game_board_size * 0.72 / 2 + 2.5;
@@ -132,22 +148,47 @@ function generate_card(s) {
     card.drawRoundedRect(start_x, start_y, game_board_size * 0.5, game_board_size * 0.72, 10);
     card.endFill();
 
-    const style = new PIXI.TextStyle({
-        fontFamily: 'Arial',
-        fontSize: 15,
-        wordWrap: true,
-        wordWrapWidth: game_board_size * 0.5 - 10,
-    });
+    const header = new PIXI.Text("Schwierigkeit " + d, header_style);
+    header.x = start_x + 10 + card.width / 2 - header.width / 2 - 2.5 - 10;
+    header.y = start_y + 10;
+    card.addChild(header);
+
     const basicText = new PIXI.Text(s, style);
     basicText.x = start_x + 10;
-    basicText.y = start_y + 10;
+    basicText.y = start_y + 20 + header.height;
     card.addChild(basicText);
 
 
-    // const answer_1 = new PIXI.Text(s, style);
-    // answer_1.x = start_x + 10;
-    // answer_1.y = start_y + 100;
-    // card.addChild(answer_1);
+    // TODO Random answer order
+    let answer_1 = generate_answer_button(new PIXI.Graphics(), 1, start_x, start_y, function () {
+        select_answer(answer_1, answer_2, answer_3, answer_4, start_x, start_y, 1);
+    });
+    let answer_1_text = generate_answer_text(new PIXI.Text(a1, style), answer_1, start_x, start_y);
+    card.addChild(answer_1);
+    card.addChild(answer_1_text);
+
+    let answer_2 = generate_answer_button(new PIXI.Graphics(), 2, start_x, start_y, function () {
+        select_answer(answer_1, answer_2, answer_3, answer_4, start_x, start_y, 2);
+    });
+    let answer_2_text = generate_answer_text(new PIXI.Text(a2, style), answer_2, start_x, start_y);
+    card.addChild(answer_2);
+    card.addChild(answer_2_text);
+
+    let answer_3 = generate_answer_button(new PIXI.Graphics(), 3, start_x, start_y, function () {
+        select_answer(answer_1, answer_2, answer_3, answer_4, start_x, start_y, 3);
+    });
+    let answer_3_text = generate_answer_text(new PIXI.Text(a3, style), answer_3, start_x, start_y);
+    card.addChild(answer_3);
+    card.addChild(answer_3_text);
+
+    let answer_4 = generate_answer_button(new PIXI.Graphics(), 4, start_x, start_y, function () {
+        select_answer(answer_1, answer_2, answer_3, answer_4, start_x, start_y, 4);
+    });
+    let answer_4_text = generate_answer_text(new PIXI.Text("a4", style), answer_4, start_x, start_y);
+    card.addChild(answer_4);
+    card.addChild(answer_4_text);
+
+
 
     // OK-Button
     const ok = new PIXI.Graphics();
@@ -157,7 +198,6 @@ function generate_card(s) {
     ok.endFill();
     ok.x = 10;
     ok.y = game_board_size * 0.72 - 60;
-
     card.addChild(ok);
 
     const ok_text = new PIXI.Text('OK', style);
@@ -167,12 +207,73 @@ function generate_card(s) {
 
     ok.interactive = true;
     ok.on('click', function () {
-        console.log("OK");
+        if(right_a === answer) {
+            console.log("Richtig")
+        } else {
+            console.log("Falsch")
+        }
+        card.destroy();
     });
 
     app.stage.addChild(card);
 }
 
+
+function select_answer(answer_1, answer_2, answer_3, answer_4, start_x, start_y, id) {
+    if(answer === null) {
+        answer = id;
+        switch(answer) {
+            case 1:
+                draw_rect(answer_1, 0xff00ff, start_x, start_y);
+                break;
+            case 2:
+                draw_rect(answer_2, 0xff00ff, start_x, start_y);
+                break;
+            case 3:
+                draw_rect(answer_3, 0xff00ff, start_x, start_y);
+                break;
+            case 4:
+                draw_rect(answer_4, 0xff00ff, start_x, start_y);
+                break;
+        }
+    } else {
+        draw_rect(answer_1, 0xffffff, start_x, start_y);
+        draw_rect(answer_2, 0xffffff, start_x, start_y);
+        draw_rect(answer_3, 0xffffff, start_x, start_y);
+        draw_rect(answer_4, 0xffffff, start_x, start_y);
+        answer = null;
+
+        select_answer(answer_1, answer_2, answer_3, answer_4, start_x, start_y, id);
+    }
+}
+
+function draw_rect(answer, color, start_x, start_y) {
+    answer.clear();
+
+    answer.lineStyle(2, 0x000000, 1);
+    answer.beginFill(color);
+    answer.drawRect(start_x, start_y, game_board_size * 0.5 - 20, 75);
+    answer.endFill();
+}
+
+function generate_answer_button(answer, y, start_x, start_y, onclick) {
+    draw_rect(answer, 0xffffff, start_x, start_y);
+
+    answer.x = 10;
+    answer.y = game_board_size * 0.72 - 60 - 85 * y;
+
+    answer.interactive = true;
+    answer.on('click', onclick);
+
+    return answer;
+}
+
+function generate_answer_text(answer_text, rect, start_x, start_y) {
+    console.log(rect.width)
+    answer_text.x = start_x + rect.x + rect.width / 2 - answer_text.width / 2;
+    answer_text.y = start_y + rect.y + rect.height / 2 - answer_text.height / 2;
+    return answer_text
+}
 
 function calculate_size() {
     if (game.offsetWidth > game.offsetHeight) {
@@ -216,7 +317,30 @@ function resize() {
     third_circle = generate_circle(new PIXI.Graphics(), 7, 9);
     app.stage.addChild(third_circle);
 
-    // TODO card and card stacks
+    // card stacks
+    cards_1.destroy();
+    cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 3, 3, function () {
+        console.log("1");
+        generate_card("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.");
+    });
+    app.stage.addChild(cards_1);
+
+    cards_2.destroy();
+    cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 5, 3, function () {
+        console.log("2");
+        generate_card("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.");
+    });
+    app.stage.addChild(cards_2);
+
+    cards_3.destroy();
+    cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 7, 3, function () {
+        console.log("3");
+        generate_card("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores.");
+    });
+    app.stage.addChild(cards_3);
+
+    // card
+
 }
 
 resize();
