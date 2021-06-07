@@ -81,23 +81,25 @@ app.stage.addChild(third_circle);
 
 // Card stacks
 let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 3, 3, function () {
-    if(!show_card) {
+    if (!show_card) {
         console.log("1");
         generate_card("Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?", "a1", "a2", "a3", "a4", 1, 1);
         show_card = true;
-    }});
+    }
+});
 app.stage.addChild(cards_1);
 
 let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 5, 3, function () {
-    if(!show_card) {
+    if (!show_card) {
         console.log("2");
         generate_card("Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?", "a1", "a2", "a3", "a4", 1, 1);
         show_card = true;
-    }});
+    }
+});
 app.stage.addChild(cards_2);
 
 let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 7, 3, function () {
-    if(!show_card) {
+    if (!show_card) {
         console.log("3");
         generate_card("Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?", "a1", "a2", "a3", "a4", 1, 1);
         show_card = true;
