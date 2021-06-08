@@ -98,7 +98,7 @@ function generate_log_message(room, user, type, message) {
 
 function getRandomCard(difficulty) {
     let filtered_cards = cards.filter(card => {
-        return card.diffuculty === difficulty;
+        return card.difficulty === difficulty;
     });
 
     return shuffleAnswers(filtered_cards[Math.floor(Math.random() * filtered_cards.length)]);

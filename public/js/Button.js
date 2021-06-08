@@ -1,4 +1,4 @@
-function Button(default_color, hover_color, select_color, width, height, x, y, text, button_is_answer, click) {
+function Button(default_color, hover_color, select_color, width, height, x, y, text, status, button_is_answer, click) {
     this.graphics = new PIXI.Graphics();
     this.default_color = default_color;
     this.hover_color = hover_color;
@@ -7,6 +7,7 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
     this.x = x;
     this.y = y;
     this.text = text;
+    this.status = status;
     this.button_is_answer = button_is_answer;
     this.click = click;
     this.selected = false;

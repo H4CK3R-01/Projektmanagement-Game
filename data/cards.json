@@ -1,69 +1,69 @@
 [
   {
     "id": 1,
-    "diffuculty": 1,
+    "difficulty": 1,
     "question": "Was?",
     "answers": [
       {
-        "answer_a": "A",
+        "text": "A",
         "status": false
       },
       {
-        "answer_b": "B",
+        "text": "B",
         "status": true
       },
       {
-        "answer_c": "C",
+        "text": "C",
         "status": false
       },
       {
-        "answer_d": "D",
+        "text": "D",
         "status": false
       }
     ]
   },
   {
     "id": 2,
-    "diffuculty": 2,
+    "difficulty": 2,
     "question": "Wie?",
     "answers": [
       {
-        "answer_a": "A",
+        "text": "A",
         "status": false
       },
       {
-        "answer_b": "B",
+        "text": "B",
         "status": true
       },
       {
-        "answer_c": "C",
+        "text": "C",
         "status": false
       },
       {
-        "answer_d": "D",
+        "text": "D",
         "status": false
       }
     ]
   },
   {
     "id": 3,
-    "diffuculty": 3,
+    "difficulty": 3,
     "question": "Wo?",
     "answers": [
       {
-        "answer_a": "A",
+        "text": "A",
         "status": false
       },
       {
-        "answer_b": "B",
+        "text": "B",
         "status": true
       },
       {
-        "answer_c": "C",
+        "text": "C",
         "status": false
       },
       {
-        "answer_d": "D",
+        "text": "D",
         "status": false
       }
     ]

@@ -71,8 +71,7 @@ function start_game() {
     let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 3, 3, function () {
         if (!show_card) {
             console.log("1");
-            new Card(game_board_size, "Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?", "a1", "a2", "a3", "a4", 1, 1).showCard();
-            show_card = true;
+            socket.emit('get card', 1);
         }
     });
     app.stage.addChild(cards_1);
@@ -80,8 +79,7 @@ function start_game() {
     let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 5, 3, function () {
         if (!show_card) {
             console.log("2");
-            new Card(game_board_size, "Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?", "a1", "a2", "a3", "a4", 1, 1).showCard();
-            show_card = true;
+            socket.emit('get card', 2);
         }
     });
     app.stage.addChild(cards_2);
@@ -89,8 +87,7 @@ function start_game() {
     let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 7, 3, function () {
         if (!show_card) {
             console.log("3");
-            new Card(game_board_size, "Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?", "a1", "a2", "a3", "a4", 1, 1).showCard();
-            show_card = true;
+            socket.emit('get card', 3);
         }
     });
     app.stage.addChild(cards_3);
@@ -100,7 +97,11 @@ function start_game() {
     });
 
     socket.on('card', function (data) {
-        console.log(data);
+        let q = data.question
+        let a = data.answers
+        let d = data.difficulty
+        new Card(game_board_size, q, a[0], a[1], a[2], a[3], d).showCard();
+        show_card = true;
     });
 
     resize();
