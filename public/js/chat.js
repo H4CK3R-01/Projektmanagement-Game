@@ -1,7 +1,9 @@
 let socket;
+let username = prompt("Please enter your name");
+let room_name = prompt("Please enter room name");
 let connected = false;
 
-function start_chat() {
+window.addEventListener('load', function () {
     socket = io();
 
     socket.on('login', function () {
@@ -23,7 +25,7 @@ function start_chat() {
 
     // Login
     socket.emit('add user', {'username': username, 'room_name': room_name});
-}
+});
 
 function sendMessage() {
     let message = document.getElementById('message_input').value;
