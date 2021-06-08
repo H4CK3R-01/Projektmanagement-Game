@@ -3,6 +3,41 @@ let app = express();
 let server = require('http').createServer(app);
 let {Server} = require("socket.io");
 let io = new Server(server);
+let cards = [
+    {
+        id: 1,
+        diffuculty: 1,
+        question: "Was?",
+        answers: [
+            {answer_a: "A", status: false},
+            {answer_b: "B", status: true},
+            {answer_c: "C", status: false},
+            {answer_d: "D", status: false},
+        ],
+    },
+    {
+        id: 2,
+        diffuculty: 2,
+        question: "Wie?",
+        answers: [
+            {answer_a: "A", status: false},
+            {answer_b: "B", status: true},
+            {answer_c: "C", status: false},
+            {answer_d: "D", status: false},
+        ]
+    },
+    {
+        id: 3,
+        diffuculty: 3,
+        question: "Wo?",
+        answers: [
+            {answer_a: "A", status: false},
+            {answer_b: "B", status: true},
+            {answer_c: "C", status: false},
+            {answer_d: "D", status: false},
+        ]
+    }
+];
 
 let port = 5000;
 server.listen(port, function () {
@@ -46,6 +81,23 @@ io.on('connection', socket => {
 
         generate_log_message(socket.room, socket.username, "LEFT", "");
     });
+
+
+    // Game
+    socket.on('roll dice', function () {
+        let sides = 3;
+        let randomNumber = Math.floor(Math.random() * sides) + 1;
+
+        io.in(socket.room).emit('dice', randomNumber);
+
+        generate_log_message(socket.room, socket.username, "DICE", randomNumber);
+    });
+
+    socket.on('get card', function (difficulty) {
+        io.in(socket.room).emit('card', getRandomCard(difficulty));
+
+        generate_log_message(socket.room, socket.username, "CARD", difficulty);
+    });
 });
 
 function generate_log_message(room, user, type, message) {
@@ -63,6 +115,9 @@ function generate_log_message(room, user, type, message) {
         case 'RUNNING':
             color = '\x1b[35m';
             break;
+        case 'DICE':
+            color = '\x1b[34m';
+            break;
         default:
             color = '\x1b[0m';
     }
@@ -73,6 +128,23 @@ function generate_log_message(room, user, type, message) {
     let reset_color = '\x1b[0m';
     console.info("%s[%s] [%s] [%s]\x1b[0m %s", color, room, user, type, reset_color, message);
 }
+
+function getRandomCard(difficulty) {
+    let filtered_cards = cards.filter(card => {
+        return card.diffuculty === difficulty;
+    });
+
+    return shuffleAnswers(filtered_cards[Math.floor(Math.random() * filtered_cards.length)]);
+}
+
+function shuffleAnswers(card) {
+    for (let i = card.answers.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [card.answers[i], card.answers[j]] = [card.answers[j], card.answers[i]];
+    }
+    return card;
+}
+
 
 function pad(width, string, padding) {
     if (string === undefined || string === null) return pad(width, " ", " ");
