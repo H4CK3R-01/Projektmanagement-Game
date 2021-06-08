@@ -1,13 +1,4 @@
 #game {
     height: 100%;
-    width: 100%;
     grid-column-start: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url(/img/background.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover; /* For WebKit*/
-    -moz-background-size: cover; /* Mozilla*/
-    -o-background-size: cover; /* Opera*/
-    background-size: cover; /* Generic*/
 }
