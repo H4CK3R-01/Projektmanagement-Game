@@ -1,43 +1,11 @@
 let express = require('express');
+let fs = require('fs');
 let app = express();
 let server = require('http').createServer(app);
 let {Server} = require("socket.io");
 let io = new Server(server);
-let cards = [
-    {
-        id: 1,
-        diffuculty: 1,
-        question: "Was?",
-        answers: [
-            {answer_a: "A", status: false},
-            {answer_b: "B", status: true},
-            {answer_c: "C", status: false},
-            {answer_d: "D", status: false},
-        ],
-    },
-    {
-        id: 2,
-        diffuculty: 2,
-        question: "Wie?",
-        answers: [
-            {answer_a: "A", status: false},
-            {answer_b: "B", status: true},
-            {answer_c: "C", status: false},
-            {answer_d: "D", status: false},
-        ]
-    },
-    {
-        id: 3,
-        diffuculty: 3,
-        question: "Wo?",
-        answers: [
-            {answer_a: "A", status: false},
-            {answer_b: "B", status: true},
-            {answer_c: "C", status: false},
-            {answer_d: "D", status: false},
-        ]
-    }
-];
+let {raw_data} = fs.readFileSync(__dirname + '/../data/cards.json');
+let cards = JSON.parse(raw_data);
 
 let port = 5000;
 server.listen(port, function () {
