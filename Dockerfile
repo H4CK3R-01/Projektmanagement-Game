@@ -8,6 +8,7 @@ RUN npm install
 
 COPY Webservice Webservice
 COPY public public
+COPY data data
 
 EXPOSE 5000
 
