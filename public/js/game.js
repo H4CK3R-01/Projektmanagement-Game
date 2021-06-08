@@ -95,6 +95,14 @@ function start_game() {
     });
     app.stage.addChild(cards_3);
 
+    socket.on('dice', function (data) {
+        console.log(data);
+    });
+
+    socket.on('card', function (data) {
+        console.log(data);
+    });
+
     resize();
 }
 
