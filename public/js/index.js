@@ -14,5 +14,6 @@ document.getElementById('ok').addEventListener('click', function () {
     document.getElementById('game').style.display = 'flex';
     document.getElementById('chat').style.display = 'flex';
     start_chat();
+    start_game();
     resize();
 });
