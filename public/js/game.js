@@ -1,12 +1,65 @@
+/*
+    Images
+        background.jpg: https://www.lignaushop.de/images/product_images/popup_images/treppenstufe-buecherregal-fensterbank-eiche-country-rustikal-unbehandelt-wuppertal.JPG
+        card_stack.png: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.pngegg.com%2Fpt%2Fsearch%3Fq%3Drainha%2Bde%2Bcopas&psig=AOvVaw3wwfk87wAXBxqmdXnoGSfe&ust=1623254731054000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjUoaG1iPECFQAAAAAdAAAAABA5
+        dice.svg: https://www.svgrepo.com/download/198836/gambler-casino.svg
+        sprite.jpg: https://media.istockphoto.com/photos/gray-granite-stone-texture-seamless-square-background-tile-ready-picture-id1096464726
+*/
+let curr_player = 1;
+let player_array = [1, 1, 1, 1];
+let player_color = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00];
+let player_sprite_array = [];
+
 let answer = null;
 let show_card = false;
+let diced = false;
+let rolled_number = null;
 
 let game = document.getElementById('game');
 let app;
+let border_card_stack = new PIXI.Graphics();
 
 let game_board_size = 2000;
 let max_size = calculate_size();
 let sprite_size = Math.floor(game_board_size / 11);
+
+const rolled_number_style = new PIXI.TextStyle({
+    fontFamily: 'Arial',
+    fontSize: 140,
+    fontWeight: 'bold',
+    wordWrap: true,
+    wordWrapWidth: game_board_size * 0.5 - 20,
+});
+let rolled_number_text = new PIXI.Text("", rolled_number_style);
+
+// fields
+let sprites = [
+    // First row
+    new Sprite(1, 1),
+    new Sprite(3, 1),
+    new Sprite(5, 1),
+    new Sprite(7, 1),
+    new Sprite(9, 1),
+
+    // Second row
+    new Sprite(1, 3),
+    new Sprite(9, 3),
+
+    // Third row
+    new Sprite(1, 5),
+    new Sprite(9, 5),
+
+    // Fourth row
+    new Sprite(1, 7),
+    new Sprite(9, 7),
+
+    // Fifth row
+    new Sprite(1, 9),
+    new Sprite(3, 9),
+    new Sprite(5, 9),
+    new Sprite(7, 9),
+    new Sprite(9, 9),
+];
 
 function start_game() {
     app = new PIXI.Application({
@@ -17,36 +70,6 @@ function start_game() {
         height: max_size / game_board_size
     });
     document.getElementById('game').appendChild(app.view);
-
-
-    // fields
-    let sprites = [
-        // First row
-        new Sprite(1, 1),
-        new Sprite(3, 1),
-        new Sprite(5, 1),
-        new Sprite(7, 1),
-        new Sprite(9, 1),
-
-        // Second row
-        new Sprite(1, 3),
-        new Sprite(9, 3),
-
-        // Third row
-        new Sprite(1, 5),
-        new Sprite(9, 5),
-
-        // Fourth row
-        new Sprite(1, 7),
-        new Sprite(9, 7),
-
-        // Fifth row
-        new Sprite(1, 9),
-        new Sprite(3, 9),
-        new Sprite(5, 9),
-        new Sprite(7, 9),
-        new Sprite(9, 9),
-    ]
 
     sprites.forEach(sprite => app.stage.addChild(sprite.getSprite()));
 
@@ -69,7 +92,7 @@ function start_game() {
 
     // Card stacks
     let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 3, 3, function () {
-        if (!show_card) {
+        if (!show_card && rolled_number === 1) {
             console.log("1");
             socket.emit('get card', 1);
         }
@@ -77,7 +100,7 @@ function start_game() {
     app.stage.addChild(cards_1);
 
     let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 5, 3, function () {
-        if (!show_card) {
+        if (!show_card && rolled_number === 2) {
             console.log("2");
             socket.emit('get card', 2);
         }
@@ -85,21 +108,51 @@ function start_game() {
     app.stage.addChild(cards_2);
 
     let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 7, 3, function () {
-        if (!show_card) {
+        if (!show_card && rolled_number === 3) {
             console.log("3");
             socket.emit('get card', 3);
         }
     });
     app.stage.addChild(cards_3);
 
-    socket.on('dice', function (data) {
-        console.log(data);
+
+    // Dice
+    let diceTexture = PIXI.Texture.from('/img/dice.svg');
+    let dice = new PIXI.Sprite(diceTexture);
+    dice.x = sprite_size * 7 - sprite_size * 0.2;
+    dice.y = sprite_size * 7 - sprite_size * 0.2;
+    dice.width = 200;
+    dice.height = 200;
+    dice.interactive = true;
+    dice.buttonMode = true;
+    dice.defaultCursor = 'pointer';
+    dice.on('click', function () {
+        if (!diced) {
+            socket.emit('roll dice');
+        }
+    });
+    app.stage.addChild(dice);
+
+    app.stage.addChild(border_card_stack);
+
+    socket.on('dice', function (randomInt) {
+        rolled_number = randomInt;
+        diced = true;
+        border_card_stack.clear();
+        border_card_stack.lineStyle(15, 0x862323, 1);
+        border_card_stack.drawRoundedRect(sprite_size * (1 + 2 * rolled_number) - sprite_size * 0.2, sprite_size * 3 - sprite_size * 0.2, sprite_size * 1.5, sprite_size * 3 * 0.72, 10);
+
+        rolled_number_text = new PIXI.Text(rolled_number, rolled_number_style);
+        rolled_number_text.x = sprite_size * 7 - sprite_size * 0.2 + dice.width / 2 - rolled_number_text.width / 2;
+        rolled_number_text.y = sprite_size * 6 - sprite_size * 0.2;
+        app.stage.addChild(rolled_number_text);
+
     });
 
     socket.on('card', function (data) {
-        let q = data.question
-        let a = data.answers
-        let d = data.difficulty
+        let q = data.question;
+        let a = data.answers;
+        let d = data.difficulty;
         new Card(game_board_size, q, a[0], a[1], a[2], a[3], d).showCard();
         show_card = true;
     });
@@ -116,7 +169,7 @@ function generate_card_stack(sprite, x, y, onclick) {
     sprite.buttonMode = true;
     sprite.defaultCursor = 'pointer';
     sprite.on('click', onclick);
-    return sprite
+    return sprite;
 }
 
 function generate_red_border(graphics) {
@@ -148,5 +201,5 @@ function resize() {
     let size = calculate_size();
     app.stage.scale.set(size / game_board_size, size / game_board_size);
 
-    app.renderer.resize(size, size)
+    app.renderer.resize(size, size);
 }
