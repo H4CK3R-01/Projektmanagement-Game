@@ -135,6 +135,16 @@ function start_game() {
 
     app.stage.addChild(border_card_stack);
 
+
+    // Logo
+    let logo = PIXI.Sprite.from('/img/logo_2.png');
+    logo.x = sprite_size * 3 - sprite_size * 0.2;
+    logo.y = sprite_size * 5.5 - sprite_size * 0.2;
+    logo.width = sprite_size * 3.5;
+    logo.height = sprite_size * 1.5;
+    // logo.rotation -= Math.PI / 8;
+    app.stage.addChild(logo);
+
     socket.on('dice', function (randomInt) {
         rolled_number = randomInt;
         diced = true;
