@@ -31,7 +31,7 @@ class Hunter {
 
     hunt(players) {
         for (let i = 0; i < players.length; i++) {
-            if (players[i].position === this.position) {
+            if (players[i].position <= this.position) {
                 players[i].alive = false;
             }
         }
