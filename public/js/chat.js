@@ -2,7 +2,9 @@ let socket;
 let connected = false;
 
 function start_chat() {
-    socket = io();
+    socket = io("/", {
+        closeOnBeforeunload: false
+    });
 
     socket.on('login', function () {
         connected = true;
