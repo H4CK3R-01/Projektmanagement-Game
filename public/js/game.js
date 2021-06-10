@@ -197,10 +197,24 @@ function generate_circle(graphics, x, y) {
 }
 
 function calculate_size() {
-    if (game.offsetWidth > game.offsetHeight) {
-        return game.offsetHeight;
+    let width;
+    let height;
+    if (game.offsetWidth > window.innerWidth) {
+        width = window.innerWidth - document.getElementById('chat').offsetWidth;
     } else {
-        return game.offsetWidth;
+        width = game.offsetWidth;
+    }
+
+    if (game.offsetHeight > window.innerHeight) {
+        height = window.innerHeight - document.getElementsByTagName('header')[0].offsetHeight;
+    } else {
+        height = game.offsetHeight;
+    }
+
+    if (width > height) {
+        return height;
+    } else {
+        return width;
     }
 }
 
