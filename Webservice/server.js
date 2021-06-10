@@ -13,15 +13,21 @@ server.listen(port, function () {
 });
 
 // Monitor websockets
-instrument(io, {
-    auth: {
-        type: "basic",
-        username: process.env.WEBSOCKET_MONITOR_USERNAME,
-        password: process.env.WEBSOCKET_MONITOR_PASSWORD
-    },
-    serverId: `${require("os").hostname()}#${process.pid}`
-});
-
+if (process.env.WEBSOCKET_MONITOR_USERNAME && process.env.WEBSOCKET_MONITOR_PASSWORD) {
+    instrument(io, {
+        auth: {
+            type: "basic",
+            username: process.env.WEBSOCKET_MONITOR_USERNAME,
+            password: process.env.WEBSOCKET_MONITOR_PASSWORD
+        },
+        serverId: `${require("os").hostname()}#${process.pid}`
+    });
+} else {
+    instrument(io, {
+        auth: false,
+        serverId: `${require("os").hostname()}#${process.pid}`
+    });
+}
 
 // Serve static files (html, css, js)
 app.use(express.static(__dirname + '/../public'));
