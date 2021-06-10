@@ -4,7 +4,7 @@ let app = express();
 let server = require('http').createServer(app);
 let {Server} = require("socket.io");
 let io = new Server(server);
-let cards = JSON.parse(fs.readFileSync(__dirname + '/../data/cards.json'));
+let cards = JSON.parse(fs.readFileSync(__dirname + '/../data/fragen_10_06_21_final_new_format.json'));
 
 let port = 5000;
 server.listen(port, function () {
@@ -100,7 +100,6 @@ function getRandomCard(difficulty) {
     let filtered_cards = cards.filter(card => {
         return card.difficulty === difficulty;
     });
-
     return shuffleAnswers(filtered_cards[Math.floor(Math.random() * filtered_cards.length)]);
 }
 
