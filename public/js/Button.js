@@ -56,13 +56,6 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
         this.graphics.buttonMode = true;
         this.graphics.defaultCursor = 'pointer';
         this.graphics.on('click', function () {
-            if (_this.button_is_answer) {
-                if (_this.selected === true) {
-                    _this.unSelectButton();
-                } else {
-                    _this.selectButton();
-                }
-            }
             click();
         });
         this.graphics.on('mouseover', function () {
