@@ -20,17 +20,17 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
         this.graphics.beginFill(color);
         this.graphics.drawRect(this.x, this.y, this.width, this.height);
         this.graphics.endFill();
-    }
+    };
 
     this.selectButton = function () {
         this.selected = true;
         this.changeButtonColor(select_color);
-    }
+    };
 
     this.unSelectButton = function () {
         this.selected = false;
         this.changeButtonColor(default_color);
-    }
+    };
 
     this.getButton = function () {
         const style = new PIXI.TextStyle({
@@ -74,5 +74,5 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
             if (!_this.selected) _this.changeButtonColor(_this.default_color);
         });
         return this.graphics;
-    }
+    };
 }
