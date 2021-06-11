@@ -9,7 +9,7 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
     this.text = text;
     this.status = status;
     this.button_is_answer = button_is_answer;
-    this.click = click;
+    this.pointerdown = click;
     this.selected = false;
     let _this = this;
 
@@ -55,7 +55,7 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
         this.graphics.interactive = true;
         this.graphics.buttonMode = true;
         this.graphics.defaultCursor = 'pointer';
-        this.graphics.on('click', function () {
+        this.graphics.on('pointerdown', function () {
             if (_this.button_is_answer) {
                 if (_this.selected === true) {
                     _this.unSelectButton();
