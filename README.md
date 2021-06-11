@@ -21,7 +21,7 @@ Open `http://127.0.0.1` in your Browser
 npm install
 ```
 
-### (Optional) Use crendentials for monitoring
+### (Optional) Use credentials for monitoring
 Set environment variables `WEBSOCKET_MONITOR_USERNAME` and `WEBSOCKET_MONITOR_PASSWORD`
 
 `WEBSOCKET_MONITOR_USERNAME`: Username
