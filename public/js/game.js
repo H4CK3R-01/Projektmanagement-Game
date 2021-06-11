@@ -64,7 +64,7 @@ let sprites = [
 function start_game() {
     app = new PIXI.Application({
         autoResize: true,
-        resolution: devicePixelRatio,
+        resolution: 1,
         backgroundAlpha: 0,
         width: max_size / game_board_size,
         height: max_size / game_board_size
