@@ -68,3 +68,10 @@ function addChatMessage(data) {
 
     document.getElementById('messages_received').append(messageDiv);
 }
+
+document.getElementById('message_input').onkeydown = function (e) {
+    if (e.key === "Enter") {
+        sendMessage();
+        e.preventDefault();
+    }
+};
