@@ -42,7 +42,7 @@
   {
     "id": "5",
     "difficulty": "1",
-    "question": "Was gehört nicht direkt zum Finanzmanagement? ",
+    "question": "Was gehört nicht direkt zum Finanzmanagement?",
     "key": "D",
     "A": "Budgeteinteilung",
     "B": "Erstellen eines Finanzplans",
@@ -844,8 +844,8 @@
     "difficulty": "1",
     "question": "Was ist keine Eigenschaft eines Projekts?",
     "key": "C",
-    "A": "Ein terminlicher Rahmen  ",
-    "B": "Planung ",
+    "A": "Ein terminlicher Rahmen",
+    "B": "Planung",
     "C": "Regelmäßige Durchführung",
     "D": "Teamarbeit"
   },
