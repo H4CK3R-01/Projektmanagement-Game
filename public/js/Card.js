@@ -50,25 +50,25 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
 
         // Answers
         this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 150, this.card_x + 20, this.card_y + this.card_height - 120 - 170 * 4, this.a1.text, this.a1.status, true, function () {
-            if (this.your_turn) {
+            if (_this.your_turn) {
                 select_answer(0, _this.a1.text);
             }
         }));
 
         this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 150, this.card_x + 20, this.card_y + this.card_height - 120 - 170 * 3, this.a2.text, this.a2.status, true, function () {
-            if (this.your_turn) {
+            if (_this.your_turn) {
                 select_answer(1, _this.a2.text);
             }
         }));
 
         this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 150, this.card_x + 20, this.card_y + this.card_height - 120 - 170 * 2, this.a3.text, this.a3.status, true, function () {
-            if (this.your_turn) {
+            if (_this.your_turn) {
                 select_answer(2, _this.a3.text);
             }
         }));
 
         this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 150, this.card_x + 20, this.card_y + this.card_height - 120 - 170 * 1, this.a4.text, this.a4.status, true, function () {
-            if (this.your_turn) {
+            if (_this.your_turn) {
                 select_answer(3, _this.a4.text);
             }
         }));
@@ -88,8 +88,6 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
                 answer = null;
                 diced = false;
                 rolled_number = null;
-                rolled_number_text.destroy();
-                border_card_stack.clear();
                 socket.emit('card finished', d);
             } else {
                 alert("Bitte wähle eine Antwortmöglichkeit aus");

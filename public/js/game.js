@@ -170,6 +170,8 @@ function start_game() {
 
     socket.on('card destroyed', function () {
         card.destroyCard();
+        rolled_number_text.destroy();
+        border_card_stack.clear();
     });
 
     resize();

@@ -63,6 +63,15 @@ io.on('connection', socket => {
                 gameState['players'].splice(index, 1);
                 gameState['positions'].splice(index, 1);
             }
+
+            socket.leave(socket.room);
+
+            if (gameState['players'].length === 0) {
+                gameState['players'] = [];
+                gameState['positions'] = [];
+                gameState['whosNext'] = 0;
+                gameState['started'] = false;
+            }
         }
 
         generate_log_message(socket.room, socket.username, "LEFT", "");
