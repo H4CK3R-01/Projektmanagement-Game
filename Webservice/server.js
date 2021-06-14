@@ -124,6 +124,8 @@ io.on('connection', socket => {
 
     socket.on('card finished', function (difficulty) {
         gameState['positions'][gameState['players'].indexOf(socket.username)] += difficulty;
+        gameState['whosNext'] += 1;
+        if(gameState['whosNext'] === gameState['players'].length) gameState['whosNext'] = 0;
         io.in(socket.room).emit('card destroyed');
     });
 });

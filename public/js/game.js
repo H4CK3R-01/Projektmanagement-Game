@@ -169,6 +169,8 @@ function start_game() {
     });
 
     socket.on('card destroyed', function () {
+        diced = false;
+        show_card = false;
         card.destroyCard();
         rolled_number_text.destroy();
         border_card_stack.clear();
