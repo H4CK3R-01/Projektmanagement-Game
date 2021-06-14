@@ -9,7 +9,7 @@ let curr_player = 1;
 let player_array = [1, 1, 1, 1];
 let player_color = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00];
 let player_sprite_array = [];
-
+let card;
 let answer = null;
 let show_card = false;
 let diced = false;
@@ -156,15 +156,22 @@ function start_game() {
         rolled_number_text.x = sprite_size * 7 - sprite_size * 0.2 + dice.width / 2 - rolled_number_text.width / 2;
         rolled_number_text.y = sprite_size * 6 - sprite_size * 0.2;
         app.stage.addChild(rolled_number_text);
-
     });
 
     socket.on('card', function (data) {
-        let q = data.question;
-        let a = data.answers;
-        let d = data.difficulty;
-        new Card(game_board_size, q, a[0], a[1], a[2], a[3], d).showCard();
+        let u = data.username;
+        let q = data.card.question;
+        let a = data.card.answers;
+        let d = data.card.difficulty;
+        card = new Card(game_board_size, q, a[0], a[1], a[2], a[3], d, u === username);
+        card.showCard();
         show_card = true;
+    });
+
+    socket.on('card destroyed', function () {
+        card.destroyCard();
+        rolled_number_text.destroy();
+        border_card_stack.clear();
     });
 
     resize();
