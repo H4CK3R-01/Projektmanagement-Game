@@ -1,10 +1,11 @@
-let express = require('express');
-let fs = require('fs');
-let app = express();
-let server = require('http').createServer(app);
-let {Server} = require("socket.io");
-let io = new Server(server);
-let cards = JSON.parse(fs.readFileSync(__dirname + '/../data/cards.json'));
+const express = require('express');
+const fs = require('fs');
+const {instrument} = require("@socket.io/admin-ui");
+const app = express();
+const server = require('http').createServer(app);
+const {Server} = require("socket.io");
+const io = new Server(server);
+let cards = JSON.parse(fs.readFileSync(__dirname + '/../data/fragen_10_06_21_final_new_format.json'));
 
 let gameState = {
     players: [],
@@ -18,10 +19,28 @@ server.listen(port, function () {
     generate_log_message("MAIN", "Server", 'RUNNING', "PORT " + port);
 });
 
+// Monitor websockets
+if (process.env.WEBSOCKET_MONITOR_USERNAME && process.env.WEBSOCKET_MONITOR_PASSWORD) {
+    instrument(io, {
+        auth: {
+            type: "basic",
+            username: process.env.WEBSOCKET_MONITOR_USERNAME,
+            password: process.env.WEBSOCKET_MONITOR_PASSWORD
+        },
+        serverId: `${require("os").hostname()}#${process.pid}`
+    });
+} else {
+    instrument(io, {
+        auth: false,
+        serverId: `${require("os").hostname()}#${process.pid}`
+    });
+}
 
+// Serve static files (html, css, js)
 app.use(express.static(__dirname + '/../public'));
 
 
+// Websockets
 io.on('connection', socket => {
     let addedUser = false;
 
@@ -142,7 +161,6 @@ function getRandomCard(difficulty) {
     let filtered_cards = cards.filter(card => {
         return card.difficulty === difficulty;
     });
-
     return shuffleAnswers(filtered_cards[Math.floor(Math.random() * filtered_cards.length)]);
 }
 

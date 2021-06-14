@@ -64,7 +64,7 @@ let sprites = [
 function start_game() {
     app = new PIXI.Application({
         autoResize: true,
-        resolution: devicePixelRatio,
+        resolution: 1,
         backgroundAlpha: 0,
         width: max_size / game_board_size,
         height: max_size / game_board_size
@@ -126,7 +126,7 @@ function start_game() {
     dice.interactive = true;
     dice.buttonMode = true;
     dice.defaultCursor = 'pointer';
-    dice.on('click', function () {
+    dice.on('pointerdown', function () {
         if (!diced) {
             socket.emit('roll dice');
         }
@@ -185,7 +185,7 @@ function generate_card_stack(sprite, x, y, onclick) {
     sprite.interactive = true;
     sprite.buttonMode = true;
     sprite.defaultCursor = 'pointer';
-    sprite.on('click', onclick);
+    sprite.on('pointerdown', onclick);
     return sprite;
 }
 
