@@ -38,7 +38,7 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
             wordWrap: true,
             wordWrapWidth: this.width,
             breakWords: true,
-            lineJoin: 'miter'
+            padding: 50
         });
 
         this.graphics.clear();
