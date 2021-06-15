@@ -11,7 +11,7 @@ class Player {
     constructor(socketUsername) {
         this.socketUsername = socketUsername;
         this.position = 0;
-        this.alive = true;
+        this.isAlive = true;
     }
     move(amount) {
         this.position += amount;
@@ -28,19 +28,42 @@ class Hunter {
     move(amount) {
         this.position += amount;
     }
-    hunt(players) {
-        for (let i = 0; i < players.length; i++) {
-            if (players[i].position <= this.position) {
-                players[i].alive = false;
+    hunt(playerArray) {
+        for (let i = 0; i < playerArray.length; i++) {
+            if (playerArray[i].position <= this.position) {
+                playerArray[i].isAlive = false;
             }
         }
     }
 }
+
 let gameState = {
     players: [],
     whosNext: 0,
-    started: false
+    started: false,
+    round: 0,
+    hunter: new Hunter()
 };
+
+function finish_turn() {
+    // move on to next player; skip dead players
+    do {
+        gameState.whosNext++;
+        if (gameState.whosNext === gameState.players.length) {
+            gameState.whosNext = 0;
+            gameState.round++;
+        }
+    } while (!gameState.players[gameState.whosNext].isAlive);
+    // kill players with hunter
+    if (gameState.round >= 5) {
+        gameState.hunter.move(1);
+        gameState.hunter.hunt(gameState.players);
+    }
+    // check if all players are dead
+    if (!gameState.players.some(player => player.isAlive === true)) {
+        // todo: end game (all players are dead)
+    }
+}
 
 let port = 5000;
 server.listen(port, function () {
@@ -67,17 +90,16 @@ if (process.env.WEBSOCKET_MONITOR_USERNAME && process.env.WEBSOCKET_MONITOR_PASS
 // Serve static files (html, css, js)
 app.use(express.static(__dirname + '/../public'));
 
-
 // Websockets
 io.on('connection', socket => {
     let addedUser = false;
 
     socket.on('add user', function (data) {
-        if (gameState['players'].length < 4 && !gameState['started']) {
+        if (gameState.players.length < 4 && !gameState.started) {
             socket.username = data.username;
             socket.room = data.room_name;
 
-            gameState['players'].push(new Player(socket.username));
+            gameState.players.push(new Player(socket.username));
             addedUser = true;
 
             socket.emit('login');
@@ -104,23 +126,23 @@ io.on('connection', socket => {
         if (addedUser) {
             socket.broadcast.to(socket.room).emit('user left', socket.username);
             let index = -1;
-            for (let i = 0; i < gameState['players'].length; i++) {
-                if (gameState['players'][i].socketUsername === socket.username) {
+            for (let i = 0; i < gameState.players.length; i++) {
+                if (gameState.players[i].socketUsername === socket.username) {
                     index = i;
                     break;
                 }
             }
 
             if (index > -1) {
-                gameState['players'].splice(index, 1);
+                gameState.players.splice(index, 1);
             }
 
             socket.leave(socket.room);
 
-            if (gameState['players'].length === 0) {
-                gameState['players'] = [];
-                gameState['whosNext'] = 0;
-                gameState['started'] = false;
+            if (gameState.players.length === 0) {
+                gameState.players = [];
+                gameState.whosNext = 0;
+                gameState.started = false;
             }
         }
 
@@ -131,8 +153,8 @@ io.on('connection', socket => {
     // Game
     socket.on('roll dice', function () {
 
-        if (gameState['players'][gameState['whosNext']].socketUsername === socket.username) {
-            gameState['started'] = true;
+        if (gameState.players[gameState.whosNext].socketUsername === socket.username) {
+            gameState.started = true;
             let sides = 3;
             let randomNumber = Math.floor(Math.random() * sides) + 1;
 
@@ -145,7 +167,7 @@ io.on('connection', socket => {
     });
 
     socket.on('get card', function (difficulty) {
-        if (gameState['players'][gameState['whosNext']].socketUsername === socket.username) {
+        if (gameState.players[gameState.whosNext].socketUsername === socket.username) {
             io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
 
             generate_log_message(socket.room, socket.username, "CARD", difficulty);
@@ -155,10 +177,9 @@ io.on('connection', socket => {
     });
 
     socket.on('card finished', function (difficulty, answerIsCorrect) {
-        if (answerIsCorrect) gameState['players'][gameState['whosNext']].move(difficulty);
-        gameState['whosNext'] += 1;
-        if(gameState['whosNext'] === gameState['players'].length) gameState['whosNext'] = 0;
+        if (answerIsCorrect) gameState.players[gameState.whosNext].move(difficulty);
         io.in(socket.room).emit('card destroyed');
+        finish_turn();
     });
 });
 
