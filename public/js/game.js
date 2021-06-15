@@ -11,6 +11,7 @@ let player_color = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00];
 let player_sprite_array = [];
 let hunter = new Hunter();
 
+let card;
 let answer = null;
 let show_card = false;
 let diced = false;
@@ -56,7 +57,7 @@ let sprites = [
 function start_game() {
     app = new PIXI.Application({
         autoResize: true,
-        resolution: devicePixelRatio,
+        resolution: 1,
         backgroundAlpha: 0,
         width: max_size / game_board_size,
         height: max_size / game_board_size
@@ -117,7 +118,7 @@ function start_game() {
     dice.interactive = true;
     dice.buttonMode = true;
     dice.defaultCursor = 'pointer';
-    dice.on('click', function () {
+    dice.on('pointerdown', function () {
         if (!diced) {
             socket.emit('roll dice');
         }
@@ -147,15 +148,24 @@ function start_game() {
         rolled_number_text.x = sprite_size * 7 - sprite_size * 0.2 + dice.width / 2 - rolled_number_text.width / 2;
         rolled_number_text.y = sprite_size * 6 - sprite_size * 0.2;
         app.stage.addChild(rolled_number_text);
-
     });
 
     socket.on('card', function (data) {
-        let q = data.question;
-        let a = data.answers;
-        let d = data.difficulty;
-        new Card(game_board_size, q, a[0], a[1], a[2], a[3], d).showCard();
+        let u = data.username;
+        let q = data.card.question;
+        let a = data.card.answers;
+        let d = data.card.difficulty;
+        card = new Card(game_board_size, q, a[0], a[1], a[2], a[3], d, u === username);
+        card.showCard();
         show_card = true;
+    });
+
+    socket.on('card destroyed', function () {
+        diced = false;
+        show_card = false;
+        card.destroyCard();
+        rolled_number_text.destroy();
+        border_card_stack.clear();
     });
 
     resize();
@@ -169,7 +179,7 @@ function generate_card_stack(sprite, x, y, onclick) {
     sprite.interactive = true;
     sprite.buttonMode = true;
     sprite.defaultCursor = 'pointer';
-    sprite.on('click', onclick);
+    sprite.on('pointerdown', onclick);
     return sprite;
 }
 
@@ -188,10 +198,24 @@ function generate_circle(graphics, x, y) {
 }
 
 function calculate_size() {
-    if (game.offsetWidth > game.offsetHeight) {
-        return game.offsetHeight;
+    let width;
+    let height;
+    if (game.offsetWidth > window.innerWidth) {
+        width = window.innerWidth - document.getElementById('chat').offsetWidth;
     } else {
-        return game.offsetWidth;
+        width = game.offsetWidth;
+    }
+
+    if (game.offsetHeight > window.innerHeight) {
+        height = window.innerHeight - document.getElementsByTagName('header')[0].offsetHeight;
+    } else {
+        height = game.offsetHeight;
+    }
+
+    if (width > height) {
+        return height;
+    } else {
+        return width;
     }
 }
 

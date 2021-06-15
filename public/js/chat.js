@@ -2,7 +2,9 @@ let socket;
 let connected = false;
 
 function start_chat() {
-    socket = io();
+    socket = io("/", {
+        closeOnBeforeunload: false
+    });
 
     socket.on('login', function () {
         connected = true;
@@ -43,6 +45,7 @@ function addLogMessage(message) {
     li.innerText = message;
 
     document.getElementById("messages_received").appendChild(li);
+    document.getElementById("messages_received").scrollTop = document.getElementById("messages_received").scrollHeight;
 }
 
 function addChatMessage(data) {
@@ -65,4 +68,12 @@ function addChatMessage(data) {
     messageDiv.appendChild(messageBody);
 
     document.getElementById('messages_received').append(messageDiv);
+    document.getElementById("messages_received").scrollTop = document.getElementById("messages_received").scrollHeight;
 }
+
+document.getElementById('message_input').onkeydown = function (e) {
+    if (e.key === "Enter") {
+        sendMessage();
+        e.preventDefault();
+    }
+};

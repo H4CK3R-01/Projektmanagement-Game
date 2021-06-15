@@ -1,4 +1,4 @@
-function Button(default_color, hover_color, select_color, width, height, x, y, text, status, button_is_answer, click) {
+function Button(default_color, hover_color, select_color, width, height, x, y, text, status, click) {
     this.graphics = new PIXI.Graphics();
     this.default_color = default_color;
     this.hover_color = hover_color;
@@ -8,8 +8,7 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
     this.y = y;
     this.text = text;
     this.status = status;
-    this.button_is_answer = button_is_answer;
-    this.click = click;
+    this.pointerdown = click;
     this.selected = false;
     let _this = this;
 
@@ -20,24 +19,26 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
         this.graphics.beginFill(color);
         this.graphics.drawRect(this.x, this.y, this.width, this.height);
         this.graphics.endFill();
-    }
+    };
 
     this.selectButton = function () {
         this.selected = true;
         this.changeButtonColor(select_color);
-    }
+    };
 
     this.unSelectButton = function () {
         this.selected = false;
         this.changeButtonColor(default_color);
-    }
+    };
 
     this.getButton = function () {
         const style = new PIXI.TextStyle({
             fontFamily: 'Arial',
-            fontSize: 60,
+            fontSize: 40,
             wordWrap: true,
-            wordWrapWidth: game_board_size * 0.5 - 20,
+            wordWrapWidth: this.width,
+            breakWords: true,
+            padding: 50
         });
 
         this.graphics.clear();
@@ -55,14 +56,7 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
         this.graphics.interactive = true;
         this.graphics.buttonMode = true;
         this.graphics.defaultCursor = 'pointer';
-        this.graphics.on('click', function () {
-            if (_this.button_is_answer) {
-                if (_this.selected === true) {
-                    _this.unSelectButton();
-                } else {
-                    _this.selectButton();
-                }
-            }
+        this.graphics.on('pointerdown', function () {
             click();
         });
         this.graphics.on('mouseover', function () {
@@ -74,5 +68,5 @@ function Button(default_color, hover_color, select_color, width, height, x, y, t
             if (!_this.selected) _this.changeButtonColor(_this.default_color);
         });
         return this.graphics;
-    }
+    };
 }
