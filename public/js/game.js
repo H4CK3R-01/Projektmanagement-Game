@@ -5,12 +5,6 @@
         dice.svg: https://www.svgrepo.com/download/198836/gambler-casino.svg
         sprite.jpg: https://media.istockphoto.com/photos/gray-granite-stone-texture-seamless-square-background-tile-ready-picture-id1096464726
 */
-let curr_player = 1;
-let player_array = createPlayers(4);
-let player_color = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00];
-let player_sprite_array = [];
-let hunter = new Hunter();
-
 let card;
 let answer = null;
 let show_card = false;
