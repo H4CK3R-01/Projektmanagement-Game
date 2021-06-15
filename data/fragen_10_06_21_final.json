@@ -352,7 +352,7 @@
   {
     "id": "36",
     "difficulty": "3",
-    "question": "Ein wütender Besucher des Events, dessen Ressourcen du gemanagte hast, kommt zu dir und beschwert sich darüber, dass sein Fleisch nicht ganz so war, wie er es wollte.\r\nWar es dein Fehler?",
+    "question": "Ein wütender Besucher des Events, dessen Ressourcen du gemanagte hast, kommt zu dir und beschwert sich darüber, dass sein Fleisch nicht ganz so war, wie er es wollte.\nWar es dein Fehler?",
     "key": "B",
     "A": "Ja, da die Zubereitung des Essens in deinen Zuständigkeitsbereich fällt",
     "B": "Nein, da der “Koch” dafür verantwortlich ist",
@@ -977,7 +977,7 @@
     "A": "Initiieren, Vorbereiten, Planen, Steuern, Abschließen",
     "B": "Planen, Vorbereiten, Initiieren, Steuern, Abschließen",
     "C": "Vorbereiten, Planen, Initiieren, Steuern, Abschließen",
-    "D": "Vorbereiten, Initiieren, Planen, Steuern, Abschließen\r\n"
+    "D": "Vorbereiten, Initiieren, Planen, Steuern, Abschließen"
   },
   {
     "id": "99",
