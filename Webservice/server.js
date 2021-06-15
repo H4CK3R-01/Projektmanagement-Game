@@ -154,8 +154,8 @@ io.on('connection', socket => {
         }
     });
 
-    socket.on('card finished', function (difficulty) {
-        gameState['players'][gameState['whosNext']].move(difficulty); //TODO: stop players from moving when answer is wrong
+    socket.on('card finished', function (difficulty, answerIsCorrect) {
+        if (answerIsCorrect) gameState['players'][gameState['whosNext']].move(difficulty);
         gameState['whosNext'] += 1;
         if(gameState['whosNext'] === gameState['players'].length) gameState['whosNext'] = 0;
         io.in(socket.room).emit('card destroyed');
