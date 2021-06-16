@@ -13,6 +13,7 @@ class Player {
         this.position = 0;
         this.isAlive = true;
     }
+
     move(amount) {
         this.position += amount;
         if (this.position === 15) {
@@ -25,9 +26,11 @@ class Hunter {
     constructor() {
         this.position = 0;
     }
+
     move(amount) {
         this.position += amount;
     }
+
     hunt(playerArray) {
         for (let i = 0; i < playerArray.length; i++) {
             if (playerArray[i].position <= this.position) {
@@ -37,33 +40,37 @@ class Hunter {
     }
 }
 
-let gameState = {
-    players: [],
-    whosNext: 0,
-    started: false,
-    round: 0,
-    hunter: new Hunter()
-};
-
-function finish_turn() {
-    // move on to next player; skip dead players
-    do {
-        gameState.whosNext++;
-        if (gameState.whosNext === gameState.players.length) {
-            gameState.whosNext = 0;
-            gameState.round++;
-        }
-    } while (!gameState.players[gameState.whosNext].isAlive);
-    // kill players with hunter
-    if (gameState.round >= 5) {
-        gameState.hunter.move(1);
-        gameState.hunter.hunt(gameState.players);
+class Game {
+    constructor() {
+        this.players = [];
+        this.whosNext = 0;
+        this.started = false;
+        this.round = 0;
+        this.hunter = new Hunter()
     }
-    // check if all players are dead
-    if (!gameState.players.some(player => player.isAlive === true)) {
-        // todo: end game (all players are dead)
+
+    finish_turn() {
+        // move on to next player; skip dead players
+        do {
+            this.whosNext++;
+            if (this.whosNext === this.players.length) {
+                this.whosNext = 0;
+                this.round++;
+            }
+        } while (!gameState.players[gameState.whosNext].isAlive);
+        // kill players with hunter
+        if (this.round >= 5) {
+            this.hunter.move(1);
+            this.hunter.hunt(this.players);
+        }
+        // check if all players are dead
+        if (!this.players.some(player => player.isAlive === true)) {
+            // todo: end game (all players are dead)
+        }
     }
 }
+// todo: instantiate this for individual rooms
+let gameState = new Game();
 
 let port = 5000;
 server.listen(port, function () {
@@ -149,7 +156,6 @@ io.on('connection', socket => {
         generate_log_message(socket.room, socket.username, "LEFT", "");
     });
 
-
     // Game
     socket.on('roll dice', function () {
 
@@ -179,7 +185,7 @@ io.on('connection', socket => {
     socket.on('card finished', function (difficulty, answerIsCorrect) {
         if (answerIsCorrect) gameState.players[gameState.whosNext].move(difficulty);
         io.in(socket.room).emit('card destroyed');
-        finish_turn();
+        gameState.finish_turn();
     });
 });
 
