@@ -79,16 +79,17 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
         // OK-Button
         this.card.addChild(new Button(0xffffff, 0xcccccc, 0xffffff, this.card_width - 40, 100, this.card_x + 20, this.card_y + this.card_height - 120, "OK", null, function () {
             if (answer !== null) {
-                if (_this.right_answer === answer) {
+                if (_this.right_answer === answer) { //TODO: do this in backend instead to prevent cheating
                     console.log("Richtig");
+                    socket.emit('card finished', d, true);
                 } else {
                     console.log("Falsch");
+                    socket.emit('card finished', d, false);
                 }
                 show_card = false;
                 answer = null;
                 diced = false;
                 rolled_number = null;
-                socket.emit('card finished', d);
             } else {
                 alert("Bitte wähle eine Antwortmöglichkeit aus");
             }

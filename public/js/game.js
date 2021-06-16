@@ -5,10 +5,6 @@
         dice.svg: https://www.svgrepo.com/download/198836/gambler-casino.svg
         sprite.jpg: https://media.istockphoto.com/photos/gray-granite-stone-texture-seamless-square-background-tile-ready-picture-id1096464726
 */
-let curr_player = 1;
-let player_array = [1, 1, 1, 1];
-let player_color = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00];
-let player_sprite_array = [];
 let card;
 let answer = null;
 let show_card = false;
@@ -34,31 +30,22 @@ let rolled_number_text = new PIXI.Text("", rolled_number_style);
 
 // fields
 let sprites = [
-    // First row
-    new Sprite(1, 1),
-    new Sprite(3, 1),
-    new Sprite(5, 1),
-    new Sprite(7, 1),
-    new Sprite(9, 1),
-
-    // Second row
-    new Sprite(1, 3),
-    new Sprite(9, 3),
-
-    // Third row
-    new Sprite(1, 5),
-    new Sprite(9, 5),
-
-    // Fourth row
-    new Sprite(1, 7),
+    new Sprite(9, 9),
     new Sprite(9, 7),
-
-    // Fifth row
+    new Sprite(9, 5),
+    new Sprite(9, 3),
+    new Sprite(9, 1),
+    new Sprite(7, 1),
+    new Sprite(5, 1),
+    new Sprite(3, 1),
+    new Sprite(1, 1),
+    new Sprite(1, 3),
+    new Sprite(1, 5),
+    new Sprite(1, 7),
     new Sprite(1, 9),
     new Sprite(3, 9),
     new Sprite(5, 9),
-    new Sprite(7, 9),
-    new Sprite(9, 9),
+    new Sprite(7, 9)
 ];
 
 function start_game() {
@@ -72,7 +59,6 @@ function start_game() {
     document.getElementById('game').appendChild(app.view);
 
     sprites.forEach(sprite => app.stage.addChild(sprite.getSprite()));
-
 
     // Red border
     let red_border = generate_red_border(new PIXI.Graphics());
