@@ -66,14 +66,17 @@ function start_game() {
 
 
     // White circles
-    let first_circle = generate_circle(new PIXI.Graphics(), 3, 9);
+    let first_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'yellow', 1);
     app.stage.addChild(first_circle);
 
-    let second_circle = generate_circle(new PIXI.Graphics(), 5, 9);
+    let second_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'blue', 2);
     app.stage.addChild(second_circle);
-
-    let third_circle = generate_circle(new PIXI.Graphics(), 7, 9);
+    
+    let third_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'green', 3);
     app.stage.addChild(third_circle);
+    
+    let fourth_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'red', 4);
+    app.stage.addChild(fourth_circle);
 
 
     // Card stacks
@@ -102,7 +105,7 @@ function start_game() {
     app.stage.addChild(cards_3);
 
 
-    // Dice
+    // Die
     let diceTexture = PIXI.Texture.from('/img/dice.svg');
     let dice = new PIXI.Sprite(diceTexture);
     dice.x = sprite_size * 7 - sprite_size * 0.2;
@@ -162,6 +165,55 @@ function start_game() {
         border_card_stack.clear();
     });
 
+    socket.on('player moved', function(data){
+        let player = data.player;
+        let position = data.position;
+        console.log("player: " + player); // test
+        console.log("position: " + position); // test
+        let x = 0;
+        let y = 0;
+        switch (position){
+            case 0: x = 9; y = 9; break;
+            case 1: x = 9; y = 7; break;
+            case 2: x = 9; y = 5; break;
+            case 3: x = 9; y = 3; break;
+            case 4: x = 9; y = 1; break;
+            case 5: x = 7; y = 1; break;
+            case 6: x = 5; y = 1; break;
+            case 7: x = 3; y = 1; break;
+            case 8: x = 1; y = 1; break;
+            case 9: x = 1; y = 3; break;
+            case 10: x = 1; y = 5; break;
+            case 11: x = 1; y = 7; break;
+            case 12: x = 1; y = 9; break;
+            case 13: x = 3; y = 9; break;
+            case 14: x = 5; y = 9; break;
+            case 15: x = 7; y = 9; break;
+        }
+        switch(player){
+            case 0:
+                first_circle.clear();
+                first_circle = generate_circle(new PIXI.Graphics(), y, x, 'yellow', 1);
+                app.stage.addChild(first_circle);
+                break;
+            case 1: 
+                second_circle.clear();
+                second_circle = generate_circle(new PIXI.Graphics(), y, x, 'blue', 2);
+                app.stage.addChild(second_circle);
+                break;
+            case 2: 
+                third_circle.clear();
+                third_circle = generate_circle(new PIXI.Graphics(), y, x, 'green', 3);
+                app.stage.addChild(third_circle);
+                break;
+            case 3:  
+                fourth_circle.clear();
+                fourth_circle = generate_circle(new PIXI.Graphics(), y, x, 'red', 4);
+                app.stage.addChild(fourth_circle);
+                break;
+        }
+    });
+
     resize();
 }
 
@@ -183,10 +235,20 @@ function generate_red_border(graphics) {
     return graphics;
 }
 
-function generate_circle(graphics, x, y) {
+function generate_circle(graphics, x, y, color, offset) {
     graphics.lineStyle(0);
-    graphics.beginFill(0xffffff, 1);
-    graphics.drawCircle(sprite_size * x - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4);
+    switch (color){
+        case 'yellow': graphics.beginFill(0xFFDDA1, 1); break;
+        case 'red': graphics.beginFill(0xF47A93, 1); break;
+        case 'green': graphics.beginFill(0x6C9A8B, 1); break;
+        case 'blue': graphics.beginFill(0x4169E1, 1); break;
+    }
+    switch(offset){
+        case 1: graphics.drawCircle(sprite_size * x - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // upper left
+        case 2: graphics.drawCircle(sprite_size * x + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // upper right
+        case 3: graphics.drawCircle(sprite_size * x - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // lower left
+        case 4: graphics.drawCircle(sprite_size * x + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // lower right
+    }
     graphics.endFill();
     return graphics;
 }

@@ -138,6 +138,10 @@ io.on('connection', socket => {
         if (gameState[socket.room] !== undefined && addedUser) {
             if (answerIsCorrect) gameState[socket.room].players[gameState[socket.room].whosNext].move(difficulty);
             io.in(socket.room).emit('card destroyed');
+            io.in(socket.room).emit('player moved', {
+                "player": gameState[socket.room].whosNext,
+                "position": gameState[socket.room].players[gameState[socket.room].whosNext].position
+            });
             gameState[socket.room].finish_turn();
         }
     });
