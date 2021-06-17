@@ -65,16 +65,18 @@ io.on('connection', socket => {
     });
 
     socket.on('new message', function (data) {
-        socket.broadcast.to(socket.room).emit('new message', {
-            username: socket.username,
-            message: data
-        });
+        if (gameState[socket.room] !== undefined && addedUser) {
+            socket.broadcast.to(socket.room).emit('new message', {
+                username: socket.username,
+                message: data
+            });
 
-        generate_log_message(socket.room, socket.username, "MESSAGE", data);
+            generate_log_message(socket.room, socket.username, "MESSAGE", data);
+        }
     });
 
     socket.on('disconnect', function () {
-        if (addedUser) {
+        if (gameState[socket.room] !== undefined && addedUser) {
             socket.broadcast.to(socket.room).emit('user left', socket.username);
             let index = -1;
             for (let i = 0; i < gameState[socket.room].players.length; i++) {
@@ -102,34 +104,39 @@ io.on('connection', socket => {
 
     // Game
     socket.on('roll dice', function () {
+        if (gameState[socket.room] !== undefined && addedUser) {
+            if (gameState[socket.room].players[gameState[socket.room].whosNext].socketUsername === socket.username) {
+                gameState[socket.room].started = true;
+                let sides = 3;
+                let randomNumber = Math.floor(Math.random() * sides) + 1;
 
-        if (gameState[socket.room].players[gameState[socket.room].whosNext].socketUsername === socket.username) {
-            gameState[socket.room].started = true;
-            let sides = 3;
-            let randomNumber = Math.floor(Math.random() * sides) + 1;
+                io.in(socket.room).emit('dice', randomNumber);
 
-            io.in(socket.room).emit('dice', randomNumber);
-
-            generate_log_message(socket.room, socket.username, "DICE", randomNumber);
-        } else {
-            // TODO
+                generate_log_message(socket.room, socket.username, "DICE", randomNumber);
+            } else {
+                // TODO
+            }
         }
     });
 
     socket.on('get card', function (difficulty) {
-        if (gameState[socket.room].players[gameState[socket.room].whosNext].socketUsername === socket.username) {
-            io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
+        if (gameState[socket.room] !== undefined && addedUser) {
+            if (gameState[socket.room].players[gameState[socket.room].whosNext].socketUsername === socket.username) {
+                io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
 
-            generate_log_message(socket.room, socket.username, "CARD", difficulty);
-        } else {
-            // TODO
+                generate_log_message(socket.room, socket.username, "CARD", difficulty);
+            } else {
+                // TODO
+            }
         }
     });
 
     socket.on('card finished', function (difficulty, answerIsCorrect) {
-        if (answerIsCorrect) gameState[socket.room].players[gameState[socket.room].whosNext].move(difficulty);
-        io.in(socket.room).emit('card destroyed');
-        gameState[socket.room].finish_turn();
+        if (gameState[socket.room] !== undefined && addedUser) {
+            if (answerIsCorrect) gameState[socket.room].players[gameState[socket.room].whosNext].move(difficulty);
+            io.in(socket.room).emit('card destroyed');
+            gameState[socket.room].finish_turn();
+        }
     });
 });
 
