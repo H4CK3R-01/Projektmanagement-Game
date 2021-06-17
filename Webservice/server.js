@@ -76,6 +76,7 @@ io.on('connection', socket => {
 
     socket.on('disconnect', function () {
         if (gameState[socket.room] !== undefined && addedUser) {
+            socket.broadcast.to(socket.room).emit('user left', socket.username);
             gameState[socket.room].remove_player(socket.username);
 
             socket.leave(socket.room);
