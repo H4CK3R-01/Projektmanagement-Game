@@ -93,9 +93,7 @@ io.on('connection', socket => {
             socket.leave(socket.room);
 
             if (gameState[socket.room].players.length === 0) {
-                gameState[socket.room].players = [];
-                gameState[socket.room].whosNext = 0;
-                gameState[socket.room].started = false;
+                delete gameState[socket.room];
             }
         }
 
@@ -105,6 +103,11 @@ io.on('connection', socket => {
     // Game
     socket.on('roll dice', function () {
         if (gameState[socket.room] !== undefined && addedUser) {
+            if(gameState[socket.room].players[gameState[socket.room].whosNext] === undefined) {
+                console.log(gameState[socket.room].players)
+                console.log(gameState[socket.room].whosNext)
+            }
+
             if (gameState[socket.room].players[gameState[socket.room].whosNext].socketUsername === socket.username) {
                 gameState[socket.room].started = true;
                 let sides = 3;
