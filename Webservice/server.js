@@ -1,4 +1,3 @@
-const Player = require('./Player');
 const Game = require('./Game');
 
 const express = require('express');
@@ -50,7 +49,7 @@ io.on('connection', socket => {
         }
 
         if (gameState[socket.room].players.length < 4 && !gameState[socket.room].started) {
-            gameState[socket.room].players.push(new Player(socket.username));
+            gameState[socket.room].add_player(socket.username);
             addedUser = true;
 
             socket.emit('login');
@@ -77,25 +76,13 @@ io.on('connection', socket => {
 
     socket.on('disconnect', function () {
         if (gameState[socket.room] !== undefined && addedUser) {
-            socket.broadcast.to(socket.room).emit('user left', socket.username);
-            let index = -1;
-            for (let i = 0; i < gameState[socket.room].players.length; i++) {
-                if (gameState[socket.room].players[i].socketUsername === socket.username) {
-                    index = i;
-                    break;
-                }
-            }
-
-            if (index > -1) {
-                gameState[socket.room].players.splice(index, 1);
-            }
+            gameState[socket.room].remove_player(socket.username);
 
             socket.leave(socket.room);
 
-            if (gameState[socket.room].players.length === 0) {
-                delete gameState[socket.room];
-            }
+            if (gameState[socket.room].players.length === 0) delete gameState[socket.room];
         }
+
 
         generate_log_message(socket.room, socket.username, "LEFT", "");
     });
@@ -103,12 +90,7 @@ io.on('connection', socket => {
     // Game
     socket.on('roll dice', function () {
         if (gameState[socket.room] !== undefined && addedUser) {
-            if(gameState[socket.room].players[gameState[socket.room].whosNext] === undefined) {
-                console.log(gameState[socket.room].players)
-                console.log(gameState[socket.room].whosNext)
-            }
-
-            if (gameState[socket.room].players[gameState[socket.room].whosNext].socketUsername === socket.username) {
+            if (gameState[socket.room].current_player_is(socket.username)) {
                 gameState[socket.room].started = true;
                 let sides = 3;
                 let randomNumber = Math.floor(Math.random() * sides) + 1;
@@ -124,7 +106,7 @@ io.on('connection', socket => {
 
     socket.on('get card', function (difficulty) {
         if (gameState[socket.room] !== undefined && addedUser) {
-            if (gameState[socket.room].players[gameState[socket.room].whosNext].socketUsername === socket.username) {
+            if (gameState[socket.room].current_player_is(socket.username)) {
                 io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
 
                 generate_log_message(socket.room, socket.username, "CARD", difficulty);
@@ -136,11 +118,15 @@ io.on('connection', socket => {
 
     socket.on('card finished', function (difficulty, answerIsCorrect) {
         if (gameState[socket.room] !== undefined && addedUser) {
-            if (answerIsCorrect) gameState[socket.room].players[gameState[socket.room].whosNext].move(difficulty);
+            if (answerIsCorrect) {
+                gameState[socket.room].move_player(socket.username, difficulty);
+                generate_log_message(socket.room, socket.username, "MOVE", difficulty);
+            }
             io.in(socket.room).emit('card destroyed');
+            let index = gameState[socket.room].get_player_index(socket.username);
             io.in(socket.room).emit('player moved', {
-                "player": gameState[socket.room].whosNext,
-                "position": gameState[socket.room].players[gameState[socket.room].whosNext].position
+                "player": index,
+                "position": gameState[socket.room].players[index].position
             });
             gameState[socket.room].finish_turn();
         }

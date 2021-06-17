@@ -3,7 +3,7 @@ class Hunter {
         this.position = 0;
     }
 
-    move(amount) {
+    move_by(amount) {
         this.position += amount;
     }
 
