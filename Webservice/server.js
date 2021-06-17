@@ -1,3 +1,6 @@
+const Player = require('./Player');
+const Game = require('./Game');
+
 const express = require('express');
 const fs = require('fs');
 const {instrument} = require("@socket.io/admin-ui");
@@ -7,69 +10,7 @@ const {Server} = require("socket.io");
 const io = new Server(server);
 let cards = JSON.parse(fs.readFileSync(__dirname + '/../data/fragen_10_06_21_final_new_format.json'));
 
-class Player {
-    constructor(socketUsername) {
-        this.socketUsername = socketUsername;
-        this.position = 0;
-        this.isAlive = true;
-    }
-
-    move(amount) {
-        this.position += amount;
-        if (this.position === 15) {
-            // todo: win
-        }
-    }
-}
-
-class Hunter {
-    constructor() {
-        this.position = 0;
-    }
-
-    move(amount) {
-        this.position += amount;
-    }
-
-    hunt(playerArray) {
-        for (let i = 0; i < playerArray.length; i++) {
-            if (playerArray[i].position <= this.position) {
-                playerArray[i].isAlive = false;
-            }
-        }
-    }
-}
-
-class Game {
-    constructor() {
-        this.players = [];
-        this.whosNext = 0;
-        this.started = false;
-        this.round = 0;
-        this.hunter = new Hunter()
-    }
-
-    finish_turn() {
-        // move on to next player; skip dead players
-        do {
-            this.whosNext++;
-            if (this.whosNext === this.players.length) {
-                this.whosNext = 0;
-                this.round++;
-            }
-        } while (!gameState.players[gameState.whosNext].isAlive);
-        // kill players with hunter
-        if (this.round >= 5) {
-            this.hunter.move(1);
-            this.hunter.hunt(this.players);
-        }
-        // check if all players are dead
-        if (!this.players.some(player => player.isAlive === true)) {
-            // todo: end game (all players are dead)
-        }
-    }
-}
-let gameState = {}
+let gameState = {};
 
 let port = 5000;
 server.listen(port, function () {
@@ -104,7 +45,7 @@ io.on('connection', socket => {
         socket.username = data.username;
         socket.room = data.room_name;
 
-        if(gameState[socket.room] === undefined) {
+        if (gameState[socket.room] === undefined) {
             gameState[socket.room] = new Game();
         }
 
