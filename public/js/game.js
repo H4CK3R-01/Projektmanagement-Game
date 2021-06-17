@@ -30,22 +30,22 @@ let rolled_number_text = new PIXI.Text("", rolled_number_style);
 
 // fields
 let sprites = [
-    new Sprite(9, 9),
-    new Sprite(9, 7),
-    new Sprite(9, 5),
-    new Sprite(9, 3),
-    new Sprite(9, 1),
-    new Sprite(7, 1),
-    new Sprite(5, 1),
-    new Sprite(3, 1),
-    new Sprite(1, 1),
-    new Sprite(1, 3),
-    new Sprite(1, 5),
-    new Sprite(1, 7),
-    new Sprite(1, 9),
-    new Sprite(3, 9),
+    new Sprite(9, 9), // lower right
+    new Sprite(7, 9),
     new Sprite(5, 9),
-    new Sprite(7, 9)
+    new Sprite(3, 9),
+    new Sprite(1, 9), // upper right
+    new Sprite(1, 7),
+    new Sprite(1, 5),
+    new Sprite(1, 3),
+    new Sprite(1, 1), // upper left
+    new Sprite(3, 1),
+    new Sprite(5, 1),
+    new Sprite(7, 1),
+    new Sprite(9, 1), // lower left
+    new Sprite(9, 3),
+    new Sprite(9, 5),
+    new Sprite(9, 7)
 ];
 
 function start_game() {
@@ -66,17 +66,17 @@ function start_game() {
 
 
     // White circles
-    let first_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'yellow', 1);
-    app.stage.addChild(first_circle);
+    let player_a = generate_circle(new PIXI.Graphics(), 9, 9, 'yellow', 1);
+    app.stage.addChild(player_a);
 
-    let second_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'blue', 2);
-    app.stage.addChild(second_circle);
+    let player_b = generate_circle(new PIXI.Graphics(), 9, 9, 'blue', 2);
+    app.stage.addChild(player_b);
     
-    let third_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'green', 3);
-    app.stage.addChild(third_circle);
+    let player_c = generate_circle(new PIXI.Graphics(), 9, 9, 'green', 3);
+    app.stage.addChild(player_c);
     
-    let fourth_circle = generate_circle(new PIXI.Graphics(), 9, 9, 'red', 4);
-    app.stage.addChild(fourth_circle);
+    let player_d = generate_circle(new PIXI.Graphics(), 9, 9, 'red', 4);
+    app.stage.addChild(player_d);
 
 
     // Card stacks
@@ -168,48 +168,49 @@ function start_game() {
     socket.on('player moved', function(data){
         let player = data.player;
         let position = data.position;
-        console.log("player: " + player); // test
-        console.log("position: " + position); // test
         let x = 0;
         let y = 0;
         switch (position){
-            case 0: x = 9; y = 9; break;
-            case 1: x = 9; y = 7; break;
-            case 2: x = 9; y = 5; break;
-            case 3: x = 9; y = 3; break;
-            case 4: x = 9; y = 1; break;
-            case 5: x = 7; y = 1; break;
-            case 6: x = 5; y = 1; break;
-            case 7: x = 3; y = 1; break;
-            case 8: x = 1; y = 1; break;
-            case 9: x = 1; y = 3; break;
-            case 10: x = 1; y = 5; break;
-            case 11: x = 1; y = 7; break;
-            case 12: x = 1; y = 9; break;
-            case 13: x = 3; y = 9; break;
-            case 14: x = 5; y = 9; break;
-            case 15: x = 7; y = 9; break;
+            case 0: x = 9; y = 9; break; // lower right
+            case 1: x = 7; y = 9; break;
+            case 2: x = 5; y = 9; break;
+            case 3: x = 3; y = 9; break;
+            case 4: x = 1; y = 9; break; // upper right
+            case 5: x = 1; y = 7; break;
+            case 6: x = 1; y = 5; break;
+            case 7: x = 1; y = 3; break;
+            case 8: x = 1; y = 1; break;  // upper left
+            case 9: x = 3; y = 1; break;
+            case 10: x = 5; y = 1; break;
+            case 11: x = 7; y = 1; break;
+            case 12: x = 9; y = 1; break; // lower left
+            case 13: x = 9; y = 3; break;
+            case 14: x = 9; y = 5; break;
+            case 15: x = 9; y = 7; break;
+            
+            
+            
         }
         switch(player){
             case 0:
-                first_circle.clear();
-                first_circle = generate_circle(new PIXI.Graphics(), y, x, 'yellow', 1);
-                app.stage.addChild(first_circle);
+                player_a.clear();
+                player_a = generate_circle(new PIXI.Graphics(), y, x, 'yellow', 1);
+                app.stage.addChild(player_a);
                 break;
             case 1: 
-                second_circle.clear();
-                second_circle = generate_circle(new PIXI.Graphics(), y, x, 'blue', 2);
-                app.stage.addChild(second_circle);
+                player_b.clear();
+                player_b = generate_circle(new PIXI.Graphics(), y, x, 'blue', 2);
+                app.stage.addChild(player_b);
                 break;
             case 2: 
-                third_circle.clear();
-                third_circle = generate_circle(new PIXI.Graphics(), y, x, 'green', 3);
-                app.stage.addChild(third_circle);
+                player_c.clear();
+                player_c = generate_circle(new PIXI.Graphics(), y, x, 'green', 3);
+                app.stage.addChild(player_c);
                 break;
             case 3:  
-                fourth_circle.clear();
-                fourth_circle = generate_circle(new PIXI.Graphics(), y, x, 'red', 4);
-                app.stage.addChild(fourth_circle);
+                player_d.clear();
+                player_d = generate_circle(new PIXI.Graphics(), y, x, 'red', 4);
+                app.stage.addChild(player_d);
                 break;
         }
     });
