@@ -79,11 +79,12 @@ io.on('connection', socket => {
             socket.broadcast.to(socket.room).emit('user left', socket.username);
             gameState[socket.room].remove_player(socket.username);
 
+            // TODO Close card if card is opened and active player left
+
             socket.leave(socket.room);
 
             if (gameState[socket.room].players.length === 0) delete gameState[socket.room];
         }
-
 
         generate_log_message(socket.room, socket.username, "LEFT", "");
     });

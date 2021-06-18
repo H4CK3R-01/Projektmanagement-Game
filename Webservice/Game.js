@@ -14,7 +14,7 @@ class Game {
         let move_to_next_round = false;
         // move on to next player; skip dead players
         do {
-            if(this.players.length === 0) break;
+            if (this.players.length === 0) break;
 
             this.currentPlayerIndex++;
             if (this.currentPlayerIndex >= this.players.length) {
@@ -44,7 +44,10 @@ class Game {
 
     remove_player(name) {
         let index = this.get_player_index(name);
-        if (index !== -1) this.players.splice(index, 1);
+        if (index !== -1) {
+            this.players.splice(index, 1);
+            if (this.currentPlayerIndex >= index) this.currentPlayerIndex--;
+        }
         if (this.currentPlayerIndex === index) this.finish_turn(); // if current player leaves: move on to next
     }
 
