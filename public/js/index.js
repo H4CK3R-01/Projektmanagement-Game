@@ -10,10 +10,12 @@ document.getElementById('ok').addEventListener('click', function () {
     username = document.getElementById('username').value;
     room_name = document.getElementById('room').value;
 
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('game').style.display = 'flex';
-    document.getElementById('chat').style.display = 'flex';
+    socket = io("/", {
+        closeOnBeforeunload: false
+    });
+
     start_chat();
-    start_game();
-    resize();
+
+    // Login
+    socket.emit('add user', {'username': username, 'room_name': room_name});
 });

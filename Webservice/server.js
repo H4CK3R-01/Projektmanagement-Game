@@ -59,7 +59,7 @@ io.on('connection', socket => {
 
             generate_log_message(socket.room, socket.username, "JOINED", "");
         } else {
-            // TODO
+            io.to(socket.id).emit('error', 'Game started already or room has two many members');
         }
     });
 
@@ -101,7 +101,7 @@ io.on('connection', socket => {
 
                 generate_log_message(socket.room, socket.username, "DICE", randomNumber);
             } else {
-                // TODO
+                io.to(socket.id).emit('error', 'It\'s not your turn');
             }
         }
     });
@@ -113,7 +113,7 @@ io.on('connection', socket => {
 
                 generate_log_message(socket.room, socket.username, "CARD", difficulty);
             } else {
-                // TODO
+                io.to(socket.id).emit('error', 'It\'s not your turn');
             }
         }
     });
@@ -156,6 +156,9 @@ function generate_log_message(room, user, type, message) {
             break;
         case 'DICE':
             color = '\x1b[34m';
+            break;
+        case 'MOVE':
+            color = '\x1b[30m';
             break;
         default:
             color = '\x1b[0m';
