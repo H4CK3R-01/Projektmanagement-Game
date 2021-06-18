@@ -14,6 +14,8 @@ class Game {
         let move_to_next_round = false;
         // move on to next player; skip dead players
         do {
+            if(this.players.length === 0) break;
+
             this.currentPlayerIndex++;
             if (this.currentPlayerIndex >= this.players.length) {
                 this.currentPlayerIndex = 0;
