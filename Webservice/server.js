@@ -145,6 +145,7 @@ io.on('connection', socket => {
         switch (game[socket.room].currentStatus) {
             case Game.STATUS.IS_WON:
                 //TODO show clients the winner
+                //game[socket.room].winnerIndex
                 break;
             case Game.STATUS.IS_DRAW:
                 //TODO show clients that nobody wins
