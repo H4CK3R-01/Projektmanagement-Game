@@ -9,7 +9,7 @@ const {Server} = require("socket.io");
 const io = new Server(server);
 let cards = JSON.parse(fs.readFileSync(__dirname + '/../data/fragen_10_06_21_final_new_format.json'));
 
-let gameState = {};
+let game = {};
 
 let port = 5000;
 server.listen(port, function () {
@@ -44,12 +44,12 @@ io.on('connection', socket => {
         socket.username = data.username;
         socket.room = data.room_name;
 
-        if (gameState[socket.room] === undefined) {
-            gameState[socket.room] = new Game();
+        if (game[socket.room] === undefined) {
+            game[socket.room] = new Game();
         }
 
-        if (gameState[socket.room].players.length < 4 && !gameState[socket.room].started) {
-            gameState[socket.room].add_player(socket.username);
+        if (game[socket.room].add_player(socket.username)) {
+
             addedUser = true;
 
             socket.emit('login');
@@ -64,7 +64,7 @@ io.on('connection', socket => {
     });
 
     socket.on('new message', function (data) {
-        if (gameState[socket.room] !== undefined && addedUser) {
+        if (game[socket.room] !== undefined && addedUser) {
             socket.broadcast.to(socket.room).emit('new message', {
                 username: socket.username,
                 message: data
@@ -75,15 +75,15 @@ io.on('connection', socket => {
     });
 
     socket.on('disconnect', function () {
-        if (gameState[socket.room] !== undefined && addedUser) {
+        if (game[socket.room] !== undefined && addedUser) {
             socket.broadcast.to(socket.room).emit('user left', socket.username);
-            gameState[socket.room].remove_player(socket.username);
+            game[socket.room].remove_player(socket.username);
 
             // TODO Close card if card is opened and active player left
 
             socket.leave(socket.room);
 
-            if (gameState[socket.room].players.length === 0) delete gameState[socket.room];
+            if (game[socket.room].players.length === 0) delete game[socket.room];
         }
 
         generate_log_message(socket.room, socket.username, "LEFT", "");
@@ -91,50 +91,67 @@ io.on('connection', socket => {
 
     // Game
     socket.on('roll dice', function () {
-        if (gameState[socket.room] !== undefined && addedUser) {
-            if (gameState[socket.room].current_player_is(socket.username)) {
-                gameState[socket.room].started = true;
-                let sides = 3;
-                let randomNumber = Math.floor(Math.random() * sides) + 1;
+        if (game[socket.room] === undefined || !addedUser) return;
 
-                io.in(socket.room).emit('dice', randomNumber);
+        if (game[socket.room].current_player_is(socket.username)) {
+            game[socket.room].currentStatus = Game.STATUS.ONGOING;
+            let sides = 3;
+            let randomNumber = Math.floor(Math.random() * sides) + 1;
 
-                generate_log_message(socket.room, socket.username, "DICE", randomNumber);
-            } else {
-                io.to(socket.id).emit('error', 'It\'s not your turn');
-            }
+            io.in(socket.room).emit('dice', randomNumber);
+
+            generate_log_message(socket.room, socket.username, "DICE", randomNumber);
+        } else {
+            io.to(socket.id).emit('error', 'It\'s not your turn');
         }
+
     });
 
     socket.on('get card', function (difficulty) {
-        if (gameState[socket.room] !== undefined && addedUser) {
-            if (gameState[socket.room].current_player_is(socket.username)) {
-                io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
+        if (game[socket.room] === undefined || !addedUser) return;
+        if (game[socket.room].currentStatus !== Game.STATUS.ONGOING) return;
 
-                generate_log_message(socket.room, socket.username, "CARD", difficulty);
-            } else {
-                io.to(socket.id).emit('error', 'It\'s not your turn');
-            }
+        if (game[socket.room].current_player_is(socket.username)) {
+            io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
+
+            generate_log_message(socket.room, socket.username, "CARD", difficulty);
+        } else {
+            io.to(socket.id).emit('error', 'It\'s not your turn');
         }
+
     });
 
     socket.on('card finished', function (difficulty, answerIsCorrect) {
-        if (gameState[socket.room] !== undefined && addedUser) {
-            if (answerIsCorrect) {
-                gameState[socket.room].move_player(socket.username, difficulty);
-                generate_log_message(socket.room, socket.username, "MOVE", difficulty);
-            }
-            io.in(socket.room).emit('card destroyed');
-            gameState[socket.room].finish_turn();
+        if (game[socket.room] === undefined || !addedUser) return;
+        if (game[socket.room].currentStatus !== Game.STATUS.ONGOING) return;
 
-            let index = gameState[socket.room].get_player_index(socket.username);
-            let next_player = gameState[socket.room].players[gameState[socket.room].currentPlayerIndex].name;
+        io.in(socket.room).emit('card destroyed');
 
+        if (answerIsCorrect) {
+            game[socket.room].move_player(socket.username, difficulty);
+            generate_log_message(socket.room, socket.username, "MOVE", difficulty);
+
+            let index = game[socket.room].get_player_index(socket.username);
+            let next_player = game[socket.room].players[game[socket.room].currentPlayerIndex].name;
             io.in(socket.room).emit('player moved', {
                 "next_player": next_player,
                 "player": index,
-                "position": gameState[socket.room].players[index].position
+                "position": game[socket.room].players[index].position
             });
+        }
+
+        game[socket.room].finish_turn();
+
+        switch (game[socket.room].currentStatus) {
+            case Game.STATUS.IS_WON:
+                //TODO show clients the winner
+                //game[socket.room].winnerIndex
+                break;
+            case Game.STATUS.IS_DRAW:
+                //TODO show clients that nobody wins
+                break;
+            default:
+                break;
         }
     });
 });
