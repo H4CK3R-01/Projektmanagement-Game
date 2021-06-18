@@ -1,13 +1,14 @@
 class Player {
-    constructor(socketUsername) {
-        this.socketUsername = socketUsername;
+    constructor(name) {
+        this.name = name;
         this.position = 0;
         this.isAlive = true;
     }
 
-    move(amount) {
+    move_by(amount) {
         this.position += amount;
-        if (this.position === 15) {
+        //todo: move by 1 only on the last 3 fields
+        if (this.position >= 16) {
             // todo: win
         }
     }
