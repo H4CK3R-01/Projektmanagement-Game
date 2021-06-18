@@ -1,45 +1,58 @@
 const Player = require('./Player');
 const Hunter = require("./Hunter");
 
+
 class Game {
+
+    static MAX_PLAYERS = 4;
+
+    static STATUS = {
+        SETTING_UP: 0,
+        ONGOING: 1,
+        IS_DRAW: 2,
+        IS_WON: 3
+    }
+
     constructor() {
+        this.currentStatus = Game.STATUS.SETTING_UP;
         this.players = [];
         this.currentPlayerIndex = 0;
-        this.started = false;
+        this.winnerIndex = 0;
         this.round = 0;
         this.hunter = new Hunter();
     }
 
     finish_turn() {
-        let move_to_next_round = false;
-        // move on to next player; skip dead players
-        do {
-            if (this.players.length === 0) break;
+        this.update_game_status();
 
+        if (this.currentStatus !== Game.STATUS.ONGOING) return;
+        if (!this.players.some(player => player.isAlive === true)) return;
+
+        let roundIsOver = false;
+        do {
             this.currentPlayerIndex++;
             if (this.currentPlayerIndex >= this.players.length) {
                 this.currentPlayerIndex = 0;
-                move_to_next_round = true;
+                roundIsOver = true;
             }
         } while (!this.players[this.currentPlayerIndex].isAlive); // skip dead players
-        this.finish_round();
+
+        if (roundIsOver) this.#finish_round();
     }
 
-    finish_round() {
+    #finish_round() {
         this.round++;
-        // kill players with hunter
         if (this.round >= 5) {
             this.hunter.move_by(1);
             this.hunter.hunt(this.players);
         }
-        // check if all players are dead
-        if (!this.players.some(player => player.isAlive === true)) {
-            // todo: end game (all players are dead)
-        }
+        this.update_game_status();
     }
 
     add_player(name) {
-        this.players.push(new Player(name));
+        let canAddPlayer = this.players.length < Game.MAX_PLAYERS;
+        if (canAddPlayer) this.players.push(new Player(name));
+        return canAddPlayer;
     }
 
     remove_player(name) {
@@ -52,6 +65,7 @@ class Game {
     }
 
     current_player_is(name) {
+        if (this.players[this.currentPlayerIndex] === undefined) return false;
         return this.players[this.currentPlayerIndex].name === name;
     }
 
@@ -61,7 +75,19 @@ class Game {
 
     move_player(name, amount) {
         let index = this.get_player_index(name);
+        if (index === -1) return;
         this.players[index].move_by(amount);
+        this.update_game_status();
+    }
+
+    update_game_status() {
+        if (!this.players.some(player => player.isAlive === true)) this.currentStatus = Game.STATUS.IS_DRAW;
+
+        let index = this.players.findIndex(player => player.position > 15);
+        if (index !== -1) {
+            this.currentStatus = Game.STATUS.IS_WON;
+            this.winnerIndex = index;
+        }
     }
 }
 
