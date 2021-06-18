@@ -1,11 +1,10 @@
 const Player = require('./Player');
 const Hunter = require("./Hunter");
 
-
 class Game {
 
     static MAX_PLAYERS = 4;
-
+    static WIN_POSITION = 16;
     static STATUS = {
         SETTING_UP: 0,
         ONGOING: 1,
@@ -83,7 +82,7 @@ class Game {
     update_game_status() {
         if (!this.players.some(player => player.isAlive === true)) this.currentStatus = Game.STATUS.IS_DRAW;
 
-        let index = this.players.findIndex(player => player.position > 15);
+        let index = this.players.findIndex(player => player.position >= Game.WIN_POSITION);
         if (index !== -1) {
             this.currentStatus = Game.STATUS.IS_WON;
             this.winnerIndex = index;
