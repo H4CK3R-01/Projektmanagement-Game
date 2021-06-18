@@ -168,29 +168,10 @@ function start_game() {
     socket.on('player moved', function(data){
         let player = data.player;
         let position = data.position;
-        let x = 0;
-        let y = 0;
-        switch (position){
-            case 0: x = 9; y = 9; break; // lower right
-            case 1: x = 7; y = 9; break;
-            case 2: x = 5; y = 9; break;
-            case 3: x = 3; y = 9; break;
-            case 4: x = 1; y = 9; break; // upper right
-            case 5: x = 1; y = 7; break;
-            case 6: x = 1; y = 5; break;
-            case 7: x = 1; y = 3; break;
-            case 8: x = 1; y = 1; break;  // upper left
-            case 9: x = 3; y = 1; break;
-            case 10: x = 5; y = 1; break;
-            case 11: x = 7; y = 1; break;
-            case 12: x = 9; y = 1; break; // lower left
-            case 13: x = 9; y = 3; break;
-            case 14: x = 9; y = 5; break;
-            case 15: x = 9; y = 7; break;
-            
-            
-            
-        }
+
+        let x = sprites[position].coord_x;
+        let y = sprites[position].coord_y;
+
         switch(player){
             case 0:
                 player_a.clear();
