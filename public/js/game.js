@@ -14,19 +14,11 @@ let rolled_number = null;
 let game = document.getElementById('game');
 let app;
 let border_card_stack = new PIXI.Graphics();
+let my_turn;
 
 let game_board_size = 2000;
 let max_size = calculate_size();
 let sprite_size = Math.floor(game_board_size / 11);
-
-const rolled_number_style = new PIXI.TextStyle({
-    fontFamily: 'Arial',
-    fontSize: 140,
-    fontWeight: 'bold',
-    wordWrap: true,
-    wordWrapWidth: game_board_size * 0.5 - 20,
-});
-let rolled_number_text = new PIXI.Text("", rolled_number_style);
 
 // fields
 let sprites = [
@@ -71,10 +63,10 @@ function start_game() {
 
     let player_b = generate_circle(new PIXI.Graphics(), 9, 9, 'blue', 2);
     app.stage.addChild(player_b);
-    
+
     let player_c = generate_circle(new PIXI.Graphics(), 9, 9, 'green', 3);
     app.stage.addChild(player_c);
-    
+
     let player_d = generate_circle(new PIXI.Graphics(), 9, 9, 'red', 4);
     app.stage.addChild(player_d);
 
@@ -105,7 +97,7 @@ function start_game() {
     app.stage.addChild(cards_3);
 
 
-    // Die
+    // Dice
     let diceTexture = PIXI.Texture.from('/img/dice.svg');
     let dice = new PIXI.Sprite(diceTexture);
     dice.x = sprite_size * 7 - sprite_size * 0.2;
@@ -134,6 +126,29 @@ function start_game() {
     // logo.rotation -= Math.PI / 8;
     app.stage.addChild(logo);
 
+
+    my_turn = new PIXI.Text("", new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 70,
+        fontWeight: 'bold',
+    }));
+    my_turn.x = sprite_size * 3;
+    my_turn.y = sprite_size * 8;
+    app.stage.addChild(my_turn);
+
+
+    let rolled_number_text = new PIXI.Text("", new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 140,
+        fontWeight: 'bold',
+        wordWrap: true,
+        wordWrapWidth: game_board_size * 0.5 - 20,
+    }));
+    rolled_number_text.x = sprite_size * 7 - sprite_size * 0.2 + dice.width / 2 - rolled_number_text.width / 2;
+    rolled_number_text.y = sprite_size * 6 - sprite_size * 0.2;
+    app.stage.addChild(rolled_number_text);
+
+
     socket.on('dice', function (randomInt) {
         rolled_number = randomInt;
         diced = true;
@@ -141,10 +156,7 @@ function start_game() {
         border_card_stack.lineStyle(15, 0x862323, 1);
         border_card_stack.drawRoundedRect(sprite_size * (1 + 2 * rolled_number) - sprite_size * 0.2, sprite_size * 3 - sprite_size * 0.2, sprite_size * 1.5, sprite_size * 3 * 0.72, 10);
 
-        rolled_number_text = new PIXI.Text(rolled_number, rolled_number_style);
-        rolled_number_text.x = sprite_size * 7 - sprite_size * 0.2 + dice.width / 2 - rolled_number_text.width / 2;
-        rolled_number_text.y = sprite_size * 6 - sprite_size * 0.2;
-        app.stage.addChild(rolled_number_text);
+        rolled_number_text.text = rolled_number;
     });
 
     socket.on('card', function (data) {
@@ -161,39 +173,44 @@ function start_game() {
         diced = false;
         show_card = false;
         card.destroyCard();
-        rolled_number_text.destroy();
+        rolled_number_text.text = "";
         border_card_stack.clear();
     });
 
-    socket.on('player moved', function(data){
+    socket.on('player moved', function (data) {
+        my_turn.text = "";
+
         let player = data.player;
         let position = data.position;
+        let next_player = data.next_player;
 
         let x = sprites[position].coord_x;
         let y = sprites[position].coord_y;
 
-        switch(player){
+        switch (player) {
             case 0:
                 player_a.clear();
                 player_a = generate_circle(new PIXI.Graphics(), y, x, 'yellow', 1);
                 app.stage.addChild(player_a);
                 break;
-            case 1: 
+            case 1:
                 player_b.clear();
                 player_b = generate_circle(new PIXI.Graphics(), y, x, 'blue', 2);
                 app.stage.addChild(player_b);
                 break;
-            case 2: 
+            case 2:
                 player_c.clear();
                 player_c = generate_circle(new PIXI.Graphics(), y, x, 'green', 3);
                 app.stage.addChild(player_c);
                 break;
-            case 3:  
+            case 3:
                 player_d.clear();
                 player_d = generate_circle(new PIXI.Graphics(), y, x, 'red', 4);
                 app.stage.addChild(player_d);
                 break;
         }
+
+        if (next_player === username) my_turn.text = "Your Turn";
     });
 
     resize();
@@ -219,17 +236,33 @@ function generate_red_border(graphics) {
 
 function generate_circle(graphics, x, y, color, offset) {
     graphics.lineStyle(0);
-    switch (color){
-        case 'yellow': graphics.beginFill(0xFFDDA1, 1); break;
-        case 'red': graphics.beginFill(0xF47A93, 1); break;
-        case 'green': graphics.beginFill(0x6C9A8B, 1); break;
-        case 'blue': graphics.beginFill(0x4169E1, 1); break;
+    switch (color) {
+        case 'yellow':
+            graphics.beginFill(0xFFDDA1, 1);
+            break;
+        case 'red':
+            graphics.beginFill(0xF47A93, 1);
+            break;
+        case 'green':
+            graphics.beginFill(0x6C9A8B, 1);
+            break;
+        case 'blue':
+            graphics.beginFill(0x4169E1, 1);
+            break;
     }
-    switch(offset){
-        case 1: graphics.drawCircle(sprite_size * x - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // upper left
-        case 2: graphics.drawCircle(sprite_size * x + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // upper right
-        case 3: graphics.drawCircle(sprite_size * x - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // lower left
-        case 4: graphics.drawCircle(sprite_size * x + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4); break; // lower right
+    switch (offset) {
+        case 1:
+            graphics.drawCircle(sprite_size * x - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4);
+            break; // upper left
+        case 2:
+            graphics.drawCircle(sprite_size * x + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4);
+            break; // upper right
+        case 3:
+            graphics.drawCircle(sprite_size * x - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4);
+            break; // lower left
+        case 4:
+            graphics.drawCircle(sprite_size * x + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4);
+            break; // lower right
     }
     graphics.endFill();
     return graphics;

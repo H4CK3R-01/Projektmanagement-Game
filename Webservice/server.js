@@ -125,12 +125,16 @@ io.on('connection', socket => {
                 generate_log_message(socket.room, socket.username, "MOVE", difficulty);
             }
             io.in(socket.room).emit('card destroyed');
+            gameState[socket.room].finish_turn();
+
             let index = gameState[socket.room].get_player_index(socket.username);
+            let next_player = gameState[socket.room].players[gameState[socket.room].currentPlayerIndex].name;
+
             io.in(socket.room).emit('player moved', {
+                "next_player": next_player,
                 "player": index,
                 "position": gameState[socket.room].players[index].position
             });
-            gameState[socket.room].finish_turn();
         }
     });
 });
