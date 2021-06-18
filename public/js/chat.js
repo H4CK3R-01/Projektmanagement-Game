@@ -1,43 +1,6 @@
 let socket;
 let connected = false;
 
-function start_chat() {
-    socket.on('login', function () {
-        connected = true;
-
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('game').style.display = 'flex';
-        document.getElementById('chat').style.display = 'flex';
-        start_chat();
-        start_game();
-        resize();
-
-        addLogMessage("Welcome " + username + "!");
-    });
-
-    socket.on('error', function (data) {
-        if (data === 'Game started already or room has two many members') {
-            document.getElementById('login').style.display = 'flex';
-            document.getElementById('game').style.display = 'none';
-            document.getElementById('chat').style.display = 'none';
-            document.getElementById('error').innerText = data;
-        }
-        console.log(data);
-    });
-
-    socket.on('new message', function (data) {
-        addChatMessage(data);
-    });
-
-    socket.on('user joined', function (data) {
-        addLogMessage(data + ' joined');
-    });
-
-    socket.on('user left', function (data) {
-        addLogMessage(data + ' left');
-    });
-}
-
 function sendMessage() {
     let message = document.getElementById('message_input').value;
 
