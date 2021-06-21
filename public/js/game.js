@@ -1,10 +1,11 @@
 /*
     Images
-        background.jpg: https://www.lignaushop.de/images/product_images/popup_images/treppenstufe-buecherregal-fensterbank-eiche-country-rustikal-unbehandelt-wuppertal.JPG
+        background.jpg: https://pixabay.com/get/ge3fe775ba1a5bfd2cc937b0687982214d547e5cf538543560fc25041c070ad5b860d8dd24df751dbc5c7d5ede3f672e7_1920.jpg?attachment=
         card_stack.png: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.pngegg.com%2Fpt%2Fsearch%3Fq%3Drainha%2Bde%2Bcopas&psig=AOvVaw3wwfk87wAXBxqmdXnoGSfe&ust=1623254731054000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjUoaG1iPECFQAAAAAdAAAAABA5
         dice.svg: https://www.svgrepo.com/download/198836/gambler-casino.svg
         sprite.jpg: https://media.istockphoto.com/photos/gray-granite-stone-texture-seamless-square-background-tile-ready-picture-id1096464726
 */
+let positions = [0, 0, 0, 0];
 let card;
 let answer = null;
 let show_card = false;
@@ -15,6 +16,7 @@ let game = document.getElementById('game');
 let app;
 let border_card_stack = new PIXI.Graphics();
 let my_turn;
+let score_button;
 
 let game_board_size = 2000;
 let max_size = calculate_size();
@@ -118,7 +120,7 @@ function start_game() {
 
 
     // Logo
-    let logo = PIXI.Sprite.from('/img/logo_2.png');
+    let logo = PIXI.Sprite.from('/img/logo.png');
     logo.x = sprite_size * 3 - sprite_size * 0.2;
     logo.y = sprite_size * 5.5 - sprite_size * 0.2;
     logo.width = sprite_size * 3.5;
@@ -132,7 +134,7 @@ function start_game() {
         fontSize: 70,
         fontWeight: 'bold',
     }));
-    my_turn.x = sprite_size * 3;
+    my_turn.x = sprite_size * 6;
     my_turn.y = sprite_size * 8;
     app.stage.addChild(my_turn);
 
@@ -148,6 +150,43 @@ function start_game() {
     rolled_number_text.y = sprite_size * 6 - sprite_size * 0.2;
     app.stage.addChild(rolled_number_text);
 
+
+    let score_button_text = new PIXI.Text("Scoreboard", new PIXI.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 40,
+        wordWrap: true,
+        wordWrapWidth: this.width,
+        breakWords: true,
+        padding: 50
+    }));
+    score_button_text.x = sprite_size * 3 + 25 - sprite_size * 0.2;
+    score_button_text.y = sprite_size * 7 + 25 - sprite_size * 0.2 + sprite_size * 0.5;
+
+    score_button = new PIXI.Graphics();
+    score_button.lineStyle(4, 0x000000, 1);
+    score_button.beginFill(0x7d7d7d);
+    score_button.drawRect(sprite_size * 3 - sprite_size * 0.2, sprite_size * 7 - sprite_size * 0.2 + sprite_size * 0.5, score_button_text.width + 50, score_button_text.height + 50);
+    score_button.endFill();
+    score_button.interactive = true;
+    score_button.buttonMode = true;
+    score_button.defaultCursor = 'pointer';
+    score_button.on('pointerdown', function () {
+        card = new Card(game_board_size, "",
+            {"text": "Spieler 1: " + positions[0], "status": false},
+            {"text": "Spieler 2: " + positions[1], "status": false},
+            {"text": "Spieler 3: " + positions[2], "status": false},
+            {"text": "Spieler 4: " + positions[3], "status": false}, 0, false);
+        card.showCard();
+        show_card = true;
+    });
+
+
+    app.stage.addChild(score_button);
+    score_button.addChild(score_button_text);
+
+    socket.on('first player', function () {
+        my_turn.text = "Your Turn";
+    });
 
     socket.on('dice', function (randomInt) {
         rolled_number = randomInt;
@@ -189,21 +228,25 @@ function start_game() {
 
         switch (player) {
             case 0:
+                positions[0] = data.position;
                 player_a.clear();
                 player_a = generate_circle(new PIXI.Graphics(), y, x, 'yellow', 1);
                 app.stage.addChild(player_a);
                 break;
             case 1:
+                positions[1] = data.position;
                 player_b.clear();
                 player_b = generate_circle(new PIXI.Graphics(), y, x, 'blue', 2);
                 app.stage.addChild(player_b);
                 break;
             case 2:
+                positions[2] = data.position;
                 player_c.clear();
                 player_c = generate_circle(new PIXI.Graphics(), y, x, 'green', 3);
                 app.stage.addChild(player_c);
                 break;
             case 3:
+                positions[3] = data.position;
                 player_d.clear();
                 player_d = generate_circle(new PIXI.Graphics(), y, x, 'red', 4);
                 app.stage.addChild(player_d);

@@ -38,7 +38,12 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
         this.card.drawRoundedRect(this.card_x, this.card_y, this.card_width, this.card_height, 10);
         this.card.endFill();
 
-        const header = new PIXI.Text("Schwierigkeit " + this.d, header_style);
+        let header;
+        if (this.d === 0) {
+            header = new PIXI.Text("Scoreboard", header_style);
+        } else {
+            header = new PIXI.Text("Schwierigkeit " + this.d, header_style);
+        }
         header.x = this.card_x + 20 + this.card.width / 2 - header.width / 2 - 2.5 - 20;
         header.y = this.card_y + 20;
         this.card.addChild(header);
@@ -49,25 +54,41 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
         this.card.addChild(basicText);
 
         // Answers
-        this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 4, this.a1.text, this.a1.status, function () {
+        let color = 0xffffff;
+        if (this.d === 0) {
+            color = 0xFFDDA1;
+        }
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 4, this.a1.text, this.a1.status, function () {
             if (_this.your_turn) {
                 select_answer(0, _this.a1.text);
             }
         }));
 
-        this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 3, this.a2.text, this.a2.status, function () {
+        color = 0xffffff;
+        if (this.d === 0) {
+            color = 0x4169E1;
+        }
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 3, this.a2.text, this.a2.status, function () {
             if (_this.your_turn) {
                 select_answer(1, _this.a2.text);
             }
         }));
 
-        this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 2, this.a3.text, this.a3.status, function () {
+        color = 0xffffff;
+        if (this.d === 0) {
+            color = 0x6C9A8B;
+        }
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 2, this.a3.text, this.a3.status, function () {
             if (_this.your_turn) {
                 select_answer(2, _this.a3.text);
             }
         }));
 
-        this.buttons.push(new Button(0xffffff, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 1, this.a4.text, this.a4.status, function () {
+        color = 0xffffff;
+        if (this.d === 0) {
+            color = 0xF47A93;
+        }
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 1, this.a4.text, this.a4.status, function () {
             if (_this.your_turn) {
                 select_answer(3, _this.a4.text);
             }
@@ -91,7 +112,16 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
                 diced = false;
                 rolled_number = null;
             } else {
-                alert("Bitte wähle eine Antwortmöglichkeit aus");
+                if (your_turn === true) {
+                    alert("Bitte wähle eine Antwortmöglichkeit aus");
+                } else {
+                    show_card = false;
+                    answer = null;
+                    diced = false;
+                    rolled_number = null;
+                    card.destroyCard();
+                    border_card_stack.clear();
+                }
             }
         }).getButton());
 
