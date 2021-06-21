@@ -12,6 +12,21 @@ header {
     grid-template-columns: 25% 40% 25%;
 }
 
+.spielanleitung {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    padding-left: 10px;
+}
+
+.spielanleitung span {
+    background: #404040;
+    border: 1px solid #000000;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .title {
     text-align: center;
     display: flex;
