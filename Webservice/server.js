@@ -55,6 +55,8 @@ io.on('connection', socket => {
             socket.emit('login');
             socket.join(socket.room);
 
+            if (game[socket.room].players.length === 1) io.to(socket.id).emit('first player');
+
             socket.broadcast.to(socket.room).emit('user joined', socket.username);
 
             generate_log_message(socket.room, socket.username, "JOINED", "");
@@ -130,17 +132,18 @@ io.on('connection', socket => {
         if (answerIsCorrect) {
             game[socket.room].move_player(socket.username, difficulty);
             generate_log_message(socket.room, socket.username, "MOVE", difficulty);
-
-            let index = game[socket.room].get_player_index(socket.username);
-            let next_player = game[socket.room].players[game[socket.room].currentPlayerIndex].name;
-            io.in(socket.room).emit('player moved', {
-                "next_player": next_player,
-                "player": index,
-                "position": game[socket.room].players[index].position
-            });
         }
 
+        let index = game[socket.room].get_player_index(socket.username);
+        let position = game[socket.room].players[index].position;
+
         game[socket.room].finish_turn();
+
+        io.in(socket.room).emit('player moved', {
+            "next_player": game[socket.room].players[game[socket.room].currentPlayerIndex].name,
+            "player": index,
+            "position": position
+        });
 
         switch (game[socket.room].currentStatus) {
             case Game.STATUS.IS_WON:
