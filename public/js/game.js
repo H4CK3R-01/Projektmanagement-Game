@@ -118,7 +118,7 @@ function start_game() {
 
 
     // Logo
-    let logo = PIXI.Sprite.from('/img/logo_2.png');
+    let logo = PIXI.Sprite.from('/img/logo.png');
     logo.x = sprite_size * 3 - sprite_size * 0.2;
     logo.y = sprite_size * 5.5 - sprite_size * 0.2;
     logo.width = sprite_size * 3.5;
