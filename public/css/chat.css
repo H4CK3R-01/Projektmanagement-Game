@@ -98,3 +98,14 @@
     content: '\A';
     white-space: pre;
 }
+
+@media only screen and (max-width: 980px) {
+    #chat {
+      display: flex;
+      flex-flow: column-reverse;
+      overflow: hidden;
+      border-left: #7d7d7d solid 2px;
+      height: 100%;
+      margin-bottom: 10px;
+    }
+  }

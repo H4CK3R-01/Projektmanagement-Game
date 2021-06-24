@@ -11,3 +11,10 @@
     -o-background-size: cover; /* Opera*/
     background-size: cover; /* Generic*/
 }
+
+@media only screen and (max-width: 980px) {
+    #game {
+        height: auto;
+        width: auto;
+    }
+}
