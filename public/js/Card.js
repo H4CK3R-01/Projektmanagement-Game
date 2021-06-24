@@ -33,9 +33,28 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
             wordWrapWidth: game_board_size * 0.5 - 20,
         });
 
-        this.card.lineStyle(20, 0x6C9A8B, 1);
         this.card.beginFill(0xffffff);
-        this.card.drawRoundedRect(this.card_x, this.card_y, this.card_width, this.card_height, 10);
+        switch (d) {
+            case 1:
+                this.card.lineStyle(30, 0x6C9A8B, 1);
+                break;
+            case 2:
+                this.card.lineStyle(30, 0xFFDDA1, 1);
+                break;
+            case 3:
+                this.card.lineStyle(30, 0xF47A93, 1);
+                break;
+        }
+        this.card.beginFill(0xFFFFFF);
+        this.card.moveTo(this.card_x + 50, this.card_y);
+        this.card.lineTo(this.card_x + 0, this.card_y + 50);
+        this.card.lineTo(this.card_x + 0, this.card_y + this.card_height);
+        this.card.lineTo(this.card_x + 50, this.card_y + this.card_height + 50);
+        this.card.lineTo(this.card_x + this.card_width - 50, this.card_y + this.card_height + 50);
+        this.card.lineTo(this.card_x + this.card_width, this.card_y + this.card_height);
+        this.card.lineTo(this.card_x + this.card_width, this.card_y + 50);
+        this.card.lineTo(this.card_x + this.card_width - 50, this.card_y + 0);
+        this.card.closePath();
         this.card.endFill();
 
         let header;
