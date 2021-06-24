@@ -15,6 +15,10 @@
     padding: 5px;
 }
 
+#messages_received div:last-child {
+    margin-bottom: 5em;
+}
+
 #message_add {
     flex: 0 0 10%;
 }
@@ -101,11 +105,9 @@
 
 @media only screen and (max-width: 980px) {
     #chat {
-      display: flex;
-      flex-flow: column-reverse;
-      overflow: hidden;
-      border-left: #7d7d7d solid 2px;
-      height: 100%;
-      margin-bottom: 10px;
+        flex-flow: column-reverse;
+        border-top: #7d7d7d solid 2px;
+        height: 100%;
+        margin-bottom: 10px;
     }
-  }
+}

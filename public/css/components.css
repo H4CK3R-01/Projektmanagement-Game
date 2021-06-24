@@ -97,13 +97,10 @@ main {
 }
 
 @media only screen and (max-width: 980px) {
-    
     #main {
         display: grid;
         grid-template-columns: unset;
         grid-template-rows: 60% 40%;
-        height: calc(90% - 7em);
-        touch-action: pan-x pan-y;
         height: 100%;
     }
 }
