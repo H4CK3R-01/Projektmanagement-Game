@@ -19,6 +19,7 @@ class Game {
         this.winnerIndex = 0;
         this.round = 0;
         this.hunter = new Hunter();
+        this.playerNames = [];
     }
 
     finish_turn() {
@@ -87,6 +88,18 @@ class Game {
             this.currentStatus = Game.STATUS.IS_WON;
             this.winnerIndex = index;
         }
+    }
+
+    getPlayerNames(){
+        return this.playerNames;
+    }
+
+    addPlayerName(playerName){
+        this.playerNames.push(playerName);
+    }
+
+    removePlayerName(playerName){
+        this.playerNames.splice(this.playerNames.indexOf(playerName), 1)
     }
 }
 

@@ -22,6 +22,8 @@ let game_board_size = 2000;
 let max_size = calculate_size();
 let sprite_size = Math.floor(game_board_size / 11);
 
+let playerNames = [];
+
 // fields
 let sprites = [
     new Sprite(1, 9, false), // lower left
@@ -162,27 +164,32 @@ function start_game() {
     score_button_text.x = sprite_size * 3 + 25 - sprite_size * 0.2;
     score_button_text.y = sprite_size * 7 + 25 - sprite_size * 0.2 + sprite_size * 0.5;
 
-    score_button = new PIXI.Graphics();
-    score_button.lineStyle(4, 0x000000, 1);
-    score_button.beginFill(0x7d7d7d);
-    score_button.drawRect(sprite_size * 3 - sprite_size * 0.2, sprite_size * 7 - sprite_size * 0.2 + sprite_size * 0.5, score_button_text.width + 50, score_button_text.height + 50);
-    score_button.endFill();
-    score_button.interactive = true;
-    score_button.buttonMode = true;
-    score_button.defaultCursor = 'pointer';
-    score_button.on('pointerdown', function () {
-        card = new Card(game_board_size, "",
-            { "text": "Spieler 1: " + positions[0], "status": false },
-            { "text": "Spieler 2: " + positions[1], "status": false },
-            { "text": "Spieler 3: " + positions[2], "status": false },
-            { "text": "Spieler 4: " + positions[3], "status": false }, 0, false);
-        card.showCard();
-        show_card = true;
+    socket.on('updatePlayerNames', function (playerNames) {
+       
+        this.playerNames = playerNames;
+        
+        score_button = new PIXI.Graphics();
+        score_button.lineStyle(4, 0x000000, 1);
+        score_button.beginFill(0x7d7d7d);
+        score_button.drawRect(sprite_size * 3 - sprite_size * 0.2, sprite_size * 7 - sprite_size * 0.2 + sprite_size * 0.5, score_button_text.width + 50, score_button_text.height + 50);
+        score_button.endFill();
+        score_button.interactive = true;
+        score_button.buttonMode = true;
+        score_button.defaultCursor = 'pointer';
+        score_button.on('pointerdown', function () {
+            card = new Card(game_board_size, "",
+                { "text": playerNames[0] + ": " + positions[0], "status": false },
+                { "text": playerNames[1] + ": " + positions[1], "status": false },
+                { "text": playerNames[2] + ": " + positions[2], "status": false },
+                { "text": playerNames[3] + ": " + positions[3], "status": false }, 0, false);
+            card.showCard();
+            show_card = true;
+        });
+
+        app.stage.addChild(score_button);
+        score_button.addChild(score_button_text);
     });
 
-
-    app.stage.addChild(score_button);
-    score_button.addChild(score_button_text);
 
     socket.on('first player', function () {
         my_turn.text = "Your Turn";
