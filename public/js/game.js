@@ -178,10 +178,10 @@ function start_game() {
         score_button.defaultCursor = 'pointer';
         score_button.on('pointerdown', function () {
             card = new Card(game_board_size, "",
-                { "text": playerNames[0] + ": " + positions[0], "status": false },
-                { "text": playerNames[1] + ": " + positions[1], "status": false },
-                { "text": playerNames[2] + ": " + positions[2], "status": false },
-                { "text": playerNames[3] + ": " + positions[3], "status": false }, 0, false);
+                { "text": playerNames[0]? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false },
+                { "text": playerNames[1]? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false },
+                { "text": playerNames[2]? playerNames[2] + ": " + positions[2] : ("Kein Spieler"), "status": false },
+                { "text": playerNames[3]? playerNames[3] + ": " + positions[3] : ("Kein Spieler"), "status": false }, 0, false);
             card.showCard();
             show_card = true;
         });
