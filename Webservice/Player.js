@@ -1,5 +1,3 @@
-var maxField = 15;
-
 class Player {
     constructor(name) {
         this.name = name;
