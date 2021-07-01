@@ -1,3 +1,5 @@
+var maxField = 15;
+
 class Player {
     constructor(name) {
         this.name = name;
@@ -6,7 +8,13 @@ class Player {
     }
 
     move_by(amount) {
-        this.position += amount;
+        if(this.position > 11){
+            this.position++;
+        }else if(this.position+amount > 11){
+            this.position = 12;
+        }else{
+            this.position += amount;
+        }
     }
 }
 

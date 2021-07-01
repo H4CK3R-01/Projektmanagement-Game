@@ -121,10 +121,10 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
             if (answer !== null) {
                 if (_this.right_answer === answer) { //TODO: do this in backend instead to prevent cheating
                     console.log("Richtig");
-                    socket.emit('card finished', d, true);
+                    socket.emit('card finished', d, true);    
                 } else {
                     console.log("Falsch");
-                    socket.emit('card finished', d, false);
+                    socket.emit('card finished', d, false);   
                 }
                 show_card = false;
                 answer = null;
