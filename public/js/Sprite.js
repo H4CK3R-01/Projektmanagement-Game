@@ -1,5 +1,9 @@
-function Sprite(x, y) {
-    this.sprite = PIXI.Sprite.from('/img/sprite.jpg');
+function Sprite(x, y, slow) {
+    if(slow){
+        this.sprite = PIXI.Sprite.from('/img/spriteSlow.jpg');
+    }else{
+        this.sprite = PIXI.Sprite.from('/img/sprite.jpg');
+    }
     this.coord_x = x;
     this.coord_y = y;
 
