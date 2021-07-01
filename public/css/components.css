@@ -95,3 +95,8 @@ main {
     width: 100%;
     height: calc(100% - 50px);
 }
+
+#manual {
+    width: 100%;
+    height: calc(100% - 50px);
+}
