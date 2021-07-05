@@ -43,16 +43,16 @@ io.on('connection', socket => {
     socket.on('add user', function (data) {
         socket.username = data.username;
         socket.room = data.room_name;
-        
+
         if (game[socket.room] === undefined) {
             game[socket.room] = new Game();
         }
-        
+
         if (game[socket.room].add_player(socket.username)) {
-            
+
             game[socket.room].addPlayerName(data.username);
             addedUser = true;
-            
+
             socket.emit('login');
             socket.join(socket.room);
             io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
@@ -80,14 +80,13 @@ io.on('connection', socket => {
 
     socket.on('disconnect', function () {
         if (game[socket.room] !== undefined && addedUser) {
+            if (game[socket.room].current_player_is(socket.username)) socket.broadcast.to(socket.room).emit('card destroyed');
 
             game[socket.room].removePlayerName(socket.username);
             io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
 
             socket.broadcast.to(socket.room).emit('user left', socket.username);
             game[socket.room].remove_player(socket.username);
-
-            // TODO Close card if card is opened and active player left
 
             socket.leave(socket.room);
 
