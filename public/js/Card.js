@@ -1,15 +1,15 @@
-function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
+function Card(game_board_size, question, answer_1, answer_2, answer_3, answer_4, difficulty, your_turn) {
     this.card = new PIXI.Graphics();
-    this.s = s;
-    this.a1 = a1;
-    this.a2 = a2;
-    this.a3 = a3;
-    this.a4 = a4;
-    if (a1.status) this.right_answer = this.a1.text;
-    if (a2.status) this.right_answer = this.a2.text;
-    if (a3.status) this.right_answer = this.a3.text;
-    if (a4.status) this.right_answer = this.a4.text;
-    this.d = d;
+    this.question = question;
+    this.answer_1 = answer_1;
+    this.answer_2 = answer_2;
+    this.answer_3 = answer_3;
+    this.answer_4 = answer_4;
+    if (answer_1.status) this.right_answer = this.answer_1.text;
+    if (answer_2.status) this.right_answer = this.answer_2.text;
+    if (answer_3.status) this.right_answer = this.answer_3.text;
+    if (answer_4.status) this.right_answer = this.answer_4.text;
+    this.difficulty = difficulty;
     this.your_turn = your_turn;
     this.card_x = game_board_size * 0.25 + 2.5;
     this.card_y = game_board_size / 2 - game_board_size * 0.72 / 2 + 2.5;
@@ -34,7 +34,7 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
         });
 
         this.card.beginFill(0xffffff);
-        switch (d) {
+        switch (difficulty) {
             case 1:
                 this.card.lineStyle(30, 0x6C9A8B, 1);
                 break;
@@ -58,58 +58,64 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
         this.card.endFill();
 
         let header;
-        if (this.d === 0) {
+        if (this.difficulty === 0) {
             header = new PIXI.Text("Scoreboard", header_style);
         } else {
-            header = new PIXI.Text("Schwierigkeit " + this.d, header_style);
+            header = new PIXI.Text("Schwierigkeit " + this.difficulty, header_style);
         }
         header.x = this.card_x + 20 + this.card.width / 2 - header.width / 2 - 2.5 - 20;
         header.y = this.card_y + 20;
         this.card.addChild(header);
 
-        const basicText = new PIXI.Text(this.s, style);
+        if (difficulty === 0) {
+            for (let i = 0; i < positions.length; i++) {
+                if (positions[i] > 15) this.question = "Gewinner: " + playerNames[i];
+            }
+        }
+
+        const basicText = new PIXI.Text(this.question, style);
         basicText.x = this.card_x + 20;
         basicText.y = this.card_y + 50 + header.height;
         this.card.addChild(basicText);
 
         // Answers
         let color = 0xffffff;
-        if (this.d === 0) {
+        if (this.difficulty === 0) {
             color = 0xFFDDA1;
         }
-        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 4, this.a1.text, this.a1.status, function () {
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 4, this.answer_1.text, this.answer_1.status, function () {
             if (_this.your_turn) {
-                select_answer(0, _this.a1.text);
+                select_answer(0, _this.answer_1.text);
             }
         }));
 
         color = 0xffffff;
-        if (this.d === 0) {
+        if (this.difficulty === 0) {
             color = 0x4169E1;
         }
-        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 3, this.a2.text, this.a2.status, function () {
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 3, this.answer_2.text, this.answer_2.status, function () {
             if (_this.your_turn) {
-                select_answer(1, _this.a2.text);
+                select_answer(1, _this.answer_2.text);
             }
         }));
 
         color = 0xffffff;
-        if (this.d === 0) {
+        if (this.difficulty === 0) {
             color = 0x6C9A8B;
         }
-        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 2, this.a3.text, this.a3.status, function () {
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 2, this.answer_3.text, this.answer_3.status, function () {
             if (_this.your_turn) {
-                select_answer(2, _this.a3.text);
+                select_answer(2, _this.answer_3.text);
             }
         }));
 
         color = 0xffffff;
-        if (this.d === 0) {
+        if (this.difficulty === 0) {
             color = 0xF47A93;
         }
-        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 1, this.a4.text, this.a4.status, function () {
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 1, this.answer_4.text, this.answer_4.status, function () {
             if (_this.your_turn) {
-                select_answer(3, _this.a4.text);
+                select_answer(3, _this.answer_4.text);
             }
         }));
 
@@ -117,32 +123,38 @@ function Card(game_board_size, s, a1, a2, a3, a4, d, your_turn) {
 
 
         // OK-Button
-        this.card.addChild(new Button(0xffffff, 0xcccccc, 0xffffff, this.card_width - 40, 100, this.card_x + 20, this.card_y + this.card_height - 120, "OK", null, function () {
-            if (answer !== null) {
-                if (_this.right_answer === answer) { //TODO: do this in backend instead to prevent cheating
-                    console.log("Richtig");
-                    socket.emit('card finished', d, true);    
-                } else {
-                    console.log("Falsch");
-                    socket.emit('card finished', d, false);   
-                }
-                show_card = false;
-                answer = null;
-                diced = false;
-                rolled_number = null;
-            } else {
-                if (your_turn === true) {
-                    alert("Bitte wähle eine Antwortmöglichkeit aus");
-                } else {
+        if (difficulty === 0 && (positions[0] > 15 || positions[1] > 15 || positions[2] > 15 || positions[3] > 15)) {
+            this.card.addChild(new Button(0xffffff, 0xcccccc, 0xffffff, this.card_width - 40, 100, this.card_x + 20, this.card_y + this.card_height - 120, "New Game", null, function () {
+                window.location.reload();
+            }).getButton());
+        } else {
+            this.card.addChild(new Button(0xffffff, 0xcccccc, 0xffffff, this.card_width - 40, 100, this.card_x + 20, this.card_y + this.card_height - 120, "OK", null, function () {
+                if (answer !== null) {
+                    if (_this.right_answer === answer) { //TODO: do this in backend instead to prevent cheating
+                        console.log("Richtig");
+                        socket.emit('card finished', difficulty, true);
+                    } else {
+                        console.log("Falsch");
+                        socket.emit('card finished', difficulty, false);
+                    }
                     show_card = false;
                     answer = null;
                     diced = false;
                     rolled_number = null;
-                    card.destroyCard();
-                    border_card_stack.clear();
+                } else {
+                    if (your_turn === true) {
+                        alert("Bitte wähle eine Antwortmöglichkeit aus");
+                    } else {
+                        show_card = false;
+                        answer = null;
+                        diced = false;
+                        rolled_number = null;
+                        card.destroyCard();
+                        border_card_stack.clear();
+                    }
                 }
-            }
-        }).getButton());
+            }).getButton());
+        }
 
         app.stage.addChild(this.card);
     };

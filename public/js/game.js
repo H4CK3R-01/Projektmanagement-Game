@@ -232,8 +232,14 @@ function start_game() {
         let position = data.position;
         let next_player = data.next_player;
 
-        let x = sprites[position].coord_x;
-        let y = sprites[position].coord_y;
+        let x, y;
+        if (position < 16) {
+            x = sprites[position].coord_x;
+            y = sprites[position].coord_y;
+        } else {
+            x = 1;
+            y = 9;
+        }
 
         switch (player) {
             case 0:
@@ -260,6 +266,17 @@ function start_game() {
                 player_d = generate_circle(new PIXI.Graphics(), x, y, 'red', 4);
                 app.stage.addChild(player_d);
                 break;
+        }
+
+        if (x === 1 && y === 9) {
+            card = new Card(game_board_size, "",
+                {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false},
+                {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false},
+                {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("Kein Spieler"), "status": false},
+                {"text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("Kein Spieler"), "status": false},
+                0, false);
+            card.showCard();
+            show_card = true;
         }
 
         if (next_player === username) my_turn.text = "Your Turn";
