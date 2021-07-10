@@ -44,3 +44,21 @@ header {
     padding-right: 10px;
     flex-direction: column;
 }
+
+@media only screen and (max-width: 980px) {
+    header {
+        height: 3em;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+    .build {
+        font-size: 1em;
+    }
+
+    .spielanleitung {
+        font-size: 1.5em;
+    }
+}
