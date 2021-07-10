@@ -1,6 +1,7 @@
 class Hunter {
     constructor() {
         this.position = 0;
+        this.isAlive = false;
     }
 
     move_by(amount) {
