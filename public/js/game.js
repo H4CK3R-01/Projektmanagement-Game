@@ -76,7 +76,7 @@ function start_game() {
 
 
     // Card stacks
-    let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 3, 3, function () {
+    let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_1.png'), 3, 3, function () {
         if (diced && !show_card && rolled_number === 1) {
             console.log("1");
             socket.emit('get card', 1);
@@ -84,7 +84,7 @@ function start_game() {
     });
     app.stage.addChild(cards_1);
 
-    let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 5, 3, function () {
+    let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_2.png'), 5, 3, function () {
         if (diced && !show_card && rolled_number === 2) {
             console.log("2");
             socket.emit('get card', 2);
@@ -92,7 +92,7 @@ function start_game() {
     });
     app.stage.addChild(cards_2);
 
-    let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 7, 3, function () {
+    let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_3.png'), 7, 3, function () {
         if (diced && !show_card && rolled_number === 3) {
             console.log("3");
             socket.emit('get card', 3);
