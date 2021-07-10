@@ -53,10 +53,3 @@
     background-color: #0062ff;
     color: #ffffff;
 }
-
-@media only screen and (max-width: 980px) {
-    #login input, #login button {
-        font-size: 1em;
-        height: 3em;
-    }
-}

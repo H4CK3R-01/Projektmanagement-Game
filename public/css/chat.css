@@ -110,4 +110,24 @@
         height: 100%;
         margin-bottom: 10px;
     }
+
+    .log_message {
+        font-size: 2em;
+    }
+
+    .chat_message .username {
+        font-size: 2em;
+    }
+
+    .chat_message .messageBody {
+        font-size: 2em;
+    }
+
+    #message_input {
+        font-size: 2em;
+    }
+
+    #message_send {
+        font-size: 2em;
+    }
 }
