@@ -50,10 +50,12 @@ io.on('connection', socket => {
 
         if (game[socket.room].add_player(socket.username)) {
 
+            game[socket.room].addPlayerName(data.username);
             addedUser = true;
 
             socket.emit('login');
             socket.join(socket.room);
+            io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
 
             if (game[socket.room].players.length === 1) io.to(socket.id).emit('first player');
 
@@ -61,7 +63,7 @@ io.on('connection', socket => {
 
             generate_log_message(socket.room, socket.username, "JOINED", "");
         } else {
-            io.to(socket.id).emit('error', 'Game started already or room has two many members');
+            io.to(socket.id).emit('error', 'Game started already or room has too many members');
         }
     });
 
@@ -78,10 +80,13 @@ io.on('connection', socket => {
 
     socket.on('disconnect', function () {
         if (game[socket.room] !== undefined && addedUser) {
+            if (game[socket.room].current_player_is(socket.username)) socket.broadcast.to(socket.room).emit('card destroyed');
+
+            game[socket.room].removePlayerName(socket.username);
+            io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
+
             socket.broadcast.to(socket.room).emit('user left', socket.username);
             game[socket.room].remove_player(socket.username);
-
-            // TODO Close card if card is opened and active player left
 
             socket.leave(socket.room);
 

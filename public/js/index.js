@@ -52,3 +52,13 @@ document.getElementById('ok').addEventListener('click', function () {
         addLogMessage(data + ' left');
     });
 });
+
+function open_manual() {
+    let frame = document.createElement('iframe');
+    frame.src = 'data/Spielanleitung.pdf';
+    frame.id = 'spielanleitung';
+
+    document.getElementById('manual').innerHTML = '';
+    document.getElementById('manual').appendChild(frame);
+    document.getElementById('modal').style.display = 'block';
+}

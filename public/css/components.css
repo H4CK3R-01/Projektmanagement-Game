@@ -96,6 +96,11 @@ main {
     height: calc(100% - 50px);
 }
 
+#manual {
+    width: 100%;
+    height: calc(100% - 50px);
+}
+
 @media only screen and (max-width: 980px) {
     #main {
         display: grid;

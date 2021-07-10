@@ -4,7 +4,7 @@ const Hunter = require("./Hunter");
 class Game {
 
     static MAX_PLAYERS = 4;
-    static WIN_POSITION = 16;
+    static MAX_POSITION = 16;
     static STATUS = {
         SETTING_UP: 0,
         ONGOING: 1,
@@ -19,6 +19,7 @@ class Game {
         this.winnerIndex = 0;
         this.round = 0;
         this.hunter = new Hunter();
+        this.playerNames = [];
     }
 
     finish_turn() {
@@ -41,7 +42,10 @@ class Game {
 
     #finish_round() {
         this.round++;
-        if (this.round >= 5) {
+        if (this.players.some(player => player.position >= Game.MAX_POSITION / 2)) {
+            this.hunter.isAlive = true;
+        }
+        if (this.hunter.isAlive) {
             this.hunter.move_by(1);
             this.hunter.hunt(this.players);
         }
@@ -82,11 +86,23 @@ class Game {
     update_game_status() {
         if (!this.players.some(player => player.isAlive === true)) this.currentStatus = Game.STATUS.IS_DRAW;
 
-        let index = this.players.findIndex(player => player.position >= Game.WIN_POSITION);
+        let index = this.players.findIndex(player => player.position >= Game.MAX_POSITION);
         if (index !== -1) {
             this.currentStatus = Game.STATUS.IS_WON;
             this.winnerIndex = index;
         }
+    }
+
+    getPlayerNames(){
+        return this.playerNames;
+    }
+
+    addPlayerName(playerName){
+        this.playerNames.push(playerName);
+    }
+
+    removePlayerName(playerName){
+        this.playerNames.splice(this.playerNames.indexOf(playerName), 1)
     }
 }
 

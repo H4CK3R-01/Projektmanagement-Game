@@ -17,7 +17,7 @@
 <body>
 <header>
     <div class="spielanleitung"><span
-            onclick="document.getElementById('modal').style.display = 'block';">Spielanleitung</span></div>
+            onclick="open_manual();">Spielanleitung</span></div>
     <div class="title">PM-Game</div>
     <div class="build"><span>DATE_TO_BE_REPLACED</span><span><a href="COMMIT_LINK_TO_BE_REPLACED" target="_blank">COMMIT_TO_BE_REPLACED</a></span>
     </div>
@@ -59,11 +59,7 @@
                          onclick="document.getElementById('modal').style.display = 'none';">close</i></span>
             </div>
             <div class="divider"></div>
-            <iframe height="678"
-                    id="spielanleitung"
-                    src="data/Spielanleitung.pdf"
-                    width="500">
-            </iframe>
+            <div id="manual"></div>
         </div>
     </div>
 </main>

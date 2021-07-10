@@ -22,24 +22,26 @@ let game_board_size = 2000;
 let max_size = calculate_size();
 let sprite_size = Math.floor(game_board_size / 11);
 
+let playerNames = [];
+
 // fields
 let sprites = [
-    new Sprite(9, 9), // lower right
-    new Sprite(7, 9),
-    new Sprite(5, 9),
-    new Sprite(3, 9),
-    new Sprite(1, 9), // upper right
-    new Sprite(1, 7),
-    new Sprite(1, 5),
-    new Sprite(1, 3),
-    new Sprite(1, 1), // upper left
-    new Sprite(3, 1),
-    new Sprite(5, 1),
-    new Sprite(7, 1),
-    new Sprite(9, 1), // lower left
-    new Sprite(9, 3),
-    new Sprite(9, 5),
-    new Sprite(9, 7)
+    new Sprite(1, 9, false), // lower left
+    new Sprite(1, 7, false),
+    new Sprite(1, 5, false),
+    new Sprite(1, 3, false),
+    new Sprite(1, 1, false), // upper left
+    new Sprite(3, 1, false),
+    new Sprite(5, 1, false),
+    new Sprite(7, 1, false),
+    new Sprite(9, 1, false), // upper right
+    new Sprite(9, 3, false),
+    new Sprite(9, 5, false),
+    new Sprite(9, 7, false),
+    new Sprite(9, 9, true), // lower right
+    new Sprite(7, 9, true),
+    new Sprite(5, 9, true),
+    new Sprite(3, 9, true)
 ];
 
 function start_game() {
@@ -59,22 +61,22 @@ function start_game() {
     app.stage.addChild(red_border);
 
 
-    // White circles
-    let player_a = generate_circle(new PIXI.Graphics(), 9, 9, 'yellow', 1);
+    // Player circles
+    let player_a = generate_circle(new PIXI.Graphics(), 1, 9, 'yellow', 1);
     app.stage.addChild(player_a);
 
-    let player_b = generate_circle(new PIXI.Graphics(), 9, 9, 'blue', 2);
+    let player_b = generate_circle(new PIXI.Graphics(), 1, 9, 'blue', 2);
     app.stage.addChild(player_b);
 
-    let player_c = generate_circle(new PIXI.Graphics(), 9, 9, 'green', 3);
+    let player_c = generate_circle(new PIXI.Graphics(), 1, 9, 'green', 3);
     app.stage.addChild(player_c);
 
-    let player_d = generate_circle(new PIXI.Graphics(), 9, 9, 'red', 4);
+    let player_d = generate_circle(new PIXI.Graphics(), 1, 9, 'red', 4);
     app.stage.addChild(player_d);
 
 
     // Card stacks
-    let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 3, 3, function () {
+    let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_1.png'), 3, 3, function () {
         if (diced && !show_card && rolled_number === 1) {
             console.log("1");
             socket.emit('get card', 1);
@@ -82,7 +84,7 @@ function start_game() {
     });
     app.stage.addChild(cards_1);
 
-    let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 5, 3, function () {
+    let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_2.png'), 5, 3, function () {
         if (diced && !show_card && rolled_number === 2) {
             console.log("2");
             socket.emit('get card', 2);
@@ -90,7 +92,7 @@ function start_game() {
     });
     app.stage.addChild(cards_2);
 
-    let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack.png'), 7, 3, function () {
+    let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_3.png'), 7, 3, function () {
         if (diced && !show_card && rolled_number === 3) {
             console.log("3");
             socket.emit('get card', 3);
@@ -172,17 +174,24 @@ function start_game() {
     score_button.defaultCursor = 'pointer';
     score_button.on('pointerdown', function () {
         card = new Card(game_board_size, "",
-            {"text": "Spieler 1: " + positions[0], "status": false},
-            {"text": "Spieler 2: " + positions[1], "status": false},
-            {"text": "Spieler 3: " + positions[2], "status": false},
-            {"text": "Spieler 4: " + positions[3], "status": false}, 0, false);
+            {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false},
+            {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false},
+            {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("Kein Spieler"), "status": false},
+            {
+                "text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("Kein Spieler"),
+                "status": false
+            }, 0, false);
         card.showCard();
         show_card = true;
     });
 
-
     app.stage.addChild(score_button);
     score_button.addChild(score_button_text);
+
+    socket.on('updatePlayerNames', function (p) {
+        playerNames = p;
+    });
+
 
     socket.on('first player', function () {
         my_turn.text = "Your Turn";
@@ -223,34 +232,51 @@ function start_game() {
         let position = data.position;
         let next_player = data.next_player;
 
-        let x = sprites[position].coord_x;
-        let y = sprites[position].coord_y;
+        let x, y;
+        if (position < 16) {
+            x = sprites[position].coord_x;
+            y = sprites[position].coord_y;
+        } else {
+            x = 1;
+            y = 9;
+        }
 
         switch (player) {
             case 0:
                 positions[0] = data.position;
                 player_a.clear();
-                player_a = generate_circle(new PIXI.Graphics(), y, x, 'yellow', 1);
+                player_a = generate_circle(new PIXI.Graphics(), x, y, 'yellow', 1);
                 app.stage.addChild(player_a);
                 break;
             case 1:
                 positions[1] = data.position;
                 player_b.clear();
-                player_b = generate_circle(new PIXI.Graphics(), y, x, 'blue', 2);
+                player_b = generate_circle(new PIXI.Graphics(), x, y, 'blue', 2);
                 app.stage.addChild(player_b);
                 break;
             case 2:
                 positions[2] = data.position;
                 player_c.clear();
-                player_c = generate_circle(new PIXI.Graphics(), y, x, 'green', 3);
+                player_c = generate_circle(new PIXI.Graphics(), x, y, 'green', 3);
                 app.stage.addChild(player_c);
                 break;
             case 3:
                 positions[3] = data.position;
                 player_d.clear();
-                player_d = generate_circle(new PIXI.Graphics(), y, x, 'red', 4);
+                player_d = generate_circle(new PIXI.Graphics(), x, y, 'red', 4);
                 app.stage.addChild(player_d);
                 break;
+        }
+
+        if (x === 1 && y === 9 && data.position !== 0) {
+            card = new Card(game_board_size, "",
+                {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false},
+                {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false},
+                {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("Kein Spieler"), "status": false},
+                {"text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("Kein Spieler"), "status": false},
+                0, false);
+            card.showCard();
+            show_card = true;
         }
 
         if (next_player === username) my_turn.text = "Your Turn";
@@ -273,7 +299,7 @@ function generate_card_stack(sprite, x, y, onclick) {
 
 function generate_red_border(graphics) {
     graphics.lineStyle(sprite_size * 0.10, 0x862323, 1);
-    graphics.drawRect(sprite_size * 9 - sprite_size * 0.2, sprite_size * 9 - sprite_size * 0.2, sprite_size * 1.5, sprite_size * 1.5);
+    graphics.drawRect(sprite_size * 1 - sprite_size * 0.2, sprite_size * 9 - sprite_size * 0.2, sprite_size * 1.5, sprite_size * 1.5);
     return graphics;
 }
 
@@ -291,6 +317,9 @@ function generate_circle(graphics, x, y, color, offset) {
             break;
         case 'blue':
             graphics.beginFill(0x4169E1, 1);
+            break;
+        case 'white':
+            graphics.beginFill(0xFFFFFF, 1);
             break;
     }
     switch (offset) {
