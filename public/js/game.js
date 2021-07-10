@@ -268,7 +268,7 @@ function start_game() {
                 break;
         }
 
-        if (x === 1 && y === 9) {
+        if (x === 1 && y === 9 && data.position !== 0) {
             card = new Card(game_board_size, "",
                 {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false},
                 {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false},
