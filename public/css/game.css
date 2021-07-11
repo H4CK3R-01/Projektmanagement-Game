@@ -12,6 +12,22 @@
     background-size: cover; /* Generic*/
 }
 
+.red {
+    background-color: #F47A93;
+}
+
+.green {
+    background-color: #6C9A8B;
+}
+
+.blue {
+    background-color: #4169E1;
+}
+
+.yellow {
+    background-color: #FFDDA1;
+}
+
 @media only screen and (max-width: 980px) {
     #game {
         height: auto;

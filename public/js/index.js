@@ -19,7 +19,7 @@ document.getElementById('ok').addEventListener('click', function () {
         socket.emit('add user', {'username': username, 'room_name': room_name});
 
 
-        socket.on('login', function () {
+        socket.on('login', function (data) {
             connected = true;
 
             document.getElementById('login').style.display = 'none';
@@ -29,6 +29,21 @@ document.getElementById('ok').addEventListener('click', function () {
             resize();
 
             addLogMessage("Welcome " + username + "!");
+
+            switch (parseInt(data)) {
+                case 0:
+                    document.getElementsByTagName('header')[0].classList.add('yellow');
+                    break;
+                case 1:
+                    document.getElementsByTagName('header')[0].classList.add('blue');
+                    break;
+                case 2:
+                    document.getElementsByTagName('header')[0].classList.add('green');
+                    break;
+                case 3:
+                    document.getElementsByTagName('header')[0].classList.add('red');
+                    break;
+            }
         });
 
         socket.on('error', function (data) {
