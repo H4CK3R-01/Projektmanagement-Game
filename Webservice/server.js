@@ -53,7 +53,7 @@ io.on('connection', socket => {
             game[socket.room].addPlayerName(data.username);
             addedUser = true;
 
-            socket.emit('login');
+            socket.emit('login', game[socket.room].get_player_index(socket.username));
             socket.join(socket.room);
             io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
 
