@@ -68,12 +68,11 @@ function Card(game_board_size, question, answer_1, answer_2, answer_3, answer_4,
         this.card.addChild(header);
 
         if (difficulty === 0) {
-            if (game_state == 3) {
+            if (game_state === 3) {
                 for (let i = 0; i < positions.length; i++) {
                     if (positions[i] > 15) this.question = "Gewinner: " + playerNames[i];
                 }
-            }
-            else if (game_state == 2) {
+            } else if (game_state === 2) {
                 this.question = "Unentschieden.";
             }
         }
@@ -128,7 +127,7 @@ function Card(game_board_size, question, answer_1, answer_2, answer_3, answer_4,
 
 
         // OK-Button
-        if (game_state == 2 || game_state == 3) {
+        if (game_state === 2 || game_state === 3) {
             this.card.addChild(new Button(0xffffff, 0xcccccc, 0xffffff, this.card_width - 40, 100, this.card_x + 20, this.card_y + this.card_height - 120, "New Game", null, function () {
                 window.location.reload();
             }).getButton());

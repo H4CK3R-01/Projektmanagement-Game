@@ -2,10 +2,10 @@ const Game = require('./Game');
 
 const express = require('express');
 const fs = require('fs');
-const { instrument } = require("@socket.io/admin-ui");
+const {instrument} = require("@socket.io/admin-ui");
 const app = express();
 const server = require('http').createServer(app);
-const { Server } = require("socket.io");
+const {Server} = require("socket.io");
 const io = new Server(server);
 let cards = JSON.parse(fs.readFileSync(__dirname + '/../data/fragen_10_06_21_final_new_format.json'));
 
@@ -118,7 +118,7 @@ io.on('connection', socket => {
         if (game[socket.room].currentStatus !== Game.STATUS.ONGOING) return;
 
         if (game[socket.room].current_player_is(socket.username)) {
-            io.in(socket.room).emit('card', { 'username': socket.username, 'card': getRandomCard(difficulty) });
+            io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
 
             generate_log_message(socket.room, socket.username, "CARD", difficulty);
         } else {
@@ -151,17 +151,6 @@ io.on('connection', socket => {
         });
 
         io.in(socket.room).emit('update Hunter', game[socket.room].hunter.getPosition());
-
-        switch (game[socket.room].currentStatus) {
-            case Game.STATUS.IS_WON:
-                console.log("FINISHED");
-                break;
-            case Game.STATUS.IS_DRAW:
-                console.log("DRAW");
-                break;
-            default:
-                break;
-        }
     });
 });
 

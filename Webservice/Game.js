@@ -10,7 +10,7 @@ class Game {
         ONGOING: 1,
         IS_DRAW: 2,
         IS_WON: 3
-    }
+    };
 
     constructor() {
         this.currentStatus = Game.STATUS.SETTING_UP;
@@ -102,7 +102,7 @@ class Game {
     }
 
     removePlayerName(playerName) {
-        this.playerNames.splice(this.playerNames.indexOf(playerName), 1)
+        this.playerNames.splice(this.playerNames.indexOf(playerName), 1);
     }
 }
 
