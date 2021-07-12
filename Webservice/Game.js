@@ -20,6 +20,7 @@ class Game {
         this.round = 0;
         this.hunter = new Hunter();
         this.playerNames = [];
+        this.used_cards = [];
     }
 
     finish_turn() {
