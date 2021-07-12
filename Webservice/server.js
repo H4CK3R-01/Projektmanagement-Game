@@ -122,7 +122,10 @@ io.on('connection', socket => {
         if (game[socket.room].currentStatus !== Game.STATUS.ONGOING) return;
 
         if (game[socket.room].current_player_is(socket.username)) {
-            io.in(socket.room).emit('card', {'username': socket.username, 'card': getRandomCard(difficulty)});
+            io.in(socket.room).emit('card', {
+                'username': socket.username,
+                'card': getRandomCard(difficulty, socket.room)
+            });
 
             generate_log_message(socket.room, socket.username, "CARD", difficulty);
         } else {
@@ -190,11 +193,18 @@ function generate_log_message(room, user, type, message) {
     console.info("%s[%s] [%s] [%s]\x1b[0m %s", color, room, user, type, reset_color, message);
 }
 
-function getRandomCard(difficulty) {
+function getRandomCard(difficulty, room) {
     let filtered_cards = cards.filter(card => {
         return card.difficulty === difficulty;
     });
-    return shuffleAnswers(filtered_cards[Math.floor(Math.random() * filtered_cards.length)]);
+
+    let tmp = filtered_cards[Math.floor(Math.random() * filtered_cards.length)];
+    while (game[room].used_cards.indexOf(tmp.id) !== -1) {
+        tmp = filtered_cards[Math.floor(Math.random() * filtered_cards.length)];
+    }
+
+    game[room].used_cards.push(tmp.id);
+    return shuffleAnswers(tmp);
 }
 
 function shuffleAnswers(card) {
