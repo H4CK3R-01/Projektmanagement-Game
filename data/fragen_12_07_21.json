@@ -1,0 +1,1052 @@
+﻿[
+  {
+    "ID": "1",
+    "Schwierigkeit": "1",
+    "Frage": "Woher stammt das Wort Budget?",
+    "Key": "C",
+    "A": "Finanzen (Chin)",
+    "B": "Geld-Plan (Griech)",
+    "C": "Reisesack (Franz)",
+    "D": "Großes Geschäft (Lat)"
+  },
+  {
+    "ID": "2",
+    "Schwierigkeit": "1",
+    "Frage": "Was ist das Budget in der Betriebswirtschaftslehre?",
+    "Key": "B",
+    "A": "Rekursiver Finanzplan",
+    "B": "Kurzfristiger Finanzplan",
+    "C": "Langfristiger Finanzplan",
+    "D": "Allokierter Finanzplan"
+  },
+  {
+    "ID": "3",
+    "Schwierigkeit": "1",
+    "Frage": "Was ist keine Möglichkeit ein Event lukrativ zu finanzieren?",
+    "Key": "C",
+    "A": "Werbepartner",
+    "B": "Investoren",
+    "C": "Durch die Familie",
+    "D": "Kartenverkäufe"
+  },
+  {
+    "ID": "4",
+    "Schwierigkeit": "1",
+    "Frage": "Was passiert vor Veröffentlichung eines Budgets?",
+    "Key": "A",
+    "A": "Betriebswirtschaftlicher Finanzplanungsprozess",
+    "B": "Volkwirtschaftlicher Finanzplanungsprozess",
+    "C": "Unternehmenszukunftsplanung",
+    "D": "Start eines neuen Projekts"
+  },
+  {
+    "ID": "5",
+    "Schwierigkeit": "1",
+    "Frage": "Was gehört nicht direkt zum Finanzmanagement? ",
+    "Key": "D",
+    "A": "Budgeteinteilung",
+    "B": "Erstellen eines Finanzplans",
+    "C": "Finanzierungspläne mit der Bank",
+    "D": "Das Ordern von Waren"
+  },
+  {
+    "ID": "6",
+    "Schwierigkeit": "1",
+    "Frage": "Was kann in einem Budget nicht enthalten sein?",
+    "Key": "C",
+    "A": "Geld",
+    "B": "Ressourcen",
+    "C": "Zeit",
+    "D": "Personalkosten"
+  },
+  {
+    "ID": "7",
+    "Schwierigkeit": "1",
+    "Frage": "Für was der folgenden Dinge ist normalerweise kein Budget geplant?",
+    "Key": "D",
+    "A": "Unternehmen",
+    "B": "Abteilungen",
+    "C": "Projekte",
+    "D": "Hausschuhe"
+  },
+  {
+    "ID": "8",
+    "Schwierigkeit": "2",
+    "Frage": "Ein Getränkemarkt will neue Kunden anlocken und plant dafür ein Budget ein. Welcher Fall sollte Eintreten?",
+    "Key": "A",
+    "A": "Durch die Aktion sollten mindestens die Ausgaben gedeckt sein",
+    "B": "Durch Angebotspreise fallen die Einnahmen",
+    "C": "Durch Angebotspreise wurden keine neuen Stammkunden gewonnen",
+    "D": "Das Budget wurde wegen eines Notfalls anderweitig verwendet"
+  },
+  {
+    "ID": "9",
+    "Schwierigkeit": "2",
+    "Frage": "Bei dem Bau eines neuen Hauses fallen Kosten plötzlich viel höher aus. Woran kann das liegen?",
+    "Key": "B",
+    "A": "Wintereinbruch",
+    "B": "Steigende Ressourcenkosten",
+    "C": "Regen",
+    "D": "Stromausfall"
+  },
+  {
+    "ID": "10",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist kein Wirtschaftssubjekt das Budgetiert werden kann?",
+    "Key": "A",
+    "A": "Bank",
+    "B": "Haushalt",
+    "C": "Unternehmen",
+    "D": "Staat"
+  },
+  {
+    "ID": "11",
+    "Schwierigkeit": "2",
+    "Frage": "Was für Funktionen sollte ein Budget nicht erfüllen?",
+    "Key": "D",
+    "A": "Motivationsfunktion",
+    "B": "Prognosefunktion",
+    "C": "Vorgabefunktion",
+    "D": "Analysefunktion"
+  },
+  {
+    "ID": "12",
+    "Schwierigkeit": "2",
+    "Frage": "Ein Buchhandel erstellt ein Liquiditätsrisiko. Woraus besteht dieses?",
+    "Key": "A",
+    "A": "Vergleich erwarteter Kosten und Ausgaben",
+    "B": "Vergleich aktueller Kosten und Ausgaben",
+    "C": "Ein Buchhandel muss dies nicht erstellen",
+    "D": "Vergleich des Habens mit den Ausgaben"
+  },
+  {
+    "ID": "13",
+    "Schwierigkeit": "2",
+    "Frage": "Die Osterried GmbH erstellt eine Finanzwirtschaftliche Analyse. Was ist keine Phase davon?",
+    "Key": "B",
+    "A": "Vorbereitungsphase",
+    "B": "Korrekturphase",
+    "C": "Bewertungsphase",
+    "D": "Steuerungsphase"
+  },
+  {
+    "ID": "14",
+    "Schwierigkeit": "2",
+    "Frage": "Ein Bäcker möchte eine neue Filiale eröffnen. Wie sollte er das Budget einteilen?",
+    "Key": "B",
+    "A": "Das gesamte Budget muss den Bau tragen",
+    "B": "Das Budget darf nur für die Filiale verwendet werden und ist zeitlich beschränkt",
+    "C": "Das Budget ist nicht wichtig und kann nachträglich erhöht werden",
+    "D": "Die bestehenden Filialen werden das schon tragen"
+  },
+  {
+    "ID": "15",
+    "Schwierigkeit": "3",
+    "Frage": "Wie viel sollten sie im Jahr 2021 für eine kWh Strom in das Budget einplanen?",
+    "Key": "A",
+    "A": "30 Cent",
+    "B": "10 Cent",
+    "C": "70 Cent",
+    "D": "1 Euro"
+  },
+  {
+    "ID": "16",
+    "Schwierigkeit": "3",
+    "Frage": "Welche Arbeiter sind im Preis-Leistungs-Verhältnis am wichtigsten für ein Projekt?",
+    "Key": "B",
+    "A": "Manager",
+    "B": "Helfer für alles",
+    "C": "Buchhalter",
+    "D": "Barkeeper"
+  },
+  {
+    "ID": "17",
+    "Schwierigkeit": "3",
+    "Frage": "Lena fragt sich wie sie am besten ihr Event Finanzieren kann. Welches der folgenden Antworten ist keine Finanzierungsart?",
+    "Key": "D",
+    "A": "Beteiligungsfinanzierung",
+    "B": "Außenfinanzierung",
+    "C": "Durch Rückstellungen",
+    "D": "Cylingfinanzierung"
+  },
+  {
+    "ID": "18",
+    "Schwierigkeit": "3",
+    "Frage": "Welche der folgenden Budgetierungsarten gibt es nicht?",
+    "Key": "C",
+    "A": "Retrograde Budgetierung",
+    "B": "Progressive Budgetierung",
+    "C": "Das Aufwärtsstromverfahren",
+    "D": "Das Gegenstromverfahren"
+  },
+  {
+    "ID": "19",
+    "Schwierigkeit": "3",
+    "Frage": "Ein Kiosk erstellt eine traditionelle Budgetierung in 10 Schritten. Was ist kein Teil davon?",
+    "Key": "D",
+    "A": "Erstellen eines Gesamtberichts",
+    "B": "Gab es signifikante Änderungen gegenüber dem Plan",
+    "C": "Man vergleicht die Top-Down und Bottom-Up Vorstellung",
+    "D": "Die Mitarbeiter schlagen ein neues Budget für das nächste Quartal vor"
+  },
+  {
+    "ID": "20",
+    "Schwierigkeit": "3",
+    "Frage": "Was für eine Budgetierungsart gibt es nicht?",
+    "Key": "A",
+    "A": "Moderne Budgetierung",
+    "B": "Traditionelle Budgetierung",
+    "C": "Better Budgeting",
+    "D": "Zero-Base-Budgeting"
+  },
+  {
+    "ID": "21",
+    "Schwierigkeit": "3",
+    "Frage": "Wie viel sollten sie im Jahr 2021 für eine Kubikmeter Frischwasser in das Budget einplanen?",
+    "Key": "B",
+    "A": "1 €",
+    "B": "2 €",
+    "C": "3 €",
+    "D": "4 €"
+  },
+  {
+    "ID": "22",
+    "Schwierigkeit": "1",
+    "Frage": "Auf was muss beim Wasser nicht geachtet werden?",
+    "Key": "B",
+    "A": "Es muss sauber sein",
+    "B": "Es muss gut schmecken",
+    "C": "Es muss gut angeschlossen sein",
+    "D": "Es muss gut verfügbar sein"
+  },
+  {
+    "ID": "23",
+    "Schwierigkeit": "1",
+    "Frage": "Was gehört nicht zum Ressourcenmanagement?",
+    "Key": "D",
+    "A": "Nahrungsmittel",
+    "B": "Wasser und Strom",
+    "C": "Zelte und Sanitäranlagen",
+    "D": "Die Finanzen"
+  },
+  {
+    "ID": "24",
+    "Schwierigkeit": "1",
+    "Frage": "Auf was muss beim Strom nicht geachtet werden?",
+    "Key": "A",
+    "A": "Er muss ästhetisch dargestellt sein",
+    "B": "Er muss sicher und gut verkabelt sein",
+    "C": "Auf die Spannung",
+    "D": "Er muss an den vorhergesehenen Orten verfügbar sein"
+  },
+  {
+    "ID": "25",
+    "Schwierigkeit": "1",
+    "Frage": "Was gehört nicht zum Ressourcenmanagement eines Festes?",
+    "Key": "C",
+    "A": "Essen und Trinken",
+    "B": "Biertische",
+    "C": "Die Organisation des Aufbaus der Ressourcen",
+    "D": "Zelte"
+  },
+  {
+    "ID": "26",
+    "Schwierigkeit": "1",
+    "Frage": "Wie viele Dimensionen des Ressourcenmanagements gibt es?",
+    "Key": "B",
+    "A": "2",
+    "B": "3",
+    "C": "5",
+    "D": "4"
+  },
+  {
+    "ID": "27",
+    "Schwierigkeit": "1",
+    "Frage": "Was ist die Nettokapazität?",
+    "Key": "A",
+    "A": "Mitarbeiter stehen nie mit 100% ihrer Kapazität zur Verfügung",
+    "B": "Die benötigten Finanzen sind unklar",
+    "C": "Das was die Mitarbeiter am Ende verdienen",
+    "D": "Die maximale Anzahl an Mitarbeitern, die zur Verfügung stehen"
+  },
+  {
+    "ID": "28",
+    "Schwierigkeit": "1",
+    "Frage": "Wer trifft häufig ad-hoc Entscheidungen über Projekte und Mitarbeiterallokationen?",
+    "Key": "C",
+    "A": "Die Mitarbeiter",
+    "B": "Die Besucher des Events",
+    "C": "Die Führungskräfte",
+    "D": "Die Lieferanten"
+  },
+  {
+    "ID": "29",
+    "Schwierigkeit": "2",
+    "Frage": "Wie heißt keine der Dimensionen im Ressourcenmanagement?",
+    "Key": "D",
+    "A": "Strategisch",
+    "B": "Taktisch",
+    "C": "Operativ",
+    "D": "Konstruktiv"
+  },
+  {
+    "ID": "30",
+    "Schwierigkeit": "2",
+    "Frage": "Wo tritt das kommunale Ressourcenmanagement auf?",
+    "Key": "A",
+    "A": "In Städten und Kommunen",
+    "B": "Bei Festivals",
+    "C": "Bei Messen",
+    "D": "Bei privaten Geburtstagspartys"
+  },
+  {
+    "ID": "31",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist kein direkter Vorteil des Ressourcenmanagements?",
+    "Key": "B",
+    "A": "Vermeidet unvorhergesehene Störungen",
+    "B": "Man spart Geld",
+    "C": "Schafft Transparenz",
+    "D": "Misst Effizienz"
+  },
+  {
+    "ID": "32",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist die Ressourcenzuteilung?",
+    "Key": "C",
+    "A": "Der Prozess der Anschaffung der Ressourcen",
+    "B": "Der Prozess der Verwendung der Ressourcen",
+    "C": "Der Prozess, in welchem die zur Verfügung stehenden Ressourcen auf die effizienteste Art und Weise verteilt werden",
+    "D": "Der Prozess, bei dem man sich alle nötigen Ressourcen anschaut und diese nach Qualität sortiert"
+  },
+  {
+    "ID": "33",
+    "Schwierigkeit": "2",
+    "Frage": "Was versteht man unter dem Ressourcenabgleich?",
+    "Key": "A",
+    "A": "Nicht voll ausgelastete oder ineffizient genutzten Ressourcen zu entdecken und zu korrigieren",
+    "B": "Ressourcen vergleichen und nach Qualität ordnen",
+    "C": "Die vorhandenen Ressourcen mit Ressourcen aus dem Markt abgleichen und, falls nötig, diese ersetzen",
+    "D": "Die Überprüfung, ob genug Ressourcen zur Verfügung stehen"
+  },
+  {
+    "ID": "34",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist die Ressourcenprognose?",
+    "Key": "D",
+    "A": "Die Vorhersage, ob die Ressourcen genutzt werden können",
+    "B": "Die Prognose die vorhersagt, dass bestimmte Ressourcen nicht rechtzeitig geliefert werden",
+    "C": "Die Vermutung auf die Lebenszeit der Ressourcen",
+    "D": "Die Vorhersage zukünftiger Ressourcenanforderungen"
+  },
+  {
+    "ID": "35",
+    "Schwierigkeit": "2",
+    "Frage": "Was gehört nicht zu den Ressourcen, die es zu managen gilt?",
+    "Key": "B",
+    "A": "Das Personal",
+    "B": "Der Zeitliche Ablauf des Projekts",
+    "C": "Sämtliche Räumlichkeiten",
+    "D": "Nahrungsmittel"
+  },
+  {
+    "ID": "36",
+    "Schwierigkeit": "3",
+    "Frage": "Ein wütender Besucher des Events, dessen Ressourcen du gemanagt hast, kommt zu dir und beschwert sich darüber, dass sein Fleisch nicht ganz so war, wie er es wollte.\r\nWar es dein Fehler?",
+    "Key": "B",
+    "A": "Ja, da die Zubereitung des Essens in deinen Zuständigkeitsbereich fällt",
+    "B": "Nein, da der “Koch” dafür verantwortlich ist",
+    "C": "Nein, da der Besucher nicht über die Qualität des Essens entscheiden darf",
+    "D": "Ja, weil du immer an Allem schuld bist"
+  },
+  {
+    "ID": "37",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist kein Teil des kommunalen Ressourcenmanagements?",
+    "Key": "A",
+    "A": "Bespaßung",
+    "B": "Wohnen",
+    "C": "Gesundheitswirtschaft",
+    "D": "Fachkräftegewinnung"
+  },
+  {
+    "ID": "38",
+    "Schwierigkeit": "3",
+    "Frage": "In deinem Projekt sind bestimmte Mitarbeiter auch in anderen Projekten mit Abhängigkeiten allokiert. Was wird jetzt benötigt?",
+    "Key": "D",
+    "A": "Die sofortige Freistellung der Mitarbeiter aus den anderen Projekten",
+    "B": "Mehr Mitarbeiter",
+    "C": "Ein erweitertes Projektmanagement",
+    "D": "Multiprojektmanagement"
+  },
+  {
+    "ID": "39",
+    "Schwierigkeit": "3",
+    "Frage": "Um dein Projekt erfolgreich abschließen zu können benötigst du eine erfolgreiche Planung. Hierfür gibt es verschiedene Möglichkeiten, die Planung anzugehen. Welche ist keine gute Möglichkeit?",
+    "Key": "C",
+    "A": "Taktische Ressourcenplanung",
+    "B": "Strategische Kapazitätenplanung",
+    "C": "Konstruktive Kapazitäts- und Ressourcenplanung",
+    "D": "Operative Ressourcenplanung"
+  },
+  {
+    "ID": "40",
+    "Schwierigkeit": "3",
+    "Frage": "Kapazitätenplanung muss nicht schwer sein, denn es gibt ein simples 4 Schritte System. Welcher der folgenden Schritte ist falsch?",
+    "Key": "D",
+    "A": "Schritt 1: Etablieren Sie die notwendigen Prozesse mit den richtigen Personen",
+    "B": "Schritt 2: Vollständige und aktualisierte Projektdaten",
+    "C": "Schritt 3: Tatsächlich zur Verfügung stehende Kapazitäten bestimmen",
+    "D": "Schritt 4: Alles nochmals mit der Projektleitung abstimmen und, falls nötig, korrigieren"
+  },
+  {
+    "ID": "41",
+    "Schwierigkeit": "3",
+    "Frage": "Oft kommt es vor, dass man seine Stakeholder überzeugen muss. Hierbei kann es sich um komplett verschiedene Personen handeln. Aber wer wird nie ein Stakeholder sein?",
+    "Key": "A",
+    "A": "Aktionäre",
+    "B": "Entscheider",
+    "C": "Teamleiter",
+    "D": "Projektleiter"
+  },
+  {
+    "ID": "42",
+    "Schwierigkeit": "3",
+    "Frage": "Du bist in der Endphase der Organisation der Ressourcen und du merkst, dass das Budget nicht ausreicht. Was machst du in der jetzt stressigen Situation?",
+    "Key": "C",
+    "A": "Dein Problem der Projektleitung melden. Sie werden sich schon darum kümmern",
+    "B": "Einfach normal weitermachen. Wenn das Budget nicht reicht, ist es ja nicht dein Problem",
+    "C": "Dich umgehend mit dem Finanzmanager und dem Projektleiterteam auseinandersetzen und zu einer Lösung finden",
+    "D": "Eine Notsituation ausrufen und allen mitteilen, dass das Projekt vermutlich nicht funktionieren wird"
+  },
+  {
+    "ID": "43",
+    "Schwierigkeit": "1",
+    "Frage": "In Netzplänen gibt es die Felder FAZ, FEZ, SAZ und SEZ. Wofür stehen die Abkürzungen?",
+    "Key": "D",
+    "A": "Fester Anfangszeitpunkt, Fester Endzeitpunkt, Spekulativer Anfangszeitpunkt und Spekulativer Endzeitpunkt",
+    "B": "Feste Arbeitszeit, Fester Endzeitpunkt, Sicheres Aufgabenziel und Soll-Endzustand",
+    "C": "Frühester Anfangszeitpunkt, Frühester Endzeitpunkt, Spekulativer Anfangszeitpunkt und Spekulativer Endzeitpunkt",
+    "D": "Frühester Anfangszeitpunkt, Frühester Endzeitpunkt, Spätester Anfangszeitpunkt und Spätester Endzeitpunkt"
+  },
+  {
+    "ID": "44",
+    "Schwierigkeit": "2",
+    "Frage": "Tom erstellt während seiner Projektplanung einen Netzplan. Welcher ist keiner der Gründe, warum er dies tut?",
+    "Key": "A",
+    "A": "Der Netzplan zeigt ihm, welche Aufgaben noch optimiert werden müssen",
+    "B": "Er will die Reihenfolge der nötigen Arbeitsschritte übersichtlich darstellen",
+    "C": "Er kann daraus ablesen, welche Bedingungen erfüllt sein müssen, um eine bestimmte Aufgabe anzufangen",
+    "D": "Der Netzplan liefert ihm eine gute Einschätzung dafür, wie lange sein Projekt dauern wird"
+  },
+  {
+    "ID": "45",
+    "Schwierigkeit": "3",
+    "Frage": "Welche Schritte werden benötigt, um einen Netzplan zu erstellen?",
+    "Key": "B",
+    "A": "Projektstrukturplan, Ereignisplanung, Sequenzplanung, Zeitplanung",
+    "B": "Projektstrukturplan, Vorgangsliste, Ablaufplanung, Zeitplanung",
+    "C": "Gantt-Diagramm, Vorgangsliste, Aufgabenplanung, Zeitplanung",
+    "D": "Aufgabenplanung, Ablaufplanung, Gantt-Diagramm, Zeitplanung"
+  },
+  {
+    "ID": "46",
+    "Schwierigkeit": "1",
+    "Frage": "Richtig oder falsch? In einer Vorgangsliste dürfen nur die Vorgangsbezeichnung, die Vorgangsnummer und die Vorgangsdauer aufgelistet werden.",
+    "Key": "B",
+    "A": "Richtig, denn die Vorgangsliste muss so knapp wie möglich gehalten werden",
+    "B": "Falsch, es fehlen noch Vorgänger und Nachfolger jedes Vorgangs",
+    "C": "Richtig, denn in die Vorgangsliste kommt nur das Nötigste, alles weitere sollte im Netzplan aufgezeigt werden",
+    "D": "Falsch, es fehlen noch die Verantwortlichen für den Vorgang"
+  },
+  {
+    "ID": "47",
+    "Schwierigkeit": "3",
+    "Frage": "Was versteht man unter dem Gesamtpuffer?",
+    "Key": "D",
+    "A": "Ein alternativer Begriff für die Gesamtdauer des Projektvorgangs",
+    "B": "Der Zeitraum, in welchem das gesamte Projekt ausgeführt werden muss",
+    "C": "Die Zeitspanne, die nach der Fertigstellung des Projektes noch bis zum finalen Abgabezeitpunkt bleibt",
+    "D": "Die Zeitspanne, um die ein Projektvorgang verzögert werden kann, ohne das Ende des Projekts zu verschieben"
+  },
+  {
+    "ID": "48",
+    "Schwierigkeit": "2",
+    "Frage": "Wie kann Mia als Projektleiterin den frühesten Endzeitpunkt eines Netzplanknotens berechnen?",
+    "Key": "C",
+    "A": "Rückwärtsrechnung, der früheste Anfangszeitpunkt des Nachfolgers bestimmt den frühesten Endzeitpunkt des Vorgängers",
+    "B": "Rückwärtsrechnung, der früheste Endzeitpunkt des Nachfolgers minus seine Vorgangsdauer ergibt den frühesten Endzeitpunkt des Vorgängers",
+    "C": "Vorwärtsrechnung, der früheste Endzeitpunkt berechnet sich aus dem frühesten Anfangszeitpunkt und der Dauer des gleichen Knotens",
+    "D": "Trickfrage, Mia ist die Projektleiterin und somit nicht für die Berechnung des Netzplans verantwortlich"
+  },
+  {
+    "ID": "49",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist keine der Eigenschaften des 'Kritischen Pfads'?",
+    "Key": "B",
+    "A": "Umfasst alle Ereignisse, deren früheste und späteste Ereigniszeitpunkte gleich sind",
+    "B": "Umfasst nur die Ereignisse, die unbedingt für das Projekt notwendig sind",
+    "C": "Enthält alle Tätigkeiten, die keine Pufferzeiten erlauben",
+    "D": "Keine zeitliche Verschiebungsmöglichkeit, wenn das Ende des gesamten Vorhabens unbeeinflusst bleiben soll"
+  },
+  {
+    "ID": "50",
+    "Schwierigkeit": "1",
+    "Frage": "Welche Aussage zu Meilensteine stimmt nicht?",
+    "Key": "B",
+    "A": "Sie sind Checkpunkte im Projektverlauf, zu denen etwas Elementares für das Projekt erledigt sein muss",
+    "B": "Es handelt sich dabei um ein Ereignis von beliebiger Dauer",
+    "C": "Sie sind auch bekannt als K.O.-Kriterien",
+    "D": "Wird ein Meilenstein verfehlt, kann das ganze Vorhaben auf der Kippe stehen oder muss abgebrochen werden"
+  },
+  {
+    "ID": "51",
+    "Schwierigkeit": "3",
+    "Frage": "Ein Auftraggeber erfährt, dass sein Projekt früher fertig sein muss als geplant, leitet diese Information aber nicht an den Projektleiter weiter. Was kann nun passieren?",
+    "Key": "D",
+    "A": "Der Projektleiter erfährt selbst, dass der Abgabetermin vorgerückt ist. Er macht die nötigen Anpassungen",
+    "B": "Da der Auftraggeber ausreichend über den Zustand des Projektes informiert ist, die Situation gut einschätzen konnte, läuft alles nach Plan",
+    "C": "Die Fertigstellung des Projekts verzögert sich über den früheren Abgabetermin, weil der Projektleiter davon ausgeht, er hätte noch genügend Zeit",
+    "D": "Der Auftraggeber greift erst ein, wenn er merkt dass das Projekt nicht rechtzeitig fertig wird. Die Frist wird verpasst"
+  },
+  {
+    "ID": "52",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist eher seltener der Grund  für ein gescheitertes Projekt?",
+    "Key": "C",
+    "A": "Nicht genügend Kommunikation",
+    "B": "Falsche Einschätzung des Scopes vom Projekt",
+    "C": "Eine Materiallieferung wird abgesagt",
+    "D": "Die Finanzierung wird abgebrochen"
+  },
+  {
+    "ID": "53",
+    "Schwierigkeit": "1",
+    "Frage": "Was bereitet Schwierigkeiten für ein Projekt, hat aber eher keinen Einfluss auf die Zeitplanung?",
+    "Key": "A",
+    "A": "Der Projektleiter wird ausgewechselt",
+    "B": "Arbeitskräfte fallen aus",
+    "C": "Einige Bestandteile des Projekts müssen abgeändert werden",
+    "D": "Eine Frist wird nicht eingehalten"
+  },
+  {
+    "ID": "54",
+    "Schwierigkeit": "1",
+    "Frage": "Was ist keine Situation, in welcher die Deadline eines Projekts verschoben werden sollte/könnte?",
+    "Key": "C",
+    "A": "Der Auftraggeber des Projekts beantragt dies",
+    "B": "Die Fertigstellung des Projekts ist essenziell, aber es steht bereits fest, dass sie nicht fristgerecht stattfinden kann",
+    "C": "Es würde die Qualität des Ergebnisses steigern",
+    "D": "Die Sponsoren des Projekts bitten darum"
+  },
+  {
+    "ID": "55",
+    "Schwierigkeit": "3",
+    "Frage": "Welche Aussage über Netzpläne und Gantt-Charts ist richtig?",
+    "Key": "A",
+    "A": "Mit ihnen kann man gut den Soll-Zustand und den Ist-Zustand des Projekts abgleichen",
+    "B": "Sie sollten jederzeit an den momentanen Fortschritt des Projekts angepasst werden",
+    "C": "Jeder Teilbereich eines Projektes führt seinen eigenen Netzplan und Gantt-Chart",
+    "D": "Beide ergänzen sich gegenseitig und dürfen daher nie alleine auftreten"
+  },
+  {
+    "ID": "56",
+    "Schwierigkeit": "3",
+    "Frage": "Erik schiebt die Erstellung eines Netzplans auf, sodass bereits seit zwei Monaten an dem Projekt gearbeitet wurde, bevor dieser fertig ist. Ist das eine gute Entscheidung?",
+    "Key": "A",
+    "A": "Nein, er riskiert damit, dass sich das Projekt in die Länge zieht, weil die Reihenfolge der Vorgänge nicht optimal festgelegt und der kritische Pfad nicht erkennbar ist",
+    "B": "Nein, zu Projektmanagement gehört ein Netzplan nun mal dazu und muss so früh wie möglich erstellt werden",
+    "C": "Ja, denn alle wichtigen Informationen zu den Vorgängen sind schon bekannt, egal wie sie dargestellt werden",
+    "D": "Ja, er hätte sogar überhaupt keinen Netzplan erstellen sollen, das ist Zeitverschwendung"
+  },
+  {
+    "ID": "57",
+    "Schwierigkeit": "1",
+    "Frage": "Welche Information ist nicht auf einem Netzknoten enthalten?",
+    "Key": "D",
+    "A": "Der Gesamtpuffer",
+    "B": "FAZ, FEZ, SAZ und SEZ",
+    "C": "Die Verantwortlichen für die Aufgabe",
+    "D": "Die ID des Nachfolgers"
+  },
+  {
+    "ID": "58",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist auf Gantt-Charts nicht besonders gut erkennbar?",
+    "Key": "B",
+    "A": "Wie lange Vorgänge dauern",
+    "B": "Welche Vorgänge voneinander abhängig sind",
+    "C": "Welche Vorgänge parallel verlaufen",
+    "D": "Wann Vorgänge beginnen und enden"
+  },
+  {
+    "ID": "59",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist auf Netzplänen nicht besonders gut erkennbar?",
+    "Key": "C",
+    "A": "Wie lange Vorgänge dauern",
+    "B": "Welche Vorgänge voneinander abhängig sind",
+    "C": "Welche Vorgänge parallel verlaufen",
+    "D": "Wann Vorgänge beginnen und enden"
+  },
+  {
+    "ID": "60",
+    "Schwierigkeit": "1",
+    "Frage": "Ist es immer die Schuld des Teams, wenn ein Meilenstein nicht rechtzeitig erreicht wird?",
+    "Key": "A",
+    "A": "Nein, die Deadline eines Meilensteins kann auch falsch gesetzt worden sein",
+    "B": "Ja, Meilensteine sind immer zu ihren idealen Deadlines gesetzt und sollten somit einfach erreichbar sein",
+    "C": "Ja, denn Meilensteine können verschoben werden, wenn das Team darum bittet, warum haben sie nicht Bescheid gesagt?",
+    "D": "Nein, denn jegliche Schuld am Versagen von Projekten wird immer dem Projektleiter zugeschrieben"
+  },
+  {
+    "ID": "61",
+    "Schwierigkeit": "2",
+    "Frage": "Was sind die größten Herausforderungen für Projekte?",
+    "Key": "C",
+    "A": "Auftraggeber",
+    "B": "Personal",
+    "C": "Zeit und Kosten",
+    "D": "Ressourcenplanung"
+  },
+  {
+    "ID": "62",
+    "Schwierigkeit": "3",
+    "Frage": "Wie viel Prozent aller Projekte heutzutage dauern länger als geplant?",
+    "Key": "B",
+    "A": "Etwa 35 %",
+    "B": "Etwa 50 %",
+    "C": "Etwa 80 %",
+    "D": "Etwa 63 %"
+  },
+  {
+    "ID": "63",
+    "Schwierigkeit": "3",
+    "Frage": "Wie lautet das Parkinson`sche Gesetz?",
+    "Key": "D",
+    "A": "Der Aufschub ist ein Dieb der Zeit",
+    "B": "Planung ersetzt Zufall durch Irrtum",
+    "C": "Je lächerlicher ein Termin, desto treuer der Versuch, ihn zu halten",
+    "D": "Arbeit dehnt sich immer genau so lang aus, wie man ihr Zeit zur Erledigung einräumt"
+  },
+  {
+    "ID": "64",
+    "Schwierigkeit": "1",
+    "Frage": "Aus wie vielen Ps besteht der Marketing-Mix?",
+    "Key": "A",
+    "A": "4",
+    "B": "3",
+    "C": "7",
+    "D": "8"
+  },
+  {
+    "ID": "65",
+    "Schwierigkeit": "1",
+    "Frage": "Aus wie vielen Ps besteht der erweiterte Marketing-Mix?",
+    "Key": "C",
+    "A": "4",
+    "B": "3",
+    "C": "7",
+    "D": "8"
+  },
+  {
+    "ID": "66",
+    "Schwierigkeit": "1",
+    "Frage": "Du möchtest dein neues Produkt vermarkten. Aus welchem Faktor sollte sich der Preis deines Produktes primär nicht entwickeln?",
+    "Key": "B",
+    "A": "Analyse der Zielgruppe",
+    "B": "Vorschlag deines Freundes",
+    "C": "Analyse deiner Konkurrenz",
+    "D": "Deine Ausgabekosten"
+  },
+  {
+    "ID": "67",
+    "Schwierigkeit": "1",
+    "Frage": "Was versteht man unter Marketingkontrolle?",
+    "Key": "C",
+    "A": "Die ergebnisorientierte Überprüfung der Maßnahmen des Marketings",
+    "B": "Die Untersuchung von Stärken und Schwächen des Unternehmens",
+    "C": "Die Sicherstellung der Kundenzufriedenheit",
+    "D": "Die Erkennungs- und Identifizierungsphase eines Marketingproblems"
+  },
+  {
+    "ID": "68",
+    "Schwierigkeit": "1",
+    "Frage": "Was gehört nicht zu den 4 Marketinginstrumenten?",
+    "Key": "B",
+    "A": "Produktpolitik",
+    "B": "Marketingkontrolle",
+    "C": "Preispolitik",
+    "D": "Distributionspolitik"
+  },
+  {
+    "ID": "69",
+    "Schwierigkeit": "1",
+    "Frage": "Wie viele Phasen gibt es im Produktlebenszyklus?",
+    "Key": "B",
+    "A": "4",
+    "B": "5",
+    "C": "7",
+    "D": "8"
+  },
+  {
+    "ID": "70",
+    "Schwierigkeit": "1",
+    "Frage": "Was gehört zu den Marketinginstrumenten?",
+    "Key": "D",
+    "A": "Die Wasserfall-Methode",
+    "B": "Stakeholder Analyse",
+    "C": "Pflichtenheft",
+    "D": "Kommunikationspolitik"
+  },
+  {
+    "ID": "71",
+    "Schwierigkeit": "2",
+    "Frage": "Der Marketingprozess ist der Kernprozess, der sich auf den Absatz eines Unternehmens konzentriert. Was gehört nicht zum Marketingprozess?",
+    "Key": "D",
+    "A": "Die Planung des Marketings",
+    "B": "Die Gestaltung des Marketings",
+    "C": "Marketingkontrolle",
+    "D": "Die Marktführerschaft"
+  },
+  {
+    "ID": "72",
+    "Schwierigkeit": "2",
+    "Frage": "Welche Phase gehört nicht zum Produktlebenszyklus?",
+    "Key": "D",
+    "A": "Wachstum",
+    "B": "Reife",
+    "C": "Sättigung",
+    "D": "Übersättigung"
+  },
+  {
+    "ID": "73",
+    "Schwierigkeit": "2",
+    "Frage": "Dein Freund hat ein Produkt auf den Markt gebracht, doch der Absatz steigt nicht nach gewünschtem Maße. Was empfiehlst du ihm als Meister des Projektmanagements?",
+    "Key": "B",
+    "A": "Mitarbeiter entlassen",
+    "B": "Preis senken",
+    "C": "Produkt vom Markt entfernen",
+    "D": "Nichts verändern"
+  },
+  {
+    "ID": "74",
+    "Schwierigkeit": "2",
+    "Frage": "Dein Unternehmen hat ein Produkt auf den Markt gebracht. Dein Mitarbeiter schlägt vor, Marktforschung zu betreiben. Inwiefern ist dies eine sinnvolle Idee?",
+    "Key": "A",
+    "A": "Zur Entwicklung einer erfolgreichen Absatzstrategie",
+    "B": "Zum Einschätzen des Produktlebenszyklus",
+    "C": "Zur Umsatzsteigerung durch den Verkauf der gewonnenen Daten",
+    "D": "Zur Befriedigung der natürlichen Neugier"
+  },
+  {
+    "ID": "75",
+    "Schwierigkeit": "2",
+    "Frage": "Die Marktforschung ist ein essenzielles Mittel des Marketings, um an mehr Informationen zu gelangen. Was ist kein primäres Ziel der Marktforschung?",
+    "Key": "A",
+    "A": "Prognose der politischen Ansichten in einem bestimmten Kundensegment",
+    "B": "Prognose der Risiken in einem bestimmten Kundensegment",
+    "C": "Prognose der Chancen in einem bestimmten Kundensegment",
+    "D": "Prognose des Verhaltens in einem bestimmten Kundensegment"
+  },
+  {
+    "ID": "76",
+    "Schwierigkeit": "2",
+    "Frage": "Dein Freund zählt dir folgende Aspekte auf, die nach seiner Ansicht zu Marketing gehören. Was gehört nicht zum Konzept von Marketing?",
+    "Key": "D",
+    "A": "Die Produkt- und Preisoptimierung",
+    "B": "Die Beobachtung und Lenkung des Marktes",
+    "C": "Die Produktpräsentation",
+    "D": "Die Lieferung der Produktkomponenten"
+  },
+  {
+    "ID": "77",
+    "Schwierigkeit": "2",
+    "Frage": "Es gibt unterschiedliche Perspektiven von Qualität. Auf welche Perspektive fokussiert sich speziell das Marketing?",
+    "Key": "B",
+    "A": "Die rationale Wahrnehmung von Qualität",
+    "B": "Die emotionale und menschliche Wahrnehmung von Qualität",
+    "C": "Die transzendente Wahrnehmung von Qualität",
+    "D": "Die technische Wahrnehmung von Qualität "
+  },
+  {
+    "ID": "78",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist zwangsläufig kein Qualität beeinflussender Faktor im Unternehmen?",
+    "Key": "C",
+    "A": "Die Unterstützung der Willensbildung innerhalb des Unternehmens",
+    "B": "Die Sammlung an Regeln, Zuständigkeiten und Prozessen, die klären, wie Qualität im Unternehmen erzeugt wird",
+    "C": "Die Senkung des Preises",
+    "D": "Die Betrachtung der Anforderungen von zusätzlichen Stakeholdern"
+  },
+  {
+    "ID": "79",
+    "Schwierigkeit": "3",
+    "Frage": "Welcher Gegenstand passt am besten als Metapher zum Begriff \"Marketingprozess\"",
+    "Key": "A",
+    "A": "Blaupause zur Verkaufsförderung eines Unternehmens",
+    "B": "Föhn zum Wegblasen von potenziellen Risiken",
+    "C": "Magnet zum Anziehen neuer Mitarbeiter",
+    "D": "Angel zum Angeln neuer Kunden"
+  },
+  {
+    "ID": "80",
+    "Schwierigkeit": "3",
+    "Frage": "Was beinhaltet die aktivitätsorientierte Marketingdefinition?",
+    "Key": "C",
+    "A": "Die Auffassung, dass Marketing im Kern die bewusste marktorientierte Führung des gesamten Unternehmens ist",
+    "B": "Die Auffassung, dass Marketing im Kern die Kundenbeziehung aufbaut, stärkt und erhält",
+    "C": "Die Auffassung, dass Marketing im Kern ein Bündel an marktgerichteter Unternehmensgeschehnisse ist",
+    "D": "Die Auffassung, dass Marketing im Kern eine unternehmensinterne und unternehmensexterne Facette enthält"
+  },
+  {
+    "ID": "81",
+    "Schwierigkeit": "3",
+    "Frage": "Was beinhaltet die integrative Marketingdefinition?",
+    "Key": "B",
+    "A": "Die Auffassung, dass Marketing im Kern die bewusste marktorientierte Führung des gesamten Unternehmens ist",
+    "B": "Die Auffassung, dass Marketing im Kern eine unternehmensinterne und unternehmensexterne Facette enthält",
+    "C": "Die Auffassung, dass Marketing im Kern die Kundenbeziehung aufbaut, stärkt und erhält",
+    "D": "Die Auffassung, dass Marketing im Kern ein Bündel an marktgerichteter Unternehmensgeschehnisse ist"
+  },
+  {
+    "ID": "82",
+    "Schwierigkeit": "3",
+    "Frage": "Wie macht sich eine defensiven Kommunikationspolitik  erkennbar?",
+    "Key": "D",
+    "A": "Flexible Arbeitszeitmodelle",
+    "B": "Intensive Kommunikation",
+    "C": "Direkter Kontakt zwischen Mitarbeitern, Kunden und Lieferanten",
+    "D": "Die Überwachung der Mitarbeiter über Video"
+  },
+  {
+    "ID": "83",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist Marketing aus der Perspektive der unternehmensexternen Facette?",
+    "Key": "C",
+    "A": "Die Schaffung der Voraussetzungen im Unternehmen für die Durchführung marktbezogener Aktivitäten",
+    "B": "Die Führung des Unternehmens nach der Leitidee der Marktorientierung",
+    "C": "Die Durchführung marktbezogener Aktivitäten bezüglich der Produktnachfrager",
+    "D": "Das marktorientierte Entscheidungsverhalten in der Unternehmung"
+  },
+  {
+    "ID": "84",
+    "Schwierigkeit": "3",
+    "Frage": "Die Diversifikation ist unterteilbar in eine horizontale und eine vertikale Diversifikation. Wie ist Ersteres zu verstehen?",
+    "Key": "C",
+    "A": "Die Aufnahme von Produkten, die zu einer vor- oder nachgelagerten Produktionsstufe gehören",
+    "B": "Zwischen den alten und den neuen Produkten besteht kein sachlicher Zusammenhang mehr",
+    "C": "Die Ausweitung des Sortiments um Produkte, die mit den alten Produkten in einem sachlichen Zusammenhang stehen",
+    "D": "Die Aufnahme von Produkten, die nicht zu einer vor- oder nachgelagerten Produktionsstufe gehören"
+  },
+  {
+    "ID": "85",
+    "Schwierigkeit": "1",
+    "Frage": "Was ist keine Eigenschaft eines Projekts?",
+    "Key": "C",
+    "A": "Ein terminlicher Rahmen  ",
+    "B": "Planung ",
+    "C": "Regelmäßige Durchführung",
+    "D": "Teamarbeit"
+  },
+  {
+    "ID": "86",
+    "Schwierigkeit": "1",
+    "Frage": "Was ist der häufigste Grund für das Scheitern von Projekten?",
+    "Key": "A",
+    "A": "Unklare Zielsetzung",
+    "B": "Fehlende Motivation",
+    "C": "Ausfall von Teammitgliedern",
+    "D": "Zu wenig Fachkenntnisse"
+  },
+  {
+    "ID": "87",
+    "Schwierigkeit": "1",
+    "Frage": "Wie sollte bei Uneinigkeit einer gemeinsamen Planung im Team vorgegangen werden?",
+    "Key": "C",
+    "A": "Abstimmen der Teammitglieder",
+    "B": "Projektleiter legt Vorgehen einfach fest",
+    "C": "Diskutieren und im Team Abstimmen",
+    "D": "Probleme aufschieben und andere Aufgaben vorziehen"
+  },
+  {
+    "ID": "88",
+    "Schwierigkeit": "1",
+    "Frage": "Was sind die Bestandteile des magischen Dreiecks?",
+    "Key": "B",
+    "A": "Planung, Kosten, Leistung",
+    "B": "Qualität, Zeit, Kosten",
+    "C": "Zeit, Kosten, Materialaufwand",
+    "D": "Ergebnis, Kosten, Planung"
+  },
+  {
+    "ID": "89",
+    "Schwierigkeit": "1",
+    "Frage": "Was zeichnet einen guten Projektleiter aus?",
+    "Key": "B",
+    "A": "Lässt keine Kritik zu",
+    "B": "Delegiert Entscheidungen",
+    "C": "Plant den größten Teil des Projekts alleine",
+    "D": "Bestimmt Entscheidungen meistens alleine"
+  },
+  {
+    "ID": "90",
+    "Schwierigkeit": "1",
+    "Frage": "Was sind keine Anforderungen an Teammitglieder?",
+    "Key": "C",
+    "A": "Teamfähigkeit",
+    "B": "Bereitschaft Kompromisse einzugehen",
+    "C": "Detaillierte Kenntnisse im Projektmanagement",
+    "D": "Aktive Mitarbeit am Projekt"
+  },
+  {
+    "ID": "91",
+    "Schwierigkeit": "1",
+    "Frage": "Was ist nicht Teil der Projektdurchführung und Projektkontrolle?",
+    "Key": "A",
+    "A": "Projektstrukturplan",
+    "B": "Projektberichterstattung",
+    "C": "Projektdokumentation",
+    "D": "Qualitätssicherung"
+  },
+  {
+    "ID": "92",
+    "Schwierigkeit": "2",
+    "Frage": "Martin ist Projektmanager und legt die Ziele für ein Projekt fest. Wie sollte er die Zielsetzung für sein Projekt dabei wählen?",
+    "Key": "B",
+    "A": "Selbstständig, Machbar, Akkurat, Richtig, Teamfähig ",
+    "B": "Spezifisch, Messbar, Aktivierend, Realistisch, Terminiert",
+    "C": "Selbstständig, Messbar, Abänderlich, Realistisch, Teilbar",
+    "D": "Systematisch, Monetär, Aktivierend, Richtig, Terminiert"
+  },
+  {
+    "ID": "93",
+    "Schwierigkeit": "2",
+    "Frage": "Wie sollte ein Projektleiter bei einer heftigen fachlichen Diskussion vorgehen?",
+    "Key": "D",
+    "A": "Die entsprechenden Personen ausschließen",
+    "B": "Die entsprechenden Personen alleine ausdiskutieren lassen",
+    "C": "Die Diskussion beenden",
+    "D": "Deine Position deutlich machen aber Niemanden dabei verletzen"
+  },
+  {
+    "ID": "94",
+    "Schwierigkeit": "2",
+    "Frage": "Wie sollte der Projektleiter vorgehen wenn eine Aufgabe aufgrund von erhöhtem Aufwand nicht fristgerecht umgesetzt wird?",
+    "Key": "C",
+    "A": "Die Frist abändern",
+    "B": "Unterstützung anbieten und den Teammitgliedern klar machen, dass sie schneller arbeiten müssen",
+    "C": "Unterstützung anbieten und möglicherweise die Fristen neu überdenken",
+    "D": "Mit Nachdruck auf die Teammitglieder einreden, sodass sie schneller arbeiten"
+  },
+  {
+    "ID": "95",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist keine Voraussetzung zur Erstellung eines Meilensteinplans?",
+    "Key": "A",
+    "A": "Genügend Fachkenntnisse um die Einzelheiten des Projekts vollständig zu verstehen",
+    "B": "Ziele, Inhalte, Start- und Endtermin des Projekts sind definiert",
+    "C": "Rahmenbedingungen und wichtige Vorgaben",
+    "D": "Klarheit über Bedeutung des Projektes im Unternehmen"
+  },
+  {
+    "ID": "96",
+    "Schwierigkeit": "2",
+    "Frage": "Was ist keine Methode zur Erstellung von Projektstrukturplänen?",
+    "Key": "D",
+    "A": "Yo-Yo-Verfahren",
+    "B": "Top-Down-Ansatz",
+    "C": "Bottom-Up-Ansatz",
+    "D": "Zeitorientierter Ansatz"
+  },
+  {
+    "ID": "97",
+    "Schwierigkeit": "2",
+    "Frage": "Was enthält laut DIN das Projekthandbuch?",
+    "Key": "B",
+    "A": "Zusammenstellung von Regelungen, Organisation für die Planung und Durchführung von Projekten inklusive deren Effizienz",
+    "B": "Zusammenstellung von Regelungen, Organisation für die Planung und Durchführung von Projekten",
+    "C": "Zusammenstellung von Regelungen, Organisation für die Planung und Durchführung von Projekten mit dem dazugehörigen Zeitaufwand",
+    "D": "Zusammenstellung von Richtlinien, Organisation für die Planung und Durchführung von Projekten"
+  },
+  {
+    "ID": "98",
+    "Schwierigkeit": "2",
+    "Frage": "Wie ist die Reihenfolge der Phasen im Projektmanagement",
+    "Key": "D",
+    "A": "Initiieren, Vorbereiten, Planen, Steuern, Abschließen",
+    "B": "Planen, Vorbereiten, Initiieren, Steuern, Abschließen",
+    "C": "Vorbereiten, Planen, Initiieren, Steuern, Abschließen",
+    "D": "Vorbereiten, Initiieren, Planen, Steuern, Abschließen\r\n"
+  },
+  {
+    "ID": "99",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist im Lastenheft nicht enthalten?",
+    "Key": "A",
+    "A": "Anforderung an Auftragnehmer",
+    "B": "Anforderungen an die Projektdurchführung",
+    "C": "Soll-Zustand-Beschreibung",
+    "D": "Ist-Zustand-Beschreibung"
+  },
+  {
+    "ID": "100",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist im Pflichtenheft nicht enthalten?",
+    "Key": "C",
+    "A": "Exakte Eingrenzung der Zielbestimmungen",
+    "B": "ABGRENZUNGS-Kriterien welche die Anwendung definitiv nicht beinhalten sollte",
+    "C": "Exakte Anforderung der SOLL-Kriterien an den Auftragnehmer",
+    "D": "Unterteilung in MUSS- und WUNSCH-Kriterien"
+  },
+  {
+    "ID": "101",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist laut DIN Norm ein Netzplan?",
+    "Key": "B",
+    "A": "Ein Netzplan ist die tabellarische Darstellung von Abläufen",
+    "B": "Ein Netzplan ist die graphische oder tabellarische Darstellung von Abläufen und deren Abhängigkeiten",
+    "C": "Ein Netzplan ist die Festlegung von Aufgabengebieten in graphischer Form",
+    "D": "Ein Netzplan ist die tabellarische Darstellung von zeitgleichen Abläufen und deren zeitlichen Abhängigkeiten"
+  },
+  {
+    "ID": "102",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist keine Gliederung des Projektstrukturplans?",
+    "Key": "B",
+    "A": "Funktionsorientierte Gliederung",
+    "B": "Kostenorientierte Gliederung",
+    "C": "Objektorientierte Gliederung",
+    "D": "Zeitorientierte Gliederung"
+  },
+  {
+    "ID": "103",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist der Bottom-Up-Ansatz?",
+    "Key": "D",
+    "A": "Ein deduktiver Weg in welchem der PSP durch Zerlegung vom Projekt bis zu den Arbeitspaketen gebildet wird",
+    "B": "Die Aufteilung der Aufgaben, sodass das Projekt strukturiert von unten nach oben aufgebaut wird",
+    "C": "Die Teammitglieder stellen gemeinsam durch dezentrale Planung das Projekt auf",
+    "D": "Durch die Ermittlung und Zusammensetzung von Teilaufgaben wird das Projekt zusammengebaut"
+  },
+  {
+    "ID": "104",
+    "Schwierigkeit": "3",
+    "Frage": "Was enthält jedes Kästchen im Netzstrukturplan?",
+    "Key": "A",
+    "A": "Dauer, Gesamtpuffer, frühester Beginn, spätestes Ende",
+    "B": "Nummer, Name, frühester Beginn, spätestes Ende, Arbeitsgruppe",
+    "C": "Gesamtpuffer, freier Puffer, Datum, frühester Beginn, spätestes Ende",
+    "D": "Gesamtpuffer, frühester Beginn, mittlerer Beginn, spätester Beginn, frühestes Ende, mittlerer Beginn, spätestes Ende"
+  },
+  {
+    "ID": "105",
+    "Schwierigkeit": "3",
+    "Frage": "Was ist kein Verfahren zur Entscheidungsfindung der Projektauswahl in einem Projektportfolio?",
+    "Key": "D",
+    "A": "Monetäre Verfahren",
+    "B": "Strategische Bewertung",
+    "C": "Mehrdimensionale Betrachtung",
+    "D": "Kausale Betrachtung"
+  }
+]
