@@ -111,7 +111,6 @@ io.on('connection', socket => {
         } else {
             io.to(socket.id).emit('error', 'It\'s not your turn');
         }
-
     });
 
     socket.on('get card', function (difficulty) {
@@ -147,20 +146,11 @@ io.on('connection', socket => {
         io.in(socket.room).emit('player moved', {
             "next_player": game[socket.room].players[game[socket.room].currentPlayerIndex].name,
             "player": index,
-            "position": position
+            "position": position,
+            "state": game[socket.room].currentStatus,
         });
 
-        switch (game[socket.room].currentStatus) {
-            case Game.STATUS.IS_WON:
-                //TODO show clients the winner
-                //game[socket.room].winnerIndex
-                break;
-            case Game.STATUS.IS_DRAW:
-                //TODO show clients that nobody wins
-                break;
-            default:
-                break;
-        }
+        io.in(socket.room).emit('update Hunter', game[socket.room].hunter.getPosition());
     });
 });
 

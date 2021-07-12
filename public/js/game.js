@@ -57,7 +57,7 @@ function start_game() {
     sprites.forEach(sprite => app.stage.addChild(sprite.getSprite()));
 
     // Red border
-    let red_border = generate_red_border(new PIXI.Graphics());
+    let red_border = generate_red_border(new PIXI.Graphics(), 1, 9);
     app.stage.addChild(red_border);
 
 
@@ -268,18 +268,27 @@ function start_game() {
                 break;
         }
 
-        if (x === 1 && y === 9 && data.position !== 0) {
+        if (data.state === 2 || data.state === 3) {
             card = new Card(game_board_size, "",
                 {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false},
                 {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false},
                 {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("Kein Spieler"), "status": false},
                 {"text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("Kein Spieler"), "status": false},
-                0, false);
+                0, false, data.state);
+            red_border.clear();
             card.showCard();
             show_card = true;
         }
 
         if (next_player === username) my_turn.text = "Your Turn";
+    });
+
+    socket.on('update Hunter', function (position) {
+        let x = sprites[position].coord_x;
+        let y = sprites[position].coord_y;
+        red_border.clear();
+        red_border = generate_red_border(new PIXI.Graphics(), x, y);
+        app.stage.addChild(red_border);
     });
 
     resize();
@@ -297,9 +306,9 @@ function generate_card_stack(sprite, x, y, onclick) {
     return sprite;
 }
 
-function generate_red_border(graphics) {
+function generate_red_border(graphics, x, y) {
     graphics.lineStyle(sprite_size * 0.10, 0x862323, 1);
-    graphics.drawRect(sprite_size * 1 - sprite_size * 0.2, sprite_size * 9 - sprite_size * 0.2, sprite_size * 1.5, sprite_size * 1.5);
+    graphics.drawRect(sprite_size * x - sprite_size * 0.2, sprite_size * y - sprite_size * 0.2, sprite_size * 1.5, sprite_size * 1.5);
     return graphics;
 }
 

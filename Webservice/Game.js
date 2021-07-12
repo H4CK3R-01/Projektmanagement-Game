@@ -1,5 +1,5 @@
 const Player = require('./Player');
-const Hunter = require("./Hunter");
+const Hunter = require('./Hunter');
 
 class Game {
 
@@ -10,7 +10,7 @@ class Game {
         ONGOING: 1,
         IS_DRAW: 2,
         IS_WON: 3
-    }
+    };
 
     constructor() {
         this.currentStatus = Game.STATUS.SETTING_UP;
@@ -93,16 +93,16 @@ class Game {
         }
     }
 
-    getPlayerNames(){
+    getPlayerNames() {
         return this.playerNames;
     }
 
-    addPlayerName(playerName){
+    addPlayerName(playerName) {
         this.playerNames.push(playerName);
     }
 
-    removePlayerName(playerName){
-        this.playerNames.splice(this.playerNames.indexOf(playerName), 1)
+    removePlayerName(playerName) {
+        this.playerNames.splice(this.playerNames.indexOf(playerName), 1);
     }
 }
 
