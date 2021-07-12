@@ -47,7 +47,7 @@ document.getElementById('ok').addEventListener('click', function () {
         });
 
         socket.on('error', function (data) {
-            if (data === 'Game started already or room has too many members') {
+            if (data === 'Game started already or room has too many members' || data === 'Username already exists') {
                 document.getElementById('login').style.display = 'flex';
                 document.getElementById('game').style.display = 'none';
                 document.getElementById('chat').style.display = 'none';
