@@ -47,10 +47,12 @@ document.getElementById('ok').addEventListener('click', function () {
         });
 
         socket.on('error', function (data) {
-            document.getElementById('login').style.display = 'flex';
-            document.getElementById('game').style.display = 'none';
-            document.getElementById('chat').style.display = 'none';
-            document.getElementById('error').innerText = data;
+            if (data === 'Game started already or room has too many members') {
+                document.getElementById('login').style.display = 'flex';
+                document.getElementById('game').style.display = 'none';
+                document.getElementById('chat').style.display = 'none';
+                document.getElementById('error').innerText = data;
+            }
         });
 
         socket.on('new message', function (data) {
