@@ -1,5 +1,5 @@
 const Player = require('./Player');
-const Hunter = require("./Hunter");
+const Hunter = require('./Hunter');
 
 class Game {
 
@@ -93,15 +93,15 @@ class Game {
         }
     }
 
-    getPlayerNames(){
+    getPlayerNames() {
         return this.playerNames;
     }
 
-    addPlayerName(playerName){
+    addPlayerName(playerName) {
         this.playerNames.push(playerName);
     }
 
-    removePlayerName(playerName){
+    removePlayerName(playerName) {
         this.playerNames.splice(this.playerNames.indexOf(playerName), 1)
     }
 }

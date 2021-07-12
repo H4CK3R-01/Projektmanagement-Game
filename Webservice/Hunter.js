@@ -4,13 +4,17 @@ class Hunter {
         this.isAlive = false;
     }
 
+    getPosition() {
+        return this.position;
+    }
+
     move_by(amount) {
         this.position += amount;
     }
 
     hunt(playerArray) {
         for (let i = 0; i < playerArray.length; i++) {
-            if (playerArray[i].position <= this.position) {
+            if (playerArray[i].position <= this.position - 1) {
                 playerArray[i].isAlive = false;
             }
         }
