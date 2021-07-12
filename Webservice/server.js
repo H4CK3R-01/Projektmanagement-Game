@@ -48,22 +48,26 @@ io.on('connection', socket => {
             game[socket.room] = new Game();
         }
 
-        if (game[socket.room].add_player(socket.username)) {
+        if (game[socket.room].get_player_index(socket.username) === -1) {
+            if (game[socket.room].add_player(socket.username)) {
 
-            game[socket.room].addPlayerName(data.username);
-            addedUser = true;
+                game[socket.room].addPlayerName(data.username);
+                addedUser = true;
 
-            socket.emit('login', game[socket.room].get_player_index(socket.username));
-            socket.join(socket.room);
-            io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
+                socket.emit('login', game[socket.room].get_player_index(socket.username));
+                socket.join(socket.room);
+                io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
 
-            if (game[socket.room].players.length === 1) io.to(socket.id).emit('first player');
+                if (game[socket.room].players.length === 1) io.to(socket.id).emit('first player');
 
-            socket.broadcast.to(socket.room).emit('user joined', socket.username);
+                socket.broadcast.to(socket.room).emit('user joined', socket.username);
 
-            generate_log_message(socket.room, socket.username, "JOINED", "");
+                generate_log_message(socket.room, socket.username, "JOINED", "");
+            } else {
+                io.to(socket.id).emit('error', 'Game started already or room has too many members');
+            }
         } else {
-            io.to(socket.id).emit('error', 'Game started already or room has too many members');
+            io.to(socket.id).emit('error', 'Username already exists');
         }
     });
 
