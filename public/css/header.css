@@ -47,11 +47,12 @@ header {
 
 @media only screen and (max-width: 980px) {
     header {
-        height: 3em;
+        height: 5em;
+        
     }
 
     .title {
-        font-size: 2em;
+        font-size: 3em;
     }
 
     .build {

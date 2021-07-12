@@ -53,3 +53,22 @@
     background-color: #0062ff;
     color: #ffffff;
 }
+
+@media only screen and (max-width: 980px) {
+
+    #login {
+        align-items: flex-start;
+    }
+
+    #login label {
+        font-size: 2.5em;
+
+    }
+
+    #login input, #login button {
+        height: 4.0em;
+        font-size: 2.5em;
+
+    }
+
+}
