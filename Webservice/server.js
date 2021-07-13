@@ -150,14 +150,14 @@ io.on('connection', socket => {
 
         game[socket.room].finish_turn();
 
+        io.in(socket.room).emit('update Hunter', game[socket.room].hunter.getPosition());
+
         io.in(socket.room).emit('player moved', {
             "next_player": game[socket.room].players[game[socket.room].currentPlayerIndex].name,
             "player": index,
             "position": position,
             "state": game[socket.room].currentStatus,
         });
-
-        io.in(socket.room).emit('update Hunter', game[socket.room].hunter.getPosition());
     });
 });
 
