@@ -55,20 +55,20 @@
 }
 
 @media only screen and (max-width: 980px) {
-
     #login {
         align-items: flex-start;
     }
 
+    #login form {
+        padding-top: 10px;
+    }
+
     #login label {
         font-size: 2.5em;
-
     }
 
     #login input, #login button {
-        height: 4.0em;
+        height: 2.0em;
         font-size: 2.5em;
-
     }
-
 }
