@@ -807,7 +807,7 @@
   {
     "id": 36,
     "difficulty": 3,
-    "question": "Ein wütender Besucher des Events, dessen Ressourcen du gemanagt hast, kommt zu dir und beschwert sich darüber, dass sein Fleisch nicht ganz so war, wie er es wollte.\r\nWar es dein Fehler?",
+    "question": "Ein wütender Besucher des Events, dessen Ressourcen du gemanagt hast, kommt zu dir und beschwert sich darüber, dass sein Fleisch nicht ganz so war, wie er es wollte.\nWar es dein Fehler?",
     "answers": [
       {
         "text": "Ja, da die Zubereitung des Essens in deinen Zuständigkeitsbereich fällt",
@@ -2248,7 +2248,7 @@
         "status": false
       },
       {
-        "text": "Vorbereiten, Initiieren, Planen, Steuern, Abschließen\r\n",
+        "text": "Vorbereiten, Initiieren, Planen, Steuern, Abschließen",
         "status": true
       }
     ]
