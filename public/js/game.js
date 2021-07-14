@@ -192,6 +192,8 @@ function start_game() {
     });
 
     socket.on('card', function (data) {
+        if (show_card === true) card.destroyCard();
+
         card = new Card(game_board_size, data.card.question, data.card['answers'][0], data.card['answers'][1], data.card['answers'][2], data.card['answers'][3], data.card['difficulty'], data.username === username);
         card.showCard();
         show_card = true;
