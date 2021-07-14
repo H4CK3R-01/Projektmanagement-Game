@@ -208,6 +208,10 @@ function start_game() {
     });
 
     socket.on('card', function (data) {
+        if (show_card === true) {
+            card.destroyCard();
+        }
+
         let u = data.username;
         let q = data.card.question;
         let a = data.card.answers;
