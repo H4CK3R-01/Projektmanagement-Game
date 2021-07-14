@@ -45,7 +45,7 @@ header {
     flex-direction: column;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 980px) {
     header {
         height: 5em;
 
