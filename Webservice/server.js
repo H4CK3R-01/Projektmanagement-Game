@@ -56,7 +56,7 @@ io.on('connection', socket => {
 
                 socket.emit('login', game[socket.room].get_player_index(socket.username));
                 socket.join(socket.room);
-                io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
+                io.in(socket.room).emit('update player names', game[socket.room].getPlayerNames());
 
                 if (game[socket.room].players.length === 1) io.to(socket.id).emit('first player');
 
@@ -87,7 +87,7 @@ io.on('connection', socket => {
             if (game[socket.room].current_player_is(socket.username)) socket.broadcast.to(socket.room).emit('card destroyed');
 
             game[socket.room].removePlayerName(socket.username);
-            io.in(socket.room).emit('updatePlayerNames', game[socket.room].getPlayerNames());
+            io.in(socket.room).emit('update player names', game[socket.room].getPlayerNames());
 
             socket.broadcast.to(socket.room).emit('user left', socket.username);
             game[socket.room].remove_player(socket.username);
@@ -150,7 +150,7 @@ io.on('connection', socket => {
 
         game[socket.room].finish_turn();
 
-        io.in(socket.room).emit('update Hunter', game[socket.room].hunter.getPosition());
+        io.in(socket.room).emit('update hunter', game[socket.room].hunter.getPosition());
 
         io.in(socket.room).emit('player moved', {
             "next_player": game[socket.room].players[game[socket.room].currentPlayerIndex].name,
@@ -163,6 +163,7 @@ io.on('connection', socket => {
 
 function generate_log_message(room, user, type, message) {
     let color;
+
     switch (type) {
         case 'LEFT':
             color = '\x1b[31m';
@@ -185,12 +186,12 @@ function generate_log_message(room, user, type, message) {
         default:
             color = '\x1b[0m';
     }
+
     room = pad(10, room, ' ').substr(0, 10);
     user = pad(10, user, ' ').substr(0, 10);
     type = pad(10, type, ' ').substr(0, 10);
 
-    let reset_color = '\x1b[0m';
-    console.info("%s[%s] [%s] [%s]\x1b[0m %s", color, room, user, type, reset_color, message);
+    console.info("%s[%s] [%s] [%s] \x1b[36m%s\x1b[0m", color, room, user, type, message);
 }
 
 function getRandomCard(difficulty, room) {

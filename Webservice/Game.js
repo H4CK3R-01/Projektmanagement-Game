@@ -16,7 +16,6 @@ class Game {
         this.currentStatus = Game.STATUS.SETTING_UP;
         this.players = [];
         this.currentPlayerIndex = 0;
-        this.winnerIndex = 0;
         this.round = 0;
         this.hunter = new Hunter();
         this.playerNames = [];
@@ -90,7 +89,6 @@ class Game {
         let index = this.players.findIndex(player => player.position >= Game.MAX_POSITION);
         if (index !== -1) {
             this.currentStatus = Game.STATUS.IS_WON;
-            this.winnerIndex = index;
         }
     }
 

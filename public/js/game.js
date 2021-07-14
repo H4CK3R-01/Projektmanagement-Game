@@ -1,7 +1,5 @@
 /*
     Images
-        background.jpg: https://pixabay.com/get/ge3fe775ba1a5bfd2cc937b0687982214d547e5cf538543560fc25041c070ad5b860d8dd24df751dbc5c7d5ede3f672e7_1920.jpg?attachment=
-        card_stack.png: https://www.google.de/url?sa=i&url=https%3A%2F%2Fwww.pngegg.com%2Fpt%2Fsearch%3Fq%3Drainha%2Bde%2Bcopas&psig=AOvVaw3wwfk87wAXBxqmdXnoGSfe&ust=1623254731054000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjUoaG1iPECFQAAAAAdAAAAABA5
         dice.svg: https://www.svgrepo.com/download/198836/gambler-casino.svg
         sprite.jpg: https://media.istockphoto.com/photos/gray-granite-stone-texture-seamless-square-background-tile-ready-picture-id1096464726
 */
@@ -57,8 +55,8 @@ function start_game() {
     sprites.forEach(sprite => app.stage.addChild(sprite.getSprite()));
 
     // Red border
-    let red_border = generate_red_border(new PIXI.Graphics(), 1, 9);
-    app.stage.addChild(red_border);
+    let hunter = generate_hunter(new PIXI.Graphics(), 1, 9);
+    app.stage.addChild(hunter);
 
 
     // Player circles
@@ -77,26 +75,17 @@ function start_game() {
 
     // Card stacks
     let cards_1 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_1.png'), 3, 3, function () {
-        if (diced && !show_card && rolled_number === 1) {
-            console.log("1");
-            socket.emit('get card', 1);
-        }
+        if (diced && !show_card && rolled_number === 1) socket.emit('get card', 1);
     });
     app.stage.addChild(cards_1);
 
     let cards_2 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_2.png'), 5, 3, function () {
-        if (diced && !show_card && rolled_number === 2) {
-            console.log("2");
-            socket.emit('get card', 2);
-        }
+        if (diced && !show_card && rolled_number === 2) socket.emit('get card', 2);
     });
     app.stage.addChild(cards_2);
 
     let cards_3 = generate_card_stack(PIXI.Sprite.from('/img/card_stack_3.png'), 7, 3, function () {
-        if (diced && !show_card && rolled_number === 3) {
-            console.log("3");
-            socket.emit('get card', 3);
-        }
+        if (diced && !show_card && rolled_number === 3) socket.emit('get card', 3);
     });
     app.stage.addChild(cards_3);
 
@@ -112,9 +101,7 @@ function start_game() {
     dice.buttonMode = true;
     dice.defaultCursor = 'pointer';
     dice.on('pointerdown', function () {
-        if (!diced) {
-            socket.emit('roll dice');
-        }
+        if (!diced) socket.emit('roll dice');
     });
     app.stage.addChild(dice);
 
@@ -127,7 +114,6 @@ function start_game() {
     logo.y = sprite_size * 5.5 - sprite_size * 0.2;
     logo.width = sprite_size * 3.5;
     logo.height = sprite_size * 1.5;
-    // logo.rotation -= Math.PI / 8;
     app.stage.addChild(logo);
 
 
@@ -174,13 +160,11 @@ function start_game() {
     score_button.defaultCursor = 'pointer';
     score_button.on('pointerdown', function () {
         card = new Card(game_board_size, "",
-            {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false},
-            {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false},
-            {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("Kein Spieler"), "status": false},
-            {
-                "text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("Kein Spieler"),
-                "status": false
-            }, 0, false);
+            {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("N/A"), "status": false},
+            {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("N/A"), "status": false},
+            {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("N/A"), "status": false},
+            {"text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("N/A"), "status": false},
+            0, false);
         card.showCard();
         show_card = true;
     });
@@ -188,10 +172,10 @@ function start_game() {
     app.stage.addChild(score_button);
     score_button.addChild(score_button_text);
 
-    socket.on('updatePlayerNames', function (p) {
+
+    socket.on('update player names', function (p) {
         playerNames = p;
     });
-
 
     socket.on('first player', function () {
         my_turn.text = "Your Turn";
@@ -208,15 +192,9 @@ function start_game() {
     });
 
     socket.on('card', function (data) {
-        if (show_card === true) {
-            card.destroyCard();
-        }
+        if (show_card === true) card.destroyCard();
 
-        let u = data.username;
-        let q = data.card.question;
-        let a = data.card.answers;
-        let d = data.card.difficulty;
-        card = new Card(game_board_size, q, a[0], a[1], a[2], a[3], d, u === username);
+        card = new Card(game_board_size, data.card.question, data.card['answers'][0], data.card['answers'][1], data.card['answers'][2], data.card['answers'][3], data.card['difficulty'], data.username === username);
         card.showCard();
         show_card = true;
     });
@@ -274,12 +252,12 @@ function start_game() {
 
         if (data.state === 2 || data.state === 3) {
             card = new Card(game_board_size, "",
-                {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("Kein Spieler"), "status": false},
-                {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("Kein Spieler"), "status": false},
-                {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("Kein Spieler"), "status": false},
-                {"text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("Kein Spieler"), "status": false},
+                {"text": playerNames[0] ? playerNames[0] + ": " + positions[0] : ("N/A"), "status": false},
+                {"text": playerNames[1] ? playerNames[1] + ": " + positions[1] : ("N/A"), "status": false},
+                {"text": playerNames[2] ? playerNames[2] + ": " + positions[2] : ("N/A"), "status": false},
+                {"text": playerNames[3] ? playerNames[3] + ": " + positions[3] : ("N/A"), "status": false},
                 0, false, data.state);
-            red_border.clear();
+            hunter.clear();
             card.showCard();
             show_card = true;
         }
@@ -287,12 +265,12 @@ function start_game() {
         if (next_player === username) my_turn.text = "Your Turn";
     });
 
-    socket.on('update Hunter', function (position) {
+    socket.on('update hunter', function (position) {
         let x = sprites[position].coord_x;
         let y = sprites[position].coord_y;
-        red_border.clear();
-        red_border = generate_red_border(new PIXI.Graphics(), x, y);
-        app.stage.addChild(red_border);
+        hunter.clear();
+        hunter = generate_hunter(new PIXI.Graphics(), x, y);
+        app.stage.addChild(hunter);
     });
 
     resize();
@@ -310,7 +288,7 @@ function generate_card_stack(sprite, x, y, onclick) {
     return sprite;
 }
 
-function generate_red_border(graphics, x, y) {
+function generate_hunter(graphics, x, y) {
     graphics.lineStyle(sprite_size * 0.10, 0x862323, 1);
     graphics.drawRect(sprite_size * x - sprite_size * 0.2, sprite_size * y - sprite_size * 0.2, sprite_size * 1.5, sprite_size * 1.5);
     return graphics;
@@ -335,6 +313,7 @@ function generate_circle(graphics, x, y, color, offset) {
             graphics.beginFill(0xFFFFFF, 1);
             break;
     }
+
     switch (offset) {
         case 1:
             graphics.drawCircle(sprite_size * x - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4);
@@ -349,6 +328,7 @@ function generate_circle(graphics, x, y, color, offset) {
             graphics.drawCircle(sprite_size * x + 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size * y - 65 - sprite_size * 0.2 + sprite_size * 0.75, sprite_size / 4);
             break; // lower right
     }
+
     graphics.endFill();
     return graphics;
 }

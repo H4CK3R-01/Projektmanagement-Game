@@ -2,8 +2,11 @@ let username;
 let room_name;
 
 window.addEventListener('beforeunload', function (e) {
-    // Prevent user from exiting page
-    e.preventDefault();
+    e.preventDefault(); // Prevent user from exiting page
+});
+
+window.addEventListener('keydown', function (event) {
+    if (event.code === 'Enter' && app == null) document.getElementById('ok').click();
 });
 
 document.getElementById('ok').addEventListener('click', function () {

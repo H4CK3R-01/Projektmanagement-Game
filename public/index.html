@@ -16,7 +16,7 @@
 <body>
 <header>
     <div class="spielanleitung"><span
-            onclick="open_manual();">Spielanleitung</span></div>
+            onclick="open_manual();">Instructions</span></div>
     <div class="title">WWPM</div>
     <div class="build"><span>DATE_TO_BE_REPLACED</span><span><a href="COMMIT_LINK_TO_BE_REPLACED" target="_blank">COMMIT_TO_BE_REPLACED</a></span>
     </div>
@@ -26,13 +26,13 @@
         <div id="login">
             <form>
                 <h2 id="error"></h2>
-                <label for="username">Benutzername: </label>
-                <input id="username" name="username" placeholder="Benutzername" type="text">
+                <label for="username">Username: </label>
+                <input id="username" name="username" placeholder="Username" type="text">
 
-                <label for="room">Raumnummer: </label>
-                <input id="room" name="room" placeholder="Raumnummer" type="text">
+                <label for="room">Room name: </label>
+                <input id="room" name="room" placeholder="Room name" type="text">
 
-                <button id="ok" type="button">Bestätigen</button>
+                <button id="ok" type="button">Submit</button>
             </form>
         </div>
         <div id="game">
@@ -53,9 +53,11 @@
     <div id="modal">
         <div id="content">
             <div id="modal_header">
-                <h3 id="modal_title">Spielanleitung</h3>
-                <span><i class="material-icon"
-                         onclick="document.getElementById('modal').style.display = 'none';">close</i></span>
+                <h3 id="modal_title">Instructions</h3>
+                <span>
+                    <i class="material-icon"
+                       onclick="document.getElementById('modal').style.display = 'none';">close</i>
+                </span>
             </div>
             <div class="divider"></div>
             <div id="manual"></div>
