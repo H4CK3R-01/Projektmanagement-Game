@@ -45,10 +45,10 @@ header {
     flex-direction: column;
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 600px) {
     header {
         height: 5em;
-        
+
     }
 
     .title {

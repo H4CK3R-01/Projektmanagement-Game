@@ -28,7 +28,7 @@
     background-color: #FFDDA1;
 }
 
-@media only screen and (max-width: 980px) {
+@media only screen and (max-width: 600px) {
     #game {
         height: auto;
         width: auto;
