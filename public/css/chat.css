@@ -103,7 +103,7 @@
     white-space: pre;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 980px) {
     #chat {
         flex-flow: column-reverse;
         border-top: #7d7d7d solid 2px;
