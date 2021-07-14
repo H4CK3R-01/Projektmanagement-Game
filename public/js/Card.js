@@ -117,7 +117,7 @@ function Card(game_board_size, question, answer_1, answer_2, answer_3, answer_4,
         if (this.difficulty === 0) {
             color = 0xF47A93;
         }
-        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220 * 1, this.answer_4.text, this.answer_4.status, function () {
+        this.buttons.push(new Button(color, 0xcccccc, 0x4169E1, this.card_width - 40, 200, this.card_x + 20, this.card_y + this.card_height - 120 - 220, this.answer_4.text, this.answer_4.status, function () {
             if (_this.your_turn) {
                 select_answer(3, _this.answer_4.text);
             }
@@ -135,10 +135,8 @@ function Card(game_board_size, question, answer_1, answer_2, answer_3, answer_4,
             this.card.addChild(new Button(0xffffff, 0xcccccc, 0xffffff, this.card_width - 40, 100, this.card_x + 20, this.card_y + this.card_height - 120, "OK", null, function () {
                 if (answer !== null) {
                     if (_this.right_answer === answer) { //TODO: do this in backend instead to prevent cheating
-                        console.log("Richtig");
                         socket.emit('card finished', difficulty, true);
                     } else {
-                        console.log("Falsch");
                         socket.emit('card finished', difficulty, false);
                     }
                     show_card = false;
@@ -147,7 +145,7 @@ function Card(game_board_size, question, answer_1, answer_2, answer_3, answer_4,
                     rolled_number = null;
                 } else {
                     if (your_turn === true) {
-                        alert("Bitte wähle eine Antwortmöglichkeit aus");
+                        alert("Please choose your answer!");
                     } else {
                         show_card = false;
                         answer = null;
