@@ -53,7 +53,7 @@ class Game {
     }
 
     add_player(name) {
-        let canAddPlayer = this.players.length < Game.MAX_PLAYERS;
+        let canAddPlayer = this.players.length < Game.MAX_PLAYERS && this.currentStatus === Game.STATUS.SETTING_UP;
         if (canAddPlayer) this.players.push(new Player(name));
         return canAddPlayer;
     }
