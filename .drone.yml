@@ -1,0 +1,27 @@
+kind: pipeline
+type: docker
+name: linux-amd64
+
+platform:
+  arch: amd64
+  os: linux
+
+steps:
+- name: generate_tag
+  image: golang
+  commands:
+    - echo -n "${DRONE_BRANCH//\//-}-${DRONE_COMMIT_SHA:0:8}, latest" > .tags
+
+
+- name: publish
+  image: plugins/docker
+  settings:
+    username: 
+      from_secret: username
+    password:
+      from_secret: password
+    registry:
+      from_secret: registry
+    repo:
+      from_secret: repo
+    dockerfile: Dockerfile
